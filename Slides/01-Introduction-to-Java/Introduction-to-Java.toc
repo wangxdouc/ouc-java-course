@@ -1,0 +1,5 @@
+\beamer@endinputifotherversion {3.33pt}
+\beamer@sectionintoc {2}{Java技术概述}{5}{0}{1}
+\beamer@sectionintoc {3}{Java平台核心机制}{10}{0}{2}
+\beamer@sectionintoc {4}{Java开发环境}{13}{0}{3}
+\beamer@sectionintoc {5}{Java基本开发流程}{17}{0}{4}
