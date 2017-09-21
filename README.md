@@ -1,10 +1,10 @@
-# Course: Java Application and Development
-Maintain Java course slides and materials lectured by Xiaodong Wang (wangxiaodong@ouc.edu.cn, CS, Ocean University of China).
+# 课程 Java应用与开发 (Course: Java Application and Development)
+本项目由 Xiaodong Wang (wangxiaodong@ouc.edu.cn, CS, Ocean University of China) 维护。
 
-## Includings
-JavaSE, JavaEE and SpringMVC
+## 下载说明
+幻灯片需要从Slides目录的每个子目录中下载.pdf文件。
 
-## References
+## 参考文献
 
 
 
