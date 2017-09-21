@@ -2,12 +2,9 @@
 Maintain Java course slides and materials lectured by Xiaodong Wang (wangxiaodong@ouc.edu.cn, CS, Ocean University of China).
 
 ## Includings
-
-## Code
-
-`class TestClass {
-	public TestClass() {}
-}`
+### JavaSE
+### JavaEE
+### SpringMVC
 
 ## References
 
