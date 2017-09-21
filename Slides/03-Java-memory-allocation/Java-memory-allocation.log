@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99991 (TeX Live 2014) (preloaded format=xelatex 2014.9.24)  21 SEP 2017 23:42
+This is XeTeX, Version 3.14159265-2.6-0.99991 (TeX Live 2014) (preloaded format=xelatex 2014.9.24)  21 SEP 2017 23:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2263,6 +2263,7 @@ File: figures/static/ouc.pdf Graphic file (type QTm)
  <use  "figures/static/ouc.pdf" > [1
 
 ]
+(./Java-memory-allocation.toc)
 \g_fontspec_family_Microsoft YaHei_int=\count319
 .................................................
 . fontspec info: "defining-font"
@@ -2290,34 +2291,28 @@ File: figures/static/ouc.pdf Graphic file (type QTm)
 
 .................................................
 File: figures/static/ouc.pdf Graphic file (type QTm)
+ <use  "figures/static/ouc.pdf" > [2
 
-<use  "figures/static/ouc.pdf" > [2
-
-] (./Java-memory-allocation.toc)
+]
+(./Java-memory-allocation.toc)
 File: figures/static/ouc.pdf Graphic file (type QTm)
-
-<use  "figures/static/ouc.pdf" > [3
-
-] (./Java-memory-allocation.toc)
-File: figures/static/ouc.pdf Graphic file (type QTm)
-
-<use  "figures/static/ouc.pdf" > [4
+ <use  "figures/static/ouc.pdf" > [3
 
 ]
 \openout4 = `Java-memory-allocation.vrb'.
 
- (./Java-memory-allocation.vrb)
-File: figures/static/ouc.pdf Graphic file (type QTm)
 
-<use  "figures/static/ouc.pdf" > [5
+(./Java-memory-allocation.vrb)
+File: figures/static/ouc.pdf Graphic file (type QTm)
+ <use  "figures/static/ouc.pdf" > [4
 
 ]
 \openout4 = `Java-memory-allocation.vrb'.
 
- (./Java-memory-allocation.vrb
+
+(./Java-memory-allocation.vrb
 File: figures/jmm.png Graphic file (type QTm)
-
-<use  "figures/jmm.png" >
+ <use  "figures/jmm.png" >
 \g_fontspec_family_KaiTi_int=\count320
 .................................................
 . fontspec info: "defining-font"
@@ -2343,13 +2338,13 @@ File: figures/jmm.png Graphic file (type QTm)
 .................................................
 )
 File: figures/static/ouc.pdf Graphic file (type QTm)
- <use  "figures/static/ouc.pdf" > [6
+
+<use  "figures/static/ouc.pdf" > [5
 
 ]
 \openout4 = `Java-memory-allocation.vrb'.
 
-
-(./Java-memory-allocation.vrb
+ (./Java-memory-allocation.vrb
 LaTeX Font Info:    Try loading font information for U+msa on input line 3.
 
 (/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/umsa.fd
@@ -2362,12 +2357,12 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ))
 File: figures/static/ouc.pdf Graphic file (type QTm)
 
-<use  "figures/static/ouc.pdf" > [7
+<use  "figures/static/ouc.pdf" > [6
 
 ] (./Java-memory-allocation.vrb)
 File: figures/static/ouc.pdf Graphic file (type QTm)
 
-<use  "figures/static/ouc.pdf" > [8
+<use  "figures/static/ouc.pdf" > [7
 
 ]
 \openout4 = `Java-memory-allocation.vrb'.
@@ -2376,10 +2371,18 @@ File: figures/static/ouc.pdf Graphic file (type QTm)
 File: figures/jmmflow.jpg Graphic file (type QTm)
 
 <use  "figures/jmmflow.jpg" >)
-Overfull \vbox (4.97221pt too high) detected at line 264
+Overfull \vbox (4.97221pt too high) detected at line 257
  []
 
 File: figures/static/ouc.pdf Graphic file (type QTm)
+<use  "figures/static/ouc.pdf" > [8
+
+]
+\openout4 = `Java-memory-allocation.vrb'.
+
+ (./Java-memory-allocation.vrb)
+File: figures/static/ouc.pdf Graphic file (type QTm)
+
 <use  "figures/static/ouc.pdf" > [9
 
 ]
@@ -2390,26 +2393,18 @@ File: figures/static/ouc.pdf Graphic file (type QTm)
 
 <use  "figures/static/ouc.pdf" > [10
 
-]
-\openout4 = `Java-memory-allocation.vrb'.
-
- (./Java-memory-allocation.vrb)
+] (./Java-memory-allocation.toc)
 File: figures/static/ouc.pdf Graphic file (type QTm)
 
 <use  "figures/static/ouc.pdf" > [11
 
-] (./Java-memory-allocation.toc)
-File: figures/static/ouc.pdf Graphic file (type QTm)
-
-<use  "figures/static/ouc.pdf" > [12
-
 ]
 \openout4 = `Java-memory-allocation.vrb'.
 
  (./Java-memory-allocation.vrb)
 File: figures/static/ouc.pdf Graphic file (type QTm)
 
-<use  "figures/static/ouc.pdf" > [13
+<use  "figures/static/ouc.pdf" > [12
 
 ]
 \openout4 = `Java-memory-allocation.vrb'.
@@ -2434,7 +2429,7 @@ LaTeX Font Info:    Font shape `EU1/lmtt/bx/n' in size <6> not available
 )
 File: figures/static/ouc.pdf Graphic file (type QTm)
 
-<use  "figures/static/ouc.pdf" > [14
+<use  "figures/static/ouc.pdf" > [13
 
 ]
 \openout4 = `Java-memory-allocation.vrb'.
@@ -2449,7 +2444,7 @@ Package Listings Warning: Text dropped after begin of listing on input line 11.
 
 )
 File: figures/static/ouc.pdf Graphic file (type QTm)
- <use  "figures/static/ouc.pdf" > [15
+ <use  "figures/static/ouc.pdf" > [14
 
 ]
 \openout4 = `Java-memory-allocation.vrb'.
@@ -2457,7 +2452,7 @@ File: figures/static/ouc.pdf Graphic file (type QTm)
  (./Java-memory-allocation.vrb)
 File: figures/static/ouc.pdf Graphic file (type QTm)
 
-<use  "figures/static/ouc.pdf" > [16
+<use  "figures/static/ouc.pdf" > [15
 
 ]
 \openout4 = `Java-memory-allocation.vrb'.
@@ -2472,7 +2467,7 @@ Package Listings Warning: Text dropped after begin of listing on input line 11.
 
 )
 File: figures/static/ouc.pdf Graphic file (type QTm)
- <use  "figures/static/ouc.pdf" > [17
+ <use  "figures/static/ouc.pdf" > [16
 
 ]
 \openout4 = `Java-memory-allocation.vrb'.
@@ -2480,7 +2475,7 @@ File: figures/static/ouc.pdf Graphic file (type QTm)
  (./Java-memory-allocation.vrb)
 File: figures/static/ouc.pdf Graphic file (type QTm)
 
-<use  "figures/static/ouc.pdf" > [18
+<use  "figures/static/ouc.pdf" > [17
 
 ]
 \openout4 = `Java-memory-allocation.vrb'.
@@ -2495,7 +2490,7 @@ Package Listings Warning: Text dropped after begin of listing on input line 11.
 
 )
 File: figures/static/ouc.pdf Graphic file (type QTm)
- <use  "figures/static/ouc.pdf" > [19
+ <use  "figures/static/ouc.pdf" > [18
 
 ]
 \openout4 = `Java-memory-allocation.vrb'.
@@ -2503,7 +2498,7 @@ File: figures/static/ouc.pdf Graphic file (type QTm)
  (./Java-memory-allocation.vrb)
 File: figures/static/ouc.pdf Graphic file (type QTm)
 
-<use  "figures/static/ouc.pdf" > [20
+<use  "figures/static/ouc.pdf" > [19
 
 ]
 \openout4 = `Java-memory-allocation.vrb'.
@@ -2518,7 +2513,7 @@ Package Listings Warning: Text dropped after begin of listing on input line 11.
 
 )
 File: figures/static/ouc.pdf Graphic file (type QTm)
- <use  "figures/static/ouc.pdf" > [21
+ <use  "figures/static/ouc.pdf" > [20
 
 ]
 \openout4 = `Java-memory-allocation.vrb'.
@@ -2526,7 +2521,7 @@ File: figures/static/ouc.pdf Graphic file (type QTm)
  (./Java-memory-allocation.vrb)
 File: figures/static/ouc.pdf Graphic file (type QTm)
 
-<use  "figures/static/ouc.pdf" > [22
+<use  "figures/static/ouc.pdf" > [21
 
 ]
 \openout4 = `Java-memory-allocation.vrb'.
@@ -2541,7 +2536,7 @@ Package Listings Warning: Text dropped after begin of listing on input line 11.
 
 )
 File: figures/static/ouc.pdf Graphic file (type QTm)
- <use  "figures/static/ouc.pdf" > [23
+ <use  "figures/static/ouc.pdf" > [22
 
 ]
 \openout4 = `Java-memory-allocation.vrb'.
@@ -2549,7 +2544,7 @@ File: figures/static/ouc.pdf Graphic file (type QTm)
  (./Java-memory-allocation.vrb)
 File: figures/static/ouc.pdf Graphic file (type QTm)
 
-<use  "figures/static/ouc.pdf" > [24
+<use  "figures/static/ouc.pdf" > [23
 
 ]
 \openout4 = `Java-memory-allocation.vrb'.
@@ -2564,7 +2559,15 @@ Package Listings Warning: Text dropped after begin of listing on input line 11.
 
 )
 File: figures/static/ouc.pdf Graphic file (type QTm)
- <use  "figures/static/ouc.pdf" > [25
+ <use  "figures/static/ouc.pdf" > [24
+
+]
+\openout4 = `Java-memory-allocation.vrb'.
+
+ (./Java-memory-allocation.vrb)
+File: figures/static/ouc.pdf Graphic file (type QTm)
+
+<use  "figures/static/ouc.pdf" > [25
 
 ]
 \openout4 = `Java-memory-allocation.vrb'.
@@ -2598,15 +2601,15 @@ File: figures/static/ouc.pdf Graphic file (type QTm)
 
 <use  "figures/static/ouc.pdf" > [29
 
-]
-\openout4 = `Java-memory-allocation.vrb'.
-
- (./Java-memory-allocation.vrb)
+] (./Java-memory-allocation.toc)
 File: figures/static/ouc.pdf Graphic file (type QTm)
 
 <use  "figures/static/ouc.pdf" > [30
 
-] (./Java-memory-allocation.toc)
+]
+\openout4 = `Java-memory-allocation.vrb'.
+
+ (./Java-memory-allocation.vrb)
 File: figures/static/ouc.pdf Graphic file (type QTm)
 
 <use  "figures/static/ouc.pdf" > [31
@@ -2651,15 +2654,15 @@ File: figures/static/ouc.pdf Graphic file (type QTm)
 
 <use  "figures/static/ouc.pdf" > [36
 
-]
-\openout4 = `Java-memory-allocation.vrb'.
-
- (./Java-memory-allocation.vrb)
+] (./Java-memory-allocation.toc)
 File: figures/static/ouc.pdf Graphic file (type QTm)
 
 <use  "figures/static/ouc.pdf" > [37
 
-] (./Java-memory-allocation.toc)
+]
+\openout4 = `Java-memory-allocation.vrb'.
+
+ (./Java-memory-allocation.vrb)
 File: figures/static/ouc.pdf Graphic file (type QTm)
 
 <use  "figures/static/ouc.pdf" > [38
@@ -2721,16 +2724,8 @@ File: figures/static/ouc.pdf Graphic file (type QTm)
 <use  "figures/static/ouc.pdf" > [45
 
 ]
-\openout4 = `Java-memory-allocation.vrb'.
-
- (./Java-memory-allocation.vrb)
 File: figures/static/ouc.pdf Graphic file (type QTm)
-
-<use  "figures/static/ouc.pdf" > [46
-
-]
-File: figures/static/ouc.pdf Graphic file (type QTm)
- <use  "figures/static/ouc.pdf" > [47
+ <use  "figures/static/ouc.pdf" > [46
 
 ]
 \tf@nav=\write7
@@ -2742,21 +2737,21 @@ File: figures/static/ouc.pdf Graphic file (type QTm)
 \tf@snm=\write9
 \openout9 = `Java-memory-allocation.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 905.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 905.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 898.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 898.
 
 (./Java-memory-allocation.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 905.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 905.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 905.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 898.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 898.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 898.
  ) 
 Here is how much of TeX's memory you used:
- 45352 strings out of 493734
- 968268 string characters out of 6146348
- 1096949 words of memory out of 5000000
- 47798 multiletter control sequences out of 15000+600000
+ 45350 strings out of 493734
+ 968250 string characters out of 6146348
+ 1096877 words of memory out of 5000000
+ 47796 multiletter control sequences out of 15000+600000
  15338 words of font info for 113 fonts, out of 8000000 for 9000
  1328 hyphenation exceptions out of 8191
  58i,15n,63p,10447b,1385s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on Java-memory-allocation.pdf (47 pages).
+Output written on Java-memory-allocation.pdf (46 pages).
