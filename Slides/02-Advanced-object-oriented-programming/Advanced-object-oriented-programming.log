@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99991 (TeX Live 2014) (preloaded format=xelatex 2014.9.24)  21 SEP 2017 23:27
+This is XeTeX, Version 3.14159265-2.6-0.99991 (TeX Live 2014) (preloaded format=xelatex 2014.9.24)  21 SEP 2017 23:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1919,26 +1919,26 @@ Package: beamerfontthemeserif 2010/06/17  (rcs-revision d02a7cf4d8ae)
 . <->"SimSun/ICU:script=hani;language=DFLT;mapping=tex-text;embolden=4;slant=0.
 167;"
 .................................................
-\g_fontspec_family_Arial_int=\count313
+\g_fontspec_family_Times New Roman_int=\count313
 .................................................
 . fontspec info: "defining-font"
 . 
-. Font family 'Arial(0)' created for font 'Arial' with options
-. [Mapping=tex-text,].
+. Font family 'TimesNewRoman(0)' created for font 'Times New Roman' with
+. options [Mapping=tex-text,].
 . 
 . This font family consists of the following shapes:
 . 
 . * 'normal' with NFSS spec.:
-. <->"Arial/ICU:script=latn;language=DFLT;mapping=tex-text;"
+. <->"Times New Roman/ICU:script=latn;language=DFLT;mapping=tex-text;"
 . 
 . * 'bold' with NFSS spec.:
-. <->"Arial/B/ICU:script=latn;language=DFLT;mapping=tex-text;"
+. <->"Times New Roman/B/ICU:script=latn;language=DFLT;mapping=tex-text;"
 . 
 . * 'italic' with NFSS spec.:
-. <->"Arial/I/ICU:script=latn;language=DFLT;mapping=tex-text;"
+. <->"Times New Roman/I/ICU:script=latn;language=DFLT;mapping=tex-text;"
 . 
 . * 'bold italic' with NFSS spec.:
-. <->"Arial/BI/ICU:script=latn;language=DFLT;mapping=tex-text;"
+. <->"Times New Roman/BI/ICU:script=latn;language=DFLT;mapping=tex-text;"
 .................................................
 Package hyperref Info: Option `CJKbookmarks' set `true' on input line 85.
 Package hyperref Info: Option `bookmarksnumbered' set `true' on input line 85.
@@ -2084,12 +2084,15 @@ LaTeX Info: Redefining \nameref on input line 194.
 \symnumbers=\mathgroup6
 \sympureletters=\mathgroup7
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
-(Font)                  OT1/cmr/m/n --> EU1/Arial(0)/m/n on input line 194.
+(Font)                  OT1/cmr/m/n --> EU1/TimesNewRoman(0)/m/n on input line 
+194.
 LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 194.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/cmr/bx/n --> EU1/Arial(0)/bx/n on input line 194.
+(Font)                  OT1/cmr/bx/n --> EU1/TimesNewRoman(0)/bx/n on input lin
+e 194.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/cmr/bx/n --> EU1/Arial(0)/bx/n on input line 194.
+(Font)                  OT1/cmr/bx/n --> EU1/TimesNewRoman(0)/bx/n on input lin
+e 194.
 LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 194.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
 (Font)                  OT1/cmss/m/n --> EU1/lmss/m/n on input line 194.
@@ -2097,30 +2100,33 @@ LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
 (Font)                  OT1/cmss/bx/n --> EU1/lmss/m/n on input line 194.
 LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 194.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/cmr/m/it --> EU1/Arial(0)/m/it on input line 194.
+(Font)                  OT1/cmr/m/it --> EU1/TimesNewRoman(0)/m/it on input lin
+e 194.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmr/bx/it --> EU1/Arial(0)/m/it on input line 194.
+(Font)                  OT1/cmr/bx/it --> EU1/TimesNewRoman(0)/m/it on input li
+ne 194.
 LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 194.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
 (Font)                  OT1/cmtt/m/n --> EU1/lmtt/m/n on input line 194.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 (Font)                  OT1/cmtt/m/n --> EU1/lmtt/m/n on input line 194.
 LaTeX Font Info:    Overwriting symbol font `numbers' in version `bold'
-(Font)                  EU1/Arial(0)/m/n --> EU1/Arial(0)/bx/n on input line 19
-4.
+(Font)                  EU1/TimesNewRoman(0)/m/n --> EU1/TimesNewRoman(0)/bx/n 
+on input line 194.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
-(Font)                  EU1/Arial(0)/m/it --> EU1/Arial(0)/bx/it on input line 
-194.
+(Font)                  EU1/TimesNewRoman(0)/m/it --> EU1/TimesNewRoman(0)/bx/i
+t on input line 194.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `bold'
-(Font)                  OT1/cmr/bx/n --> EU1/Arial(0)/bx/n on input line 194.
+(Font)                  OT1/cmr/bx/n --> EU1/TimesNewRoman(0)/bx/n on input lin
+e 194.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  EU1/Arial(0)/bx/n --> EU1/Arial(0)/bx/n on input line 1
-94.
+(Font)                  EU1/TimesNewRoman(0)/bx/n --> EU1/TimesNewRoman(0)/bx/n
+ on input line 194.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
 (Font)                  EU1/lmss/m/n --> EU1/lmss/bx/n on input line 194.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  EU1/Arial(0)/m/it --> EU1/Arial(0)/bx/it on input line 
-194.
+(Font)                  EU1/TimesNewRoman(0)/m/it --> EU1/TimesNewRoman(0)/bx/i
+t on input line 194.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 (Font)                  EU1/lmtt/m/n --> EU1/lmtt/bx/n on input line 194.
 
@@ -2184,36 +2190,38 @@ LaTeX Font Info:    Encoding `OT1' has changed to `EU1' for symbol font
 (Font)              `operators' in the math version `normal' on input line 194.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> EU1/Arial(0)/m/n on input line 194.
+(Font)                  OT1/cmr/m/n --> EU1/TimesNewRoman(0)/m/n on input line 
+194.
 LaTeX Font Info:    Encoding `OT1' has changed to `EU1' for symbol font
 (Font)              `operators' in the math version `bold' on input line 194.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmr/bx/n --> EU1/Arial(0)/m/n on input line 194.
+(Font)                  OT1/cmr/bx/n --> EU1/TimesNewRoman(0)/m/n on input line
+ 194.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  EU1/Arial(0)/m/n --> EU1/Arial(0)/m/n on input line 194
-.
+(Font)                  EU1/TimesNewRoman(0)/m/n --> EU1/TimesNewRoman(0)/m/n o
+n input line 194.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
-(Font)                  EU1/Arial(0)/m/n --> EU1/Arial(0)/m/n on input line 194
-.
+(Font)                  EU1/TimesNewRoman(0)/m/n --> EU1/TimesNewRoman(0)/m/n o
+n input line 194.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  EU1/Arial(0)/m/it --> EU1/Arial(0)/m/it on input line 1
-94.
+(Font)                  EU1/TimesNewRoman(0)/m/it --> EU1/TimesNewRoman(0)/m/it
+ on input line 194.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  EU1/Arial(0)/bx/n --> EU1/Arial(0)/bx/n on input line 1
-94.
+(Font)                  EU1/TimesNewRoman(0)/bx/n --> EU1/TimesNewRoman(0)/bx/n
+ on input line 194.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
 (Font)                  EU1/lmss/m/n --> EU1/lmss/m/n on input line 194.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
 (Font)                  EU1/lmtt/m/n --> EU1/lmtt/m/n on input line 194.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  EU1/Arial(0)/m/n --> EU1/Arial(0)/bx/n on input line 19
-4.
+(Font)                  EU1/TimesNewRoman(0)/m/n --> EU1/TimesNewRoman(0)/bx/n 
+on input line 194.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `bold'
-(Font)                  EU1/Arial(0)/bx/n --> EU1/Arial(0)/bx/n on input line 1
-94.
+(Font)                  EU1/TimesNewRoman(0)/bx/n --> EU1/TimesNewRoman(0)/bx/n
+ on input line 194.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  EU1/Arial(0)/bx/it --> EU1/Arial(0)/bx/it on input line
- 194.
+(Font)                  EU1/TimesNewRoman(0)/bx/it --> EU1/TimesNewRoman(0)/bx/
+it on input line 194.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
 (Font)                  EU1/lmss/bx/n --> EU1/lmss/bx/n on input line 194.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
@@ -3017,8 +3025,8 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1592.
  ) 
 Here is how much of TeX's memory you used:
  45618 strings out of 493734
- 975213 string characters out of 6146348
- 1103563 words of memory out of 5000000
+ 975831 string characters out of 6146348
+ 1103636 words of memory out of 5000000
  48000 multiletter control sequences out of 15000+600000
  12723 words of font info for 100 fonts, out of 8000000 for 9000
  1328 hyphenation exceptions out of 8191
