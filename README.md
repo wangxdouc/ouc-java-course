@@ -1,4 +1,5 @@
-# 课程 Java应用与开发 (Course: Java Application and Development)
+# Java应用与开发课程参考材料 
+
 本项目由 Xiaodong Wang (wangxiaodong@ouc.edu.cn, CS, Ocean University of China) 维护。
 
 ## 课程幻灯片下载说明
