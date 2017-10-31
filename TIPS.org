@@ -1,0 +1,10 @@
+#+TITLE:     Java Tips
+#+AUTHOR:    Xiaodong Wang
+#+EMAIL:     wangxiaodong@ouc.edu.cn
+
+* main方法
+
+main()方法的声明为public static void main(String args[])，且必须这么定义，这是Java的规范。
+
+这么定义和JVM的运行有关系。当一个类中有main()方法，执行命令 *java 类名* 则会启动虚拟机执行该类中的main方法。由于JVM在运行这个Java应用程序的时候，首先会调用main方法，调用时不实例化这个类的对象而是通过类名直接调用，因此需要是限制为public static。对于java中的main方法，JVM限制不能有返回值，因此返回值类型为void。
+
