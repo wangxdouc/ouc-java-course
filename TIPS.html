@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2017-10-31 Tue 23:55 -->
+<!-- 2017-11-01 Wed 00:15 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Java Tips</title>
@@ -234,15 +234,16 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org106e7ce">1. main方法为什么只能那么写？</a></li>
-<li><a href="#org3b101af">2. 抽象类有必要存在构造方法吗？</a></li>
-<li><a href="#orgdc4c1c7">3. 对于构造函数，大家知道应该注意什么吗？</a></li>
+<li><a href="#org8bb3e0d">1. main方法为什么只能那么写？</a></li>
+<li><a href="#orga6e4260">2. 抽象类有必要存在构造方法吗？</a></li>
+<li><a href="#orgc8ad53c">3. 对于构造函数，大家知道应该注意什么吗？</a></li>
+<li><a href="#orgce629f9">4. 子类会继承父类的构造方法吗？</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org106e7ce" class="outline-2">
-<h2 id="org106e7ce"><span class="section-number-2">1</span> main方法为什么只能那么写？</h2>
+<div id="outline-container-org8bb3e0d" class="outline-2">
+<h2 id="org8bb3e0d"><span class="section-number-2">1</span> main方法为什么只能那么写？</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 main()方法的声明为public static void main(String args[])，且必须这么定义，这是Java的规范。
@@ -254,8 +255,8 @@ main()方法的声明为public static void main(String args[])，且必须这么
 </div>
 </div>
 
-<div id="outline-container-org3b101af" class="outline-2">
-<h2 id="org3b101af"><span class="section-number-2">2</span> 抽象类有必要存在构造方法吗？</h2>
+<div id="outline-container-orga6e4260" class="outline-2">
+<h2 id="orga6e4260"><span class="section-number-2">2</span> 抽象类有必要存在构造方法吗？</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 抽象类虽然自身不可以实例化，但是其子类覆盖了所有的抽象方法后是可以实例化的，所以抽象类的构造函数，适用于给其子类对象进行初始化。
@@ -263,8 +264,8 @@ main()方法的声明为public static void main(String args[])，且必须这么
 </div>
 </div>
 
-<div id="outline-container-orgdc4c1c7" class="outline-2">
-<h2 id="orgdc4c1c7"><span class="section-number-2">3</span> 对于构造函数，大家知道应该注意什么吗？</h2>
+<div id="outline-container-orgc8ad53c" class="outline-2">
+<h2 id="orgc8ad53c"><span class="section-number-2">3</span> 对于构造函数，大家知道应该注意什么吗？</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 构造函数是对象的基本，没有构造函数就没有对象。如果在父类中（这里就是你的抽象类）中显示的定义了有参数的构造函数，在子类继承时就必须写一个构造函数来调用父类的构造函数。
@@ -280,10 +281,19 @@ main()方法的声明为public static void main(String args[])，且必须这么
 </p>
 </div>
 </div>
+
+<div id="outline-container-orgce629f9" class="outline-2">
+<h2 id="orgce629f9"><span class="section-number-2">4</span> 子类会继承父类的构造方法吗？</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+父类中的构造方法是不能继承的，但是在实例化子类的时候会调用父类的构造方法。
+</p>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Xiaodong Wang</p>
-<p class="date">Created: 2017-10-31 Tue 23:55</p>
+<p class="date">Created: 2017-11-01 Wed 00:15</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
