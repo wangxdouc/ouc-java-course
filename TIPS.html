@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2017-11-01 Wed 08:36 -->
+<!-- 2017-11-01 Wed 14:41 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Java Tips</title>
@@ -234,16 +234,17 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org8e9e11a">1. main方法为什么只能那么写？</a></li>
-<li><a href="#org16a7ca6">2. 抽象类有必要存在构造方法吗？</a></li>
-<li><a href="#orgf640f4a">3. 对于构造函数，大家知道应该注意什么吗？</a></li>
-<li><a href="#org6563fb0">4. 子类会继承父类的构造方法吗？</a></li>
+<li><a href="#orgd5c5cba">1. main方法为什么只能那么写？</a></li>
+<li><a href="#org03d6c6a">2. 抽象类有必要存在构造方法吗？</a></li>
+<li><a href="#orga64bcbf">3. 对于构造函数，大家知道应该注意什么吗？</a></li>
+<li><a href="#orgdc1783a">4. 子类会继承父类的构造方法吗？</a></li>
+<li><a href="#org18917be">5. 以下要删除所有元素c的代码有错么？运行完了还会有c没删除么？如有错请改错。</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org8e9e11a" class="outline-2">
-<h2 id="org8e9e11a"><span class="section-number-2">1</span> main方法为什么只能那么写？</h2>
+<div id="outline-container-orgd5c5cba" class="outline-2">
+<h2 id="orgd5c5cba"><span class="section-number-2">1</span> main方法为什么只能那么写？</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 main()方法的声明为public static void main(String args[])，且必须这么定义，这是Java的规范。
@@ -255,8 +256,8 @@ main()方法的声明为public static void main(String args[])，且必须这么
 </div>
 </div>
 
-<div id="outline-container-org16a7ca6" class="outline-2">
-<h2 id="org16a7ca6"><span class="section-number-2">2</span> 抽象类有必要存在构造方法吗？</h2>
+<div id="outline-container-org03d6c6a" class="outline-2">
+<h2 id="org03d6c6a"><span class="section-number-2">2</span> 抽象类有必要存在构造方法吗？</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 抽象类虽然自身不可以实例化，但是其子类覆盖了所有的抽象方法后是可以实例化的，所以抽象类的构造函数，适用于给其子类对象进行初始化。
@@ -264,8 +265,8 @@ main()方法的声明为public static void main(String args[])，且必须这么
 </div>
 </div>
 
-<div id="outline-container-orgf640f4a" class="outline-2">
-<h2 id="orgf640f4a"><span class="section-number-2">3</span> 对于构造函数，大家知道应该注意什么吗？</h2>
+<div id="outline-container-orga64bcbf" class="outline-2">
+<h2 id="orga64bcbf"><span class="section-number-2">3</span> 对于构造函数，大家知道应该注意什么吗？</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 构造函数是对象的基本，没有构造函数就没有对象。如果在父类中（这里就是你的抽象类）中显示的定义了有参数的构造函数，在子类继承时就必须写一个构造函数来调用父类的构造函数。
@@ -282,18 +283,53 @@ main()方法的声明为public static void main(String args[])，且必须这么
 </div>
 </div>
 
-<div id="outline-container-org6563fb0" class="outline-2">
-<h2 id="org6563fb0"><span class="section-number-2">4</span> 子类会继承父类的构造方法吗？</h2>
+<div id="outline-container-orgdc1783a" class="outline-2">
+<h2 id="orgdc1783a"><span class="section-number-2">4</span> 子类会继承父类的构造方法吗？</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 父类中的构造方法是不能继承的，但是在实例化子类的时候会调用父类的构造方法。
 </p>
 </div>
 </div>
+
+<div id="outline-container-org18917be" class="outline-2">
+<h2 id="org18917be"><span class="section-number-2">5</span> 以下要删除所有元素c的代码有错么？运行完了还会有c没删除么？如有错请改错。</h2>
+<div class="outline-text-2" id="text-5">
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #932092;">import</span> <span style="color: #008b8b;">java</span>.<span style="color: #008b8b;">util</span>.<span style="color: #228b22;">ArrayList</span>;
+<span style="color: #932092;">import</span> <span style="color: #008b8b;">java</span>.<span style="color: #008b8b;">util</span>.<span style="color: #228b22;">List</span>;
+
+<span style="color: #932092;">public</span> <span style="color: #932092;">class</span> <span style="color: #228b22;">Test</span> {
+        <span style="color: #932092;">public</span> <span style="color: #932092;">static</span> <span style="color: #228b22;">void</span> <span style="color: #0000ff;">main</span>(<span style="color: #228b22;">String</span>[] <span style="color: #a0522d;">args</span>) {
+                <span style="color: #228b22;">List</span>&lt;<span style="color: #228b22;">String</span>&gt; <span style="color: #a0522d;">li</span> = <span style="color: #932092;">new</span> <span style="color: #228b22;">ArrayList</span>&lt;<span style="color: #228b22;">String</span>&gt;();
+
+                li.add(<span style="color: #8b2252;">"a"</span>);
+                li.add(<span style="color: #8b2252;">"b"</span>);
+                li.add(<span style="color: #8b2252;">"c"</span>);
+                li.add(<span style="color: #8b2252;">"d"</span>);
+                li.add(<span style="color: #8b2252;">"c"</span>);
+                li.add(<span style="color: #8b2252;">"c"</span>);
+                li.add(<span style="color: #8b2252;">"e"</span>);
+                li.add(<span style="color: #8b2252;">"c"</span>);
+
+                <span style="color: #932092;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 0; i &lt; li.<span style="color: #228b22;">size</span>(); i++) {
+                        <span style="color: #932092;">if</span> (li.get(i).equals(<span style="color: #8b2252;">"c"</span>)) {
+                                li.remove(i);
+                        }
+
+                }
+
+                System.out.println(li);
+        }
+}
+</pre>
+</div>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Xiaodong Wang</p>
-<p class="date">Created: 2017-11-01 Wed 08:36</p>
+<p class="date">Created: 2017-11-01 Wed 14:41</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

@@ -24,3 +24,36 @@ main()方法的声明为public static void main(String args[])，且必须这么
 * 子类会继承父类的构造方法吗？
 
 父类中的构造方法是不能继承的，但是在实例化子类的时候会调用父类的构造方法。
+
+* 以下要删除所有元素c的代码有错么？运行完了还会有c没删除么？如有错请改错。
+
+#+BEGIN_SRC java
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Test {
+	public static void main(String[] args) {
+		List<String> li = new ArrayList<String>();
+
+		li.add("a");
+		li.add("b");
+		li.add("c");
+		li.add("d");
+		li.add("c");
+		li.add("c");
+		li.add("e");
+		li.add("c");
+
+		for (int i = 0; i < li.size(); i++) {
+			if (li.get(i).equals("c")) {
+				li.remove(i);
+			}
+			
+		}
+		
+		System.out.println(li);
+	}
+}
+#+END_SRC
+
