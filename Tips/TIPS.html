@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<!-- 2017-11-01 Wed 14:38 -->
+<!-- 2017-11-09 Thu 21:57 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Java Tips</title>
+<title>Tips</title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="Xiaodong Wang" />
 <style type="text/css">
@@ -180,6 +180,7 @@
   .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
+<link rel="stylesheet" type="text/css" href="orgcss/worg.css" />
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -229,22 +230,23 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="content">
-<h1 class="title">Java Tips</h1>
+<h1 class="title">Tips</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgbcbdc60">1. main方法为什么只能那么写？</a></li>
-<li><a href="#orgf6e13f7">2. 抽象类有必要存在构造方法吗？</a></li>
-<li><a href="#org4cb28b1">3. 对于构造函数，大家知道应该注意什么吗？</a></li>
-<li><a href="#org7702331">4. 子类会继承父类的构造方法吗？</a></li>
-<li><a href="#org97bb347">5. 以下要删除所有元素a的代码错在哪里？请改错。</a></li>
+<li><a href="#org169d30e">1. main方法为什么只能那么写？</a></li>
+<li><a href="#orgdcb17fd">2. 抽象类有必要存在构造方法吗？</a></li>
+<li><a href="#orgd4f0bc2">3. 对于构造函数，大家知道应该注意什么吗？</a></li>
+<li><a href="#orgbd5423f">4. 子类会继承父类的构造方法吗？</a></li>
+<li><a href="#org56ee846">5. 以下要删除所有元素c的代码有错么？运行完了还会有c没删除么？如有错请改错。</a></li>
+<li><a href="#org511b8a4">6. <span class="todo TODO">TODO</span> 关于文件的创建时间。</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgbcbdc60" class="outline-2">
-<h2 id="orgbcbdc60"><span class="section-number-2">1</span> main方法为什么只能那么写？</h2>
+<div id="outline-container-org169d30e" class="outline-2">
+<h2 id="org169d30e"><span class="section-number-2">1</span> main方法为什么只能那么写？</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 main()方法的声明为public static void main(String args[])，且必须这么定义，这是Java的规范。
@@ -256,8 +258,8 @@ main()方法的声明为public static void main(String args[])，且必须这么
 </div>
 </div>
 
-<div id="outline-container-orgf6e13f7" class="outline-2">
-<h2 id="orgf6e13f7"><span class="section-number-2">2</span> 抽象类有必要存在构造方法吗？</h2>
+<div id="outline-container-orgdcb17fd" class="outline-2">
+<h2 id="orgdcb17fd"><span class="section-number-2">2</span> 抽象类有必要存在构造方法吗？</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 抽象类虽然自身不可以实例化，但是其子类覆盖了所有的抽象方法后是可以实例化的，所以抽象类的构造函数，适用于给其子类对象进行初始化。
@@ -265,8 +267,8 @@ main()方法的声明为public static void main(String args[])，且必须这么
 </div>
 </div>
 
-<div id="outline-container-org4cb28b1" class="outline-2">
-<h2 id="org4cb28b1"><span class="section-number-2">3</span> 对于构造函数，大家知道应该注意什么吗？</h2>
+<div id="outline-container-orgd4f0bc2" class="outline-2">
+<h2 id="orgd4f0bc2"><span class="section-number-2">3</span> 对于构造函数，大家知道应该注意什么吗？</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 构造函数是对象的基本，没有构造函数就没有对象。如果在父类中（这里就是你的抽象类）中显示的定义了有参数的构造函数，在子类继承时就必须写一个构造函数来调用父类的构造函数。
@@ -283,8 +285,8 @@ main()方法的声明为public static void main(String args[])，且必须这么
 </div>
 </div>
 
-<div id="outline-container-org7702331" class="outline-2">
-<h2 id="org7702331"><span class="section-number-2">4</span> 子类会继承父类的构造方法吗？</h2>
+<div id="outline-container-orgbd5423f" class="outline-2">
+<h2 id="orgbd5423f"><span class="section-number-2">4</span> 子类会继承父类的构造方法吗？</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 父类中的构造方法是不能继承的，但是在实例化子类的时候会调用父类的构造方法。
@@ -292,8 +294,8 @@ main()方法的声明为public static void main(String args[])，且必须这么
 </div>
 </div>
 
-<div id="outline-container-org97bb347" class="outline-2">
-<h2 id="org97bb347"><span class="section-number-2">5</span> 以下要删除所有元素a的代码错在哪里？请改错。</h2>
+<div id="outline-container-org56ee846" class="outline-2">
+<h2 id="org56ee846"><span class="section-number-2">5</span> 以下要删除所有元素c的代码有错么？运行完了还会有c没删除么？如有错请改错。</h2>
 <div class="outline-text-2" id="text-5">
 <div class="org-src-container">
 <pre class="src src-java"><span style="color: #932092;">import</span> <span style="color: #008b8b;">java</span>.<span style="color: #008b8b;">util</span>.<span style="color: #228b22;">ArrayList</span>;
@@ -307,6 +309,7 @@ main()方法的声明为public static void main(String args[])，且必须这么
                 li.add(<span style="color: #8b2252;">"b"</span>);
                 li.add(<span style="color: #8b2252;">"c"</span>);
                 li.add(<span style="color: #8b2252;">"d"</span>);
+                li.add(<span style="color: #8b2252;">"c"</span>);
                 li.add(<span style="color: #8b2252;">"c"</span>);
                 li.add(<span style="color: #8b2252;">"e"</span>);
                 li.add(<span style="color: #8b2252;">"c"</span>);
@@ -325,10 +328,34 @@ main()方法的声明为public static void main(String args[])，且必须这么
 </div>
 </div>
 </div>
+
+<div id="outline-container-org511b8a4" class="outline-2">
+<h2 id="org511b8a4"><span class="section-number-2">6</span> <span class="todo TODO">TODO</span> 关于文件的创建时间。</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+在Linux系统中没有文件创建时间的概念，只有文件的访问时间、修改时间、状态改变时间，即不能在文件的生命周期内永远知道文件的创建时间。与文件相关的几个时间包括：
+</p>
+<dl class="org-dl">
+<dt>访问时间</dt><dd>读一次这个文件的内容，这个时间就会更新。比如对这个文件使用more命令。ls、stat命令都不会修改文件的访问时间。</dd>
+<dt>修改时间</dt><dd>对文件内容修改一次，这个时间就会更新。比如：vi后保存文件。ls -l列出的时间就是这个时间。</dd>
+<dt>状态改变时间</dt><dd>通过chmod命令更改一次文件属性，这个时间就会更新。</dd>
+</dl>
+
+<p>
+可以通过stat命令查看文件的详细的状态、准确的修改时间等。
+</p>
+
+<ul class="org-ul">
+<li>如果文件创建后就没有修改过，那么修改时间 = 创建时间</li>
+<li>如果文件创建后状态就没有改变过，那么状态改变时间 = 创建时间</li>
+<li>如果文件创建后没有被读取过，那么访问时间 = 创建时间</li>
+</ul>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Xiaodong Wang</p>
-<p class="date">Created: 2017-11-01 Wed 14:38</p>
+<p class="date">Created: 2017-11-09 Thu 21:57</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

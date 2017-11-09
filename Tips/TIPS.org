@@ -1,6 +1,22 @@
-#+TITLE:     Java Tips
+#+TITLE:     Tips
 #+AUTHOR:    Xiaodong Wang
 #+EMAIL:     wangxiaodong@ouc.edu.cn
+
+#+DESCRIPTION:
+#+KEYWORDS:
+#+LANGUAGE:  zh
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="orgcss/worg.css" />
+#+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+OPTIONS:   ^:nil
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+LINK_UP:   
+#+LINK_HOME: 
+#+XSLT:
+#+LATEX_HEADER: \usepackage{xeCJK}
+#+LATEX_HEADER: \setCJKmainfont{SimSun}
 
 * main方法为什么只能那么写？
 
@@ -56,4 +72,18 @@ public class Test {
 	}
 }
 #+END_SRC
+
+* TODO 关于文件的创建时间。
+
+在Linux系统中没有文件创建时间的概念，只有文件的访问时间、修改时间、状态改变时间，即不能在文件的生命周期内永远知道文件的创建时间。与文件相关的几个时间包括：
+- 访问时间 :: 读一次这个文件的内容，这个时间就会更新。比如对这个文件使用more命令。ls、stat命令都不会修改文件的访问时间。
+- 修改时间 :: 对文件内容修改一次，这个时间就会更新。比如：vi后保存文件。ls -l列出的时间就是这个时间。
+- 状态改变时间 :: 通过chmod命令更改一次文件属性，这个时间就会更新。
+
+可以通过stat命令查看文件的详细的状态、准确的修改时间等。
+
+- 如果文件创建后就没有修改过，那么修改时间 = 创建时间
+- 如果文件创建后状态就没有改变过，那么状态改变时间 = 创建时间
+- 如果文件创建后没有被读取过，那么访问时间 = 创建时间
+
 
