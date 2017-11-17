@@ -1,6 +1,0 @@
-\frametitle{课后作业}
-\begin{enumerate}
-\item 搜索关于Java常量池技术的相关文档和资源，并进行总结。
-\item 搜索关于Java中比较操作“==”和“equals()”的相关文档，并进行总结，加
-  深对Java内存模型的理解。
-\end{enumerate}

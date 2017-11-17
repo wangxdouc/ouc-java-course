@@ -1,4 +1,0 @@
-\beamer@endinputifotherversion {3.33pt}
-\beamer@sectionintoc {2}{泛型}{5}{0}{1}
-\beamer@sectionintoc {3}{使用泛型}{8}{0}{2}
-\beamer@sectionintoc {4}{泛型进阶}{14}{0}{3}

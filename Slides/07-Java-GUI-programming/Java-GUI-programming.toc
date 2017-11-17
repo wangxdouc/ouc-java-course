@@ -1,7 +1,0 @@
-\beamer@endinputifotherversion {3.33pt}
-\beamer@sectionintoc {2}{Java GUI设计}{5}{0}{1}
-\beamer@sectionintoc {3}{GUI事件处理}{29}{0}{2}
-\beamer@sectionintoc {4}{AWT常用组件和视觉控制}{45}{0}{3}
-\beamer@sectionintoc {5}{Applet}{47}{0}{4}
-\beamer@sectionintoc {6}{Swing概述}{51}{0}{5}
-\beamer@sectionintoc {7}{Swing典型组件}{57}{0}{6}

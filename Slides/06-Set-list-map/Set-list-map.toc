@@ -1,8 +1,0 @@
-\beamer@endinputifotherversion {3.33pt}
-\beamer@sectionintoc {2}{集合框架概述}{5}{0}{1}
-\beamer@sectionintoc {3}{Collection及Map接口}{8}{0}{2}
-\beamer@sectionintoc {4}{列表}{31}{0}{3}
-\beamer@sectionintoc {5}{Iterator接口}{35}{0}{4}
-\beamer@sectionintoc {6}{集}{40}{0}{5}
-\beamer@sectionintoc {7}{映射}{47}{0}{6}
-\beamer@sectionintoc {8}{其他相关API}{52}{0}{7}
