@@ -15,7 +15,6 @@ public class MusicSheetAndFilesUploaderTest {
 		filePaths.add("/Users/xiaodong/Music/Beyond/AMANI.mp3");
 		filePaths.add("/Users/xiaodong/Music/Beyond/命运是你家 - Beyond.mp3");
 		filePaths.add("/Users/xiaodong/Music/Beyond/长城.mp3");
-		
 
 		MusicSheet ms = new MusicSheet();
 		ms.setUuid("cddc055bfa33439a889cb611c1cb6db2");

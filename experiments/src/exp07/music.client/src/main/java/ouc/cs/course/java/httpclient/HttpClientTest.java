@@ -14,9 +14,6 @@ import org.apache.commons.httpclient.methods.PostMethod;
 
 /**
  * HttpClient 测试类，提供get post方法实例
- * 
- * @author zdz8207
- *
  */
 public class HttpClientTest {
 	private static final String URL = "http://data.uspacex.com/handbook/proj3-api.html";
@@ -24,7 +21,7 @@ public class HttpClientTest {
 
 	public static void main(String[] args) throws Exception {
 		// Test GET method
-		// doGetMethod(URL, PORT);
+		doGetMethod(URL, PORT);
 
 		// Test POST method
 		String posturl = "http://localhost:8080/music.server/LoginUserServlet";
@@ -32,13 +29,7 @@ public class HttpClientTest {
 	}
 
 	/**
-	 * http get 方法
-	 * 
-	 * @param url
-	 * @param port
-	 * @throws HttpException
-	 * @throws IOException
-	 * @return bodystring
+	 * HTTP GET方法
 	 */
 	public static String doGetMethod(String url, int port) throws HttpException, IOException {
 		HttpClient client = new HttpClient();
@@ -66,13 +57,7 @@ public class HttpClientTest {
 	}
 
 	/**
-	 * http post 方法
-	 * 
-	 * @param url
-	 * @param port
-	 * @throws HttpException
-	 * @throws IOException
-	 * @return bodystring
+	 * HTTP POST方法
 	 */
 	public static String doPostMethod(String url, int port) throws HttpException, IOException {
 		HttpClient client = new HttpClient();
@@ -81,10 +66,11 @@ public class HttpClientTest {
 		// 使用POST方法
 		PostMethod method = new PostMethod(url);
 		// 设置传递参数
-		//NameValuePair agent = new NameValuePair("User-Agent", "Mozilla/4.0 (compatible; MSIE 8.0; Windows 2000)");
-		NameValuePair username = new NameValuePair("userName", "wxd2870@163.com");
-		NameValuePair password = new NameValuePair("userPwd", "Yuan@2010");
-		method.setRequestBody(new NameValuePair[] {username, password });
+		// NameValuePair agent = new NameValuePair("User-Agent", "Mozilla/4.0
+		// (compatible; MSIE 8.0; Windows 2000)");
+		NameValuePair username = new NameValuePair("userName", "test");
+		NameValuePair password = new NameValuePair("userPwd", "test");
+		method.setRequestBody(new NameValuePair[] { username, password });
 		// 执行请求
 		client.executeMethod(method);
 		// 设置cookies
