@@ -33,8 +33,8 @@ public class MusicSheetUploadServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.setContentType("text/html;charset=utf-8");
 
+		response.setContentType("text/html;charset=utf-8");
 		/**
 		 * 设置响应头允许AJAX跨域访问，星号表示所有的异域请求都可以接受
 		 */
@@ -43,7 +43,7 @@ public class MusicSheetUploadServlet extends HttpServlet {
 
 		Writer out = response.getWriter();
 		JSONObject json = JsonReader.receivePost(request);
-		 
+
 		System.out.println("[REQUEST JSON] " + json);
 		MusicSheet ms = (MusicSheet) JSONObject.toBean(json, MusicSheet.class);
 		System.out.println("*************** Music sheet ***************");
@@ -52,45 +52,51 @@ public class MusicSheetUploadServlet extends HttpServlet {
 		System.out.println("Sheet Creator: " + ms.getCreator());
 		System.out.println("Sheet Created Date: " + ms.getDateCreated());
 		System.out.println("Sheet Picture: " + ms.getPicture());
-
-		System.out.println("Music: ");
-		for (String key : ms.getMusicItems().keySet()) {
-			System.out.println(" ---- " + ms.getMusicItems().get(key));
-		}
-		System.out.println("********************************************");
-
-		MusicSheetService musicSheetService = new MusicSheetService();
-		MusicService musicService = new MusicService();
-		MusicSheetToMusicService mstmService = new MusicSheetToMusicService();
-
-		Music mu = null;
-		MusicSheetToMusic mstm = null;
-		int musicSheetId, musicId;
-		boolean token = true;
-
-		try {
-			musicSheetId = musicSheetService.create(ms);
-
-			for (String key : ms.getMusicItems().keySet()) {
-				mu = new Music(key, ms.getMusicItems().get(key));
-				musicId = musicService.create(mu);
-				mstm = new MusicSheetToMusic(musicSheetId, musicId);
-				mstmService.create(mstm);
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-			token = false; 
-		}
+		System.out.println("Sheet Music Items: " + ms.getMusicItems());
 
 		JSONObject jsonObject = new JSONObject();
 
-		if (token) {
-			jsonObject.put("musicSheet", JSONObject.fromObject(ms));
-			jsonObject.put("message", "Upload musicsheet successfully.");
+		if (ms.getMusicItems() == null) {
+			jsonObject.put("message", "Music items is null.");
 		} else {
-			jsonObject.put("message", "Upload musicsheet failed.");
+			System.out.println("Music: ");
+			for (String key : ms.getMusicItems().keySet()) {
+				System.out.println(" ---- " + ms.getMusicItems().get(key));
+			}
+			System.out.println("********************************************");
+
+			MusicSheetService musicSheetService = new MusicSheetService();
+			MusicService musicService = new MusicService();
+			MusicSheetToMusicService mstmService = new MusicSheetToMusicService();
+
+			Music mu = null;
+			MusicSheetToMusic mstm = null;
+			int musicSheetId, musicId;
+			boolean token = true;
+
+			try {
+				musicSheetId = musicSheetService.create(ms);
+
+				for (String key : ms.getMusicItems().keySet()) {
+					mu = new Music(key, ms.getMusicItems().get(key));
+					musicId = musicService.create(mu);
+					mstm = new MusicSheetToMusic(musicSheetId, musicId);
+					mstmService.create(mstm);
+				}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+				token = false;
+			}
+
+			if (token) {
+				jsonObject.put("musicSheet", JSONObject.fromObject(ms));
+				jsonObject.put("message", "Upload musicsheet successfully.");
+			} else {
+				jsonObject.put("message", "Upload musicsheet failed.");
+			}
 		}
+		
 		out.write(jsonObject.toString());
 		out.flush();
 	}
