@@ -287,14 +287,14 @@ p.showInfo();
 \xyy{使用泛型的列表集合}
 \begin{javaCode}
 import java.util.Vector;
-import java.util.Data;
+import java.util.Date;
 
 public class TestVector {
   public static void main(String[] args) {
     Vector<String> v = new Vector<String>();
     v.addElement("Tom");
     v.addElement("Nancy");
-    v.addElement("new Data()");  //编译时出错
+    v.addElement("new Date()");  //编译时出错
     v.addElement("new Integer(300)");  //编译时出错
 
     for(int i = 0; i < v.size(); i++) {
@@ -703,11 +703,7 @@ public class Test {
 值型封装类（如Integer、Float、Double等）的父类型，于是决定限制泛型类Point的类型参数必须
 为Number或其子类类型，并使用extends关键字来标明这种继承层次上限制。}
 \end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{}
 
-\end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 %% \begin{frame}
 %% \frametitle{本章习题}

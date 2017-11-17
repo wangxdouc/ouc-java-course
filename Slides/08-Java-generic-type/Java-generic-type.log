@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99991 (TeX Live 2014) (preloaded format=xelatex 2014.9.24)  9 NOV 2017 21:36
+This is XeTeX, Version 3.14159265-2.6-0.99991 (TeX Live 2014) (preloaded format=xelatex 2014.9.24)  17 NOV 2017 13:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2505,16 +2505,8 @@ File: figures/static/ouc.pdf Graphic file (type QTm)
 <use  "figures/static/ouc.pdf" > [30
 
 ]
-\openout4 = `Java-generic-type.vrb'.
-
- (./Java-generic-type.vrb)
 File: figures/static/ouc.pdf Graphic file (type QTm)
-
-<use  "figures/static/ouc.pdf" > [31
-
-]
-File: figures/static/ouc.pdf Graphic file (type QTm)
- <use  "figures/static/ouc.pdf" > [32
+ <use  "figures/static/ouc.pdf" > [31
 
 ]
 \tf@nav=\write7
@@ -2526,21 +2518,21 @@ File: figures/static/ouc.pdf Graphic file (type QTm)
 \tf@snm=\write9
 \openout9 = `Java-generic-type.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 732.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 732.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 728.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 728.
 
 (./Java-generic-type.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 732.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 732.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 732.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 728.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 728.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 728.
  ) 
 Here is how much of TeX's memory you used:
- 45237 strings out of 493734
- 963821 string characters out of 6146348
- 1096526 words of memory out of 5000000
- 47739 multiletter control sequences out of 15000+600000
+ 45233 strings out of 493734
+ 963761 string characters out of 6146348
+ 1096478 words of memory out of 5000000
+ 47737 multiletter control sequences out of 15000+600000
  11411 words of font info for 87 fonts, out of 8000000 for 9000
  1328 hyphenation exceptions out of 8191
  58i,15n,63p,10442b,1167s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on Java-generic-type.pdf (32 pages).
+Output written on Java-generic-type.pdf (31 pages).
