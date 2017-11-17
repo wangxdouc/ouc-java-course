@@ -2,9 +2,7 @@
 .DS_Store
 *.md~
 *.tex~
-Slides/09-Java-exception-handling/Makefile~
-Slides/10-Java-thread-programming/Makefile~
-Slides/11-Advanced-IO-programming/Makefile~
+Makefile~
 *.aux
 *.log
 *.nav
@@ -12,4 +10,3 @@ Slides/11-Advanced-IO-programming/Makefile~
 *.snm
 *.toc
 *.vrb
-Slides/12-Socket-network-programming-UNCOMPLETED/Makefile~
