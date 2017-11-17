@@ -17,4 +17,3 @@ javax.swing.Timer提供了定时器功能，用于在指定的时间延迟之后
 \item restart() 恢复计时器。
 \end{itemize}
 
-\samp{13-6\_Timer}
