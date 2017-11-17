@@ -18,11 +18,11 @@ public class MusicSheetAndFilesUploaderTest {
 		
 
 		MusicSheet ms = new MusicSheet();
-		ms.setUuid("f4d15f962976458d93975ab99562870e");
-		ms.setCreatorId("2011022 NB");
+		ms.setUuid("cddc055bfa33439a889cb611c1cb6db2");
+		ms.setCreatorId("2011022");
 		ms.setPicture("/Users/xiaodong/Temp/test01.png");
-		ms.setCreator("Wang Xiaodong NB");
-		ms.setName("Forever Beyond Band");
+		ms.setCreator("王晓东");
+		ms.setName("永远的Beyond乐队");
 
 		MusicSheetAndFilesUploader.createMusicSheetAndUploadFiles(url, ms, filePaths);
 	}

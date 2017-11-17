@@ -9,6 +9,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
@@ -50,6 +52,8 @@ public class MusicSheetAndFilesUploader {
 			conn.setUseCaches(false);
 			conn.setRequestMethod("POST");
 			conn.setRequestProperty("Connection", "Keep-Alive");
+			// 原来没有指定字符集为UTF-8
+			conn.setRequestProperty("Charset", "UTF-8");
 			conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows; U; Windows NT 6.1; zh-CN; rv:1.9.2.6)");
 			conn.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + BOUNDARY);
 			OutputStream out = new DataOutputStream(conn.getOutputStream());
@@ -69,7 +73,9 @@ public class MusicSheetAndFilesUploader {
 					strBuf.append("Content-Disposition: form-data; name=\"" + inputName + "\"\r\n\r\n");
 					strBuf.append(inputValue);
 				}
+
 				out.write(strBuf.toString().getBytes());
+
 			}
 			// File
 			if (fileMap != null) {

@@ -35,7 +35,8 @@ public class MusicSheetAndFileUploadServlet extends HttpServlet {
 	private static final Properties properties = new Properties(System.getProperties());
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
+		
+		request.setCharacterEncoding("UTF-8");
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 
 		System.out.println("File Storage on Server: " + path);
@@ -54,7 +55,7 @@ public class MusicSheetAndFileUploadServlet extends HttpServlet {
 				String name = item.getFieldName();
 
 				if (item.isFormField()) {
-					String value = item.getString();
+					String value = item.getString("utf-8");
 					System.out.println("[FORM FIELD] " + name + ": " + value);
 					musicSheetMetadata.put(name, value);
 
@@ -121,7 +122,10 @@ public class MusicSheetAndFileUploadServlet extends HttpServlet {
 			e.printStackTrace();
 			token = false;
 		}
-
+		
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		
 		Writer out = response.getWriter();
 		JSONObject jsonObject = new JSONObject();
 
