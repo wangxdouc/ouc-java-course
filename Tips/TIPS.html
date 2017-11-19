@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<!-- 2017-11-19 Sun 21:30 -->
+<!-- 2017-11-19 Sun 21:36 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Tips</title>
@@ -235,29 +235,29 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgd6e694b">1. main方法为什么只能那么写？</a></li>
-<li><a href="#org06aec2c">2. 抽象类有必要存在构造方法吗？</a></li>
-<li><a href="#org4dc179c">3. 对于构造函数，大家知道应该注意什么吗？</a></li>
-<li><a href="#org13a966e">4. 子类会继承父类的构造方法吗？</a></li>
-<li><a href="#orgecdcb14">5. 以下要删除所有元素c的代码有错么？运行完了还会有c没删除么？如有错请改错。</a></li>
-<li><a href="#org833018c">6. <span class="done DONE">DONE</span> 关于文件的创建时间。</a></li>
-<li><a href="#org371ffbe">7. <span class="todo TODO">TODO</span> 你了解Java中equal和==区别及字符串创建过程吗？</a>
+<li><a href="#orgcab4da8">1. main方法为什么只能那么写？</a></li>
+<li><a href="#org6d04088">2. 抽象类有必要存在构造方法吗？</a></li>
+<li><a href="#org811ae47">3. 对于构造函数，大家知道应该注意什么吗？</a></li>
+<li><a href="#orgd69aaa9">4. 子类会继承父类的构造方法吗？</a></li>
+<li><a href="#orgd450ac4">5. 以下要删除所有元素c的代码有错么？运行完了还会有c没删除么？如有错请改错。</a></li>
+<li><a href="#org0efda5a">6. <span class="done DONE">DONE</span> 关于文件的创建时间。</a></li>
+<li><a href="#org029b252">7. <span class="todo TODO">TODO</span> 你了解Java中equal和==区别及字符串创建过程吗？</a>
 <ul>
-<li><a href="#org69b02ff">7.1. 起因出处</a></li>
-<li><a href="#org7515637">7.2. 原因分析</a>
+<li><a href="#org3d2f0dc">7.1. 起因出处</a></li>
+<li><a href="#org793e802">7.2. 原因分析</a>
 <ul>
-<li><a href="#org9719a2a">7.2.1. 创建字符串对象原理</a></li>
+<li><a href="#org0b2e19d">7.2.1. 创建字符串对象原理</a></li>
 </ul>
 </li>
-<li><a href="#org0c8b5c5">7.3. 字符串缓存池</a></li>
+<li><a href="#org4847246">7.3. 字符串缓存池</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgd6e694b" class="outline-2">
-<h2 id="orgd6e694b"><span class="section-number-2">1</span> main方法为什么只能那么写？</h2>
+<div id="outline-container-orgcab4da8" class="outline-2">
+<h2 id="orgcab4da8"><span class="section-number-2">1</span> main方法为什么只能那么写？</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 main()方法的声明为public static void main(String args[])，且必须这么定义，这是Java的规范。
@@ -269,8 +269,8 @@ main()方法的声明为public static void main(String args[])，且必须这么
 </div>
 </div>
 
-<div id="outline-container-org06aec2c" class="outline-2">
-<h2 id="org06aec2c"><span class="section-number-2">2</span> 抽象类有必要存在构造方法吗？</h2>
+<div id="outline-container-org6d04088" class="outline-2">
+<h2 id="org6d04088"><span class="section-number-2">2</span> 抽象类有必要存在构造方法吗？</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 抽象类虽然自身不可以实例化，但是其子类覆盖了所有的抽象方法后是可以实例化的，所以抽象类的构造函数，适用于给其子类对象进行初始化。
@@ -278,8 +278,8 @@ main()方法的声明为public static void main(String args[])，且必须这么
 </div>
 </div>
 
-<div id="outline-container-org4dc179c" class="outline-2">
-<h2 id="org4dc179c"><span class="section-number-2">3</span> 对于构造函数，大家知道应该注意什么吗？</h2>
+<div id="outline-container-org811ae47" class="outline-2">
+<h2 id="org811ae47"><span class="section-number-2">3</span> 对于构造函数，大家知道应该注意什么吗？</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 构造函数是对象的基本，没有构造函数就没有对象。如果在父类中（这里就是你的抽象类）中显示的定义了有参数的构造函数，在子类继承时就必须写一个构造函数来调用父类的构造函数。
@@ -296,8 +296,8 @@ main()方法的声明为public static void main(String args[])，且必须这么
 </div>
 </div>
 
-<div id="outline-container-org13a966e" class="outline-2">
-<h2 id="org13a966e"><span class="section-number-2">4</span> 子类会继承父类的构造方法吗？</h2>
+<div id="outline-container-orgd69aaa9" class="outline-2">
+<h2 id="orgd69aaa9"><span class="section-number-2">4</span> 子类会继承父类的构造方法吗？</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 父类中的构造方法是不能继承的，但是在实例化子类的时候会调用父类的构造方法。
@@ -305,43 +305,42 @@ main()方法的声明为public static void main(String args[])，且必须这么
 </div>
 </div>
 
-<div id="outline-container-orgecdcb14" class="outline-2">
-<h2 id="orgecdcb14"><span class="section-number-2">5</span> 以下要删除所有元素c的代码有错么？运行完了还会有c没删除么？如有错请改错。</h2>
+<div id="outline-container-orgd450ac4" class="outline-2">
+<h2 id="orgd450ac4"><span class="section-number-2">5</span> 以下要删除所有元素c的代码有错么？运行完了还会有c没删除么？如有错请改错。</h2>
 <div class="outline-text-2" id="text-5">
 <div class="org-src-container">
 <pre class="src src-java"><span style="color: #932092;">import</span> <span style="color: #008b8b;">java</span>.<span style="color: #008b8b;">util</span>.<span style="color: #228b22;">ArrayList</span>;
 <span style="color: #932092;">import</span> <span style="color: #008b8b;">java</span>.<span style="color: #008b8b;">util</span>.<span style="color: #228b22;">List</span>;
 
 <span style="color: #932092;">public</span> <span style="color: #932092;">class</span> <span style="color: #228b22;">Test</span> {
-        <span style="color: #932092;">public</span> <span style="color: #932092;">static</span> <span style="color: #228b22;">void</span> <span style="color: #0000ff;">main</span>(<span style="color: #228b22;">String</span>[] <span style="color: #a0522d;">args</span>) {
-                <span style="color: #228b22;">List</span>&lt;<span style="color: #228b22;">String</span>&gt; <span style="color: #a0522d;">li</span> = <span style="color: #932092;">new</span> <span style="color: #228b22;">ArrayList</span>&lt;<span style="color: #228b22;">String</span>&gt;();
+  <span style="color: #932092;">public</span> <span style="color: #932092;">static</span> <span style="color: #228b22;">void</span> <span style="color: #0000ff;">main</span>(<span style="color: #228b22;">String</span>[] <span style="color: #a0522d;">args</span>) {
+    <span style="color: #228b22;">List</span>&lt;<span style="color: #228b22;">String</span>&gt; <span style="color: #a0522d;">li</span> = <span style="color: #932092;">new</span> <span style="color: #228b22;">ArrayList</span>&lt;<span style="color: #228b22;">String</span>&gt;();
 
-                li.add(<span style="color: #8b2252;">"a"</span>);
-                li.add(<span style="color: #8b2252;">"b"</span>);
-                li.add(<span style="color: #8b2252;">"c"</span>);
-                li.add(<span style="color: #8b2252;">"d"</span>);
-                li.add(<span style="color: #8b2252;">"c"</span>);
-                li.add(<span style="color: #8b2252;">"c"</span>);
-                li.add(<span style="color: #8b2252;">"e"</span>);
-                li.add(<span style="color: #8b2252;">"c"</span>);
+    li.add(<span style="color: #8b2252;">"a"</span>);
+    li.add(<span style="color: #8b2252;">"b"</span>);
+    li.add(<span style="color: #8b2252;">"c"</span>);
+    li.add(<span style="color: #8b2252;">"d"</span>);
+    li.add(<span style="color: #8b2252;">"c"</span>);
+    li.add(<span style="color: #8b2252;">"c"</span>);
+    li.add(<span style="color: #8b2252;">"e"</span>);
+    li.add(<span style="color: #8b2252;">"c"</span>);
 
-                <span style="color: #932092;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 0; i &lt; li.<span style="color: #228b22;">size</span>(); i++) {
-                        <span style="color: #932092;">if</span> (li.get(i).equals(<span style="color: #8b2252;">"c"</span>)) {
-                                li.remove(i);
-                        }
+    <span style="color: #932092;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 0; i &lt; li.<span style="color: #228b22;">size</span>(); i++) {
+      <span style="color: #932092;">if</span> (li.get(i).equals(<span style="color: #8b2252;">"c"</span>)) {
+        li.remove(i);
+      }
+    }
 
-                }
-
-                System.out.println(li);
-        }
+    System.out.println(li);
+  }
 }
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org833018c" class="outline-2">
-<h2 id="org833018c"><span class="section-number-2">6</span> <span class="done DONE">DONE</span> 关于文件的创建时间。</h2>
+<div id="outline-container-org0efda5a" class="outline-2">
+<h2 id="org0efda5a"><span class="section-number-2">6</span> <span class="done DONE">DONE</span> 关于文件的创建时间。</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 在Linux系统中没有文件创建时间的概念，只有文件的访问时间、修改时间、状态改变时间，即不能在文件的生命周期内永远知道文件的创建时间。与文件相关的几个时间包括：
@@ -365,16 +364,16 @@ main()方法的声明为public static void main(String args[])，且必须这么
 </div>
 
 
-<div id="outline-container-org371ffbe" class="outline-2">
-<h2 id="org371ffbe"><span class="section-number-2">7</span> <span class="todo TODO">TODO</span> 你了解Java中equal和==区别及字符串创建过程吗？</h2>
+<div id="outline-container-org029b252" class="outline-2">
+<h2 id="org029b252"><span class="section-number-2">7</span> <span class="todo TODO">TODO</span> 你了解Java中equal和==区别及字符串创建过程吗？</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 (感谢 @方政 提出问题并整理）
 </p>
 </div>
 
-<div id="outline-container-org69b02ff" class="outline-3">
-<h3 id="org69b02ff"><span class="section-number-3">7.1</span> 起因出处</h3>
+<div id="outline-container-org3d2f0dc" class="outline-3">
+<h3 id="org3d2f0dc"><span class="section-number-3">7.1</span> 起因出处</h3>
 <div class="outline-text-3" id="text-7-1">
 <p>
 在一段Java代码中，使用了两种方式获取字符串：
@@ -407,12 +406,12 @@ main()方法的声明为public static void main(String args[])，且必须这么
 </div>
 </div>
 
-<div id="outline-container-org7515637" class="outline-3">
-<h3 id="org7515637"><span class="section-number-3">7.2</span> 原因分析</h3>
+<div id="outline-container-org793e802" class="outline-3">
+<h3 id="org793e802"><span class="section-number-3">7.2</span> 原因分析</h3>
 <div class="outline-text-3" id="text-7-2">
 </div>
 <ol class="org-ol">
-<li><a id="org73be052"></a>==和equals<br />
+<li><a id="orgcc61cc3"></a>==和equals<br />
 <div class="outline-text-5" id="text-7-2-0-1">
 <p>
 首先，在Java中，==和equals是不一样的。对于基本类型，如int，char之类的，==比较的是他们的值。而对于复合类型（类），当使用==比较的就不是他们的值，而是他们的地址，==的意思可以看成是参与比较的两个对象是不是同一个对象，即是否具有相同的地址。而equals的初始行为是比较地址，但在一些类中被重写覆盖，如String类中的equals方法：
@@ -420,25 +419,27 @@ main()方法的声明为public static void main(String args[])，且必须这么
 
 <div class="org-src-container">
 <pre class="src src-java"><span style="color: #932092;">public</span> <span style="color: #228b22;">boolean</span> <span style="color: #0000ff;">equals</span>(<span style="color: #228b22;">Object</span> <span style="color: #a0522d;">anObject</span>) {
-        <span style="color: #932092;">if</span> (<span style="color: #932092;">this</span> == anObject) {
-                <span style="color: #932092;">return</span> <span style="color: #008b8b;">true</span>;
-        }
-        <span style="color: #932092;">if</span> (anObject <span style="color: #932092;">instanceof</span> String) {
-                <span style="color: #228b22;">String</span> <span style="color: #a0522d;">anotherString</span> = (<span style="color: #228b22;">String</span>) anObject;
-                <span style="color: #228b22;">int</span> <span style="color: #a0522d;">n</span> = value.length;
-                <span style="color: #932092;">if</span> (n == anotherString.value.length) {
-                        <span style="color: #228b22;">char</span> <span style="color: #a0522d;">v1</span>[] = value;
-                        <span style="color: #228b22;">char</span> <span style="color: #a0522d;">v2</span>[] = anotherString.value;
-                        <span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 0;
-                        <span style="color: #932092;">while</span> (n-- != 0) {
-                                <span style="color: #932092;">if</span> (v1[i] != v2[i])
-                                <span style="color: #932092;">return</span> <span style="color: #008b8b;">false</span>;
-                                i++;
-                        }
-                        <span style="color: #932092;">return</span> <span style="color: #008b8b;">true</span>;
-                }
-        }
+  <span style="color: #932092;">if</span> (<span style="color: #932092;">this</span> == anObject) {
+    <span style="color: #932092;">return</span> <span style="color: #008b8b;">true</span>;
+  }
+
+  <span style="color: #932092;">if</span> (anObject <span style="color: #932092;">instanceof</span> String) {
+    <span style="color: #228b22;">String</span> <span style="color: #a0522d;">anotherString</span> = (<span style="color: #228b22;">String</span>) anObject;
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">n</span> = value.length;
+    <span style="color: #932092;">if</span> (n == anotherString.value.length) {
+      <span style="color: #228b22;">char</span> <span style="color: #a0522d;">v1</span>[] = value;
+      <span style="color: #228b22;">char</span> <span style="color: #a0522d;">v2</span>[] = anotherString.value;
+      <span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 0;
+      <span style="color: #932092;">while</span> (n-- != 0) {
+        <span style="color: #932092;">if</span> (v1[i] != v2[i])
         <span style="color: #932092;">return</span> <span style="color: #008b8b;">false</span>;
+        i++;
+      }
+      <span style="color: #932092;">return</span> <span style="color: #008b8b;">true</span>;
+    }
+  }
+  <span style="color: #932092;">return</span> <span style="color: #008b8b;">false</span>;
+
 }
 </pre>
 </div>
@@ -449,8 +450,8 @@ main()方法的声明为public static void main(String args[])，且必须这么
 </div>
 </li>
 
-<div id="outline-container-org9719a2a" class="outline-4">
-<h4 id="org9719a2a"><span class="section-number-4">7.2.1</span> 创建字符串对象原理</h4>
+<div id="outline-container-org0b2e19d" class="outline-4">
+<h4 id="org0b2e19d"><span class="section-number-4">7.2.1</span> 创建字符串对象原理</h4>
 <div class="outline-text-4" id="text-7-2-1">
 <ul class="org-ul">
 <li>在创建一个字符串对象str = X时，JVM会拿着X去字符串缓存池中找到是否有内容相同的字符串，若有，则将str与其联系起来，若没有，则在池中创建。</li>
@@ -532,8 +533,8 @@ System.out.println(str3 == str2); <span style="color: #b22222;">//</span><span s
 </div>
 </div>
 
-<div id="outline-container-org0c8b5c5" class="outline-3">
-<h3 id="org0c8b5c5"><span class="section-number-3">7.3</span> 字符串缓存池</h3>
+<div id="outline-container-org4847246" class="outline-3">
+<h3 id="org4847246"><span class="section-number-3">7.3</span> 字符串缓存池</h3>
 <div class="outline-text-3" id="text-7-3">
 <p>
 在程序运行过程中，会创建一个字符串缓存池。下面，让我们来看一看第一个例子。
@@ -576,7 +577,7 @@ System.out.println(str3 == str2); <span style="color: #b22222;">//</span><span s
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Xiaodong Wang</p>
-<p class="date">Created: 2017-11-19 Sun 21:30</p>
+<p class="date">Created: 2017-11-19 Sun 21:36</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

@@ -49,27 +49,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Test {
-	public static void main(String[] args) {
-		List<String> li = new ArrayList<String>();
+  public static void main(String[] args) {
+    List<String> li = new ArrayList<String>();
+    
+    li.add("a");
+    li.add("b");
+    li.add("c");
+    li.add("d");
+    li.add("c");
+    li.add("c");
+    li.add("e");
+    li.add("c");
+    
+    for (int i = 0; i < li.size(); i++) {
+      if (li.get(i).equals("c")) {
+        li.remove(i);
+      }
+    }
 
-		li.add("a");
-		li.add("b");
-		li.add("c");
-		li.add("d");
-		li.add("c");
-		li.add("c");
-		li.add("e");
-		li.add("c");
-
-		for (int i = 0; i < li.size(); i++) {
-			if (li.get(i).equals("c")) {
-				li.remove(i);
-			}
-			
-		}
-		
-		System.out.println(li);
-	}
+    System.out.println(li);
+  }
 }
 #+END_SRC
 
@@ -125,25 +124,27 @@ public static void main (String[] args) {
 
 #+BEGIN_SRC java
 public boolean equals(Object anObject) {
-	if (this == anObject) {
-		return true;
-	}
-	if (anObject instanceof String) {
-		String anotherString = (String) anObject;
-		int n = value.length;
-		if (n == anotherString.value.length) {
-			char v1[] = value;
-			char v2[] = anotherString.value;
-			int i = 0;
-			while (n-- != 0) {
-				if (v1[i] != v2[i])
-				return false;
-				i++;
-			}
-			return true;
-		}
-	}
+  if (this == anObject) {
+    return true;
+  }
+  
+  if (anObject instanceof String) {
+    String anotherString = (String) anObject;
+    int n = value.length;
+    if (n == anotherString.value.length) {
+      char v1[] = value;
+      char v2[] = anotherString.value;
+      int i = 0;
+      while (n-- != 0) {
+        if (v1[i] != v2[i])
 	return false;
+	i++;
+      }
+      return true;
+    }
+  }
+  return false;
+
 }
 #+END_SRC
 
