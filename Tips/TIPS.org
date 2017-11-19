@@ -118,7 +118,7 @@ public static void main (String[] args) {
 
 ** 原因分析
 
-**** ==和equals
+*** ==和equals
 
 首先，在Java中，==和equals是不一样的。对于基本类型，如int，char之类的，==比较的是他们的值。而对于复合类型（类），当使用==比较的就不是他们的值，而是他们的地址，==的意思可以看成是参与比较的两个对象是不是同一个对象，即是否具有相同的地址。而equals的初始行为是比较地址，但在一些类中被重写覆盖，如String类中的equals方法：
 
@@ -202,7 +202,7 @@ System.out.println(str3 == str2); //false
 - http://www.voidcn.com/article/p-wwfksnxk-vw.html
 - http://www.cnblogs.com/zhxhdean/archive/2011/03/25/1995431.html#undefined
 
-** 字符串缓存池
+*** 字符串缓存池
 
 在程序运行过程中，会创建一个字符串缓存池。下面，让我们来看一看第一个例子。
 

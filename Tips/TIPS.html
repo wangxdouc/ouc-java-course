@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<!-- 2017-11-19 Sun 21:39 -->
+<!-- 2017-11-19 Sun 21:40 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Tips</title>
@@ -235,29 +235,30 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org456c38c">1. main方法为什么只能那么写？</a></li>
-<li><a href="#orgb2a8412">2. 抽象类有必要存在构造方法吗？</a></li>
-<li><a href="#org97caffb">3. 对于构造函数，大家知道应该注意什么吗？</a></li>
-<li><a href="#org96cc243">4. 子类会继承父类的构造方法吗？</a></li>
-<li><a href="#orgd427074">5. 以下要删除所有元素c的代码有错么？运行完了还会有c没删除么？如有错请改错。</a></li>
-<li><a href="#org8e23cc4">6. <span class="done DONE">DONE</span> 关于文件的创建时间。</a></li>
-<li><a href="#orgcfa1c13">7. <span class="todo TODO">TODO</span> 你了解Java中equals和==区别及字符串创建过程吗？</a>
+<li><a href="#orgb1d2094">1. main方法为什么只能那么写？</a></li>
+<li><a href="#org841dfd4">2. 抽象类有必要存在构造方法吗？</a></li>
+<li><a href="#org5b154dc">3. 对于构造函数，大家知道应该注意什么吗？</a></li>
+<li><a href="#org9074773">4. 子类会继承父类的构造方法吗？</a></li>
+<li><a href="#org1dbb6a7">5. 以下要删除所有元素c的代码有错么？运行完了还会有c没删除么？如有错请改错。</a></li>
+<li><a href="#orgd779aee">6. <span class="done DONE">DONE</span> 关于文件的创建时间。</a></li>
+<li><a href="#org08e27d3">7. <span class="todo TODO">TODO</span> 你了解Java中equals和==区别及字符串创建过程吗？</a>
 <ul>
-<li><a href="#org1f1956b">7.1. 起因出处</a></li>
-<li><a href="#org750d708">7.2. 原因分析</a>
+<li><a href="#orgc03a2ea">7.1. 起因出处</a></li>
+<li><a href="#orgcd298ed">7.2. 原因分析</a>
 <ul>
-<li><a href="#org43c4d65">7.2.1. 创建字符串对象原理</a></li>
+<li><a href="#org2ded2fc">7.2.1. ==和equals</a></li>
+<li><a href="#org0e0035f">7.2.2. 创建字符串对象原理</a></li>
+<li><a href="#org31c6e04">7.2.3. 字符串缓存池</a></li>
 </ul>
 </li>
-<li><a href="#org6b60b23">7.3. 字符串缓存池</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org456c38c" class="outline-2">
-<h2 id="org456c38c"><span class="section-number-2">1</span> main方法为什么只能那么写？</h2>
+<div id="outline-container-orgb1d2094" class="outline-2">
+<h2 id="orgb1d2094"><span class="section-number-2">1</span> main方法为什么只能那么写？</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 main()方法的声明为public static void main(String args[])，且必须这么定义，这是Java的规范。
@@ -269,8 +270,8 @@ main()方法的声明为public static void main(String args[])，且必须这么
 </div>
 </div>
 
-<div id="outline-container-orgb2a8412" class="outline-2">
-<h2 id="orgb2a8412"><span class="section-number-2">2</span> 抽象类有必要存在构造方法吗？</h2>
+<div id="outline-container-org841dfd4" class="outline-2">
+<h2 id="org841dfd4"><span class="section-number-2">2</span> 抽象类有必要存在构造方法吗？</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 抽象类虽然自身不可以实例化，但是其子类覆盖了所有的抽象方法后是可以实例化的，所以抽象类的构造函数，适用于给其子类对象进行初始化。
@@ -278,8 +279,8 @@ main()方法的声明为public static void main(String args[])，且必须这么
 </div>
 </div>
 
-<div id="outline-container-org97caffb" class="outline-2">
-<h2 id="org97caffb"><span class="section-number-2">3</span> 对于构造函数，大家知道应该注意什么吗？</h2>
+<div id="outline-container-org5b154dc" class="outline-2">
+<h2 id="org5b154dc"><span class="section-number-2">3</span> 对于构造函数，大家知道应该注意什么吗？</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 构造函数是对象的基本，没有构造函数就没有对象。如果在父类中（这里就是你的抽象类）中显示的定义了有参数的构造函数，在子类继承时就必须写一个构造函数来调用父类的构造函数。
@@ -296,8 +297,8 @@ main()方法的声明为public static void main(String args[])，且必须这么
 </div>
 </div>
 
-<div id="outline-container-org96cc243" class="outline-2">
-<h2 id="org96cc243"><span class="section-number-2">4</span> 子类会继承父类的构造方法吗？</h2>
+<div id="outline-container-org9074773" class="outline-2">
+<h2 id="org9074773"><span class="section-number-2">4</span> 子类会继承父类的构造方法吗？</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 父类中的构造方法是不能继承的，但是在实例化子类的时候会调用父类的构造方法。
@@ -305,8 +306,8 @@ main()方法的声明为public static void main(String args[])，且必须这么
 </div>
 </div>
 
-<div id="outline-container-orgd427074" class="outline-2">
-<h2 id="orgd427074"><span class="section-number-2">5</span> 以下要删除所有元素c的代码有错么？运行完了还会有c没删除么？如有错请改错。</h2>
+<div id="outline-container-org1dbb6a7" class="outline-2">
+<h2 id="org1dbb6a7"><span class="section-number-2">5</span> 以下要删除所有元素c的代码有错么？运行完了还会有c没删除么？如有错请改错。</h2>
 <div class="outline-text-2" id="text-5">
 <div class="org-src-container">
 <pre class="src src-java"><span style="color: #932092;">import</span> <span style="color: #008b8b;">java</span>.<span style="color: #008b8b;">util</span>.<span style="color: #228b22;">ArrayList</span>;
@@ -339,8 +340,8 @@ main()方法的声明为public static void main(String args[])，且必须这么
 </div>
 </div>
 
-<div id="outline-container-org8e23cc4" class="outline-2">
-<h2 id="org8e23cc4"><span class="section-number-2">6</span> <span class="done DONE">DONE</span> 关于文件的创建时间。</h2>
+<div id="outline-container-orgd779aee" class="outline-2">
+<h2 id="orgd779aee"><span class="section-number-2">6</span> <span class="done DONE">DONE</span> 关于文件的创建时间。</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 在Linux系统中没有文件创建时间的概念，只有文件的访问时间、修改时间、状态改变时间，即不能在文件的生命周期内永远知道文件的创建时间。与文件相关的几个时间包括：
@@ -364,16 +365,16 @@ main()方法的声明为public static void main(String args[])，且必须这么
 </div>
 
 
-<div id="outline-container-orgcfa1c13" class="outline-2">
-<h2 id="orgcfa1c13"><span class="section-number-2">7</span> <span class="todo TODO">TODO</span> 你了解Java中equals和==区别及字符串创建过程吗？</h2>
+<div id="outline-container-org08e27d3" class="outline-2">
+<h2 id="org08e27d3"><span class="section-number-2">7</span> <span class="todo TODO">TODO</span> 你了解Java中equals和==区别及字符串创建过程吗？</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 (感谢 @方政 提出问题并整理）
 </p>
 </div>
 
-<div id="outline-container-org1f1956b" class="outline-3">
-<h3 id="org1f1956b"><span class="section-number-3">7.1</span> 起因出处</h3>
+<div id="outline-container-orgc03a2ea" class="outline-3">
+<h3 id="orgc03a2ea"><span class="section-number-3">7.1</span> 起因出处</h3>
 <div class="outline-text-3" id="text-7-1">
 <p>
 在一段Java代码中，使用了两种方式获取字符串：
@@ -406,13 +407,13 @@ main()方法的声明为public static void main(String args[])，且必须这么
 </div>
 </div>
 
-<div id="outline-container-org750d708" class="outline-3">
-<h3 id="org750d708"><span class="section-number-3">7.2</span> 原因分析</h3>
+<div id="outline-container-orgcd298ed" class="outline-3">
+<h3 id="orgcd298ed"><span class="section-number-3">7.2</span> 原因分析</h3>
 <div class="outline-text-3" id="text-7-2">
 </div>
-<ol class="org-ol">
-<li><a id="org143b248"></a>==和equals<br />
-<div class="outline-text-5" id="text-7-2-0-1">
+<div id="outline-container-org2ded2fc" class="outline-4">
+<h4 id="org2ded2fc"><span class="section-number-4">7.2.1</span> ==和equals</h4>
+<div class="outline-text-4" id="text-7-2-1">
 <p>
 首先，在Java中，==和equals是不一样的。对于基本类型，如int，char之类的，==比较的是他们的值。而对于复合类型（类），当使用==比较的就不是他们的值，而是他们的地址，==的意思可以看成是参与比较的两个对象是不是同一个对象，即是否具有相同的地址。而equals的初始行为是比较地址，但在一些类中被重写覆盖，如String类中的equals方法：
 </p>
@@ -448,11 +449,11 @@ main()方法的声明为public static void main(String args[])，且必须这么
 我们可以很明白地看出，在开始比较地址如果相同就返回true，后续则是比较String的内容。所以，当我们需要比较两个字符串是否相同的时候，最好使用equals来进行比较。
 </p>
 </div>
-</li>
+</div>
 
-<div id="outline-container-org43c4d65" class="outline-4">
-<h4 id="org43c4d65"><span class="section-number-4">7.2.1</span> 创建字符串对象原理</h4>
-<div class="outline-text-4" id="text-7-2-1">
+<div id="outline-container-org0e0035f" class="outline-4">
+<h4 id="org0e0035f"><span class="section-number-4">7.2.2</span> 创建字符串对象原理</h4>
+<div class="outline-text-4" id="text-7-2-2">
 <ul class="org-ul">
 <li>在创建一个字符串对象str = X时，JVM会拿着X去字符串缓存池中找到是否有内容相同的字符串，若有，则将str与其联系起来，若没有，则在池中创建。</li>
 <li>使用new创建对象时，会在堆栈区中创建一个对象。</li>
@@ -531,11 +532,10 @@ System.out.println(str3 == str2); <span style="color: #b22222;">//</span><span s
 </ul>
 </div>
 </div>
-</div>
 
-<div id="outline-container-org6b60b23" class="outline-3">
-<h3 id="org6b60b23"><span class="section-number-3">7.3</span> 字符串缓存池</h3>
-<div class="outline-text-3" id="text-7-3">
+<div id="outline-container-org31c6e04" class="outline-4">
+<h4 id="org31c6e04"><span class="section-number-4">7.2.3</span> 字符串缓存池</h4>
+<div class="outline-text-4" id="text-7-2-3">
 <p>
 在程序运行过程中，会创建一个字符串缓存池。下面，让我们来看一看第一个例子。
 </p>
@@ -575,9 +575,10 @@ System.out.println(str3 == str2); <span style="color: #b22222;">//</span><span s
 </div>
 </div>
 </div>
+</div>
 <div id="postamble" class="status">
 <p class="author">Author: Xiaodong Wang</p>
-<p class="date">Created: 2017-11-19 Sun 21:39</p>
+<p class="date">Created: 2017-11-19 Sun 21:40</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
