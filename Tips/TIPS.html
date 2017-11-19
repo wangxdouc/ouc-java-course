@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<!-- 2017-11-09 Thu 21:57 -->
+<!-- 2017-11-19 Sun 21:30 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Tips</title>
@@ -235,18 +235,29 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org169d30e">1. main方法为什么只能那么写？</a></li>
-<li><a href="#orgdcb17fd">2. 抽象类有必要存在构造方法吗？</a></li>
-<li><a href="#orgd4f0bc2">3. 对于构造函数，大家知道应该注意什么吗？</a></li>
-<li><a href="#orgbd5423f">4. 子类会继承父类的构造方法吗？</a></li>
-<li><a href="#org56ee846">5. 以下要删除所有元素c的代码有错么？运行完了还会有c没删除么？如有错请改错。</a></li>
-<li><a href="#org511b8a4">6. <span class="todo TODO">TODO</span> 关于文件的创建时间。</a></li>
+<li><a href="#orgd6e694b">1. main方法为什么只能那么写？</a></li>
+<li><a href="#org06aec2c">2. 抽象类有必要存在构造方法吗？</a></li>
+<li><a href="#org4dc179c">3. 对于构造函数，大家知道应该注意什么吗？</a></li>
+<li><a href="#org13a966e">4. 子类会继承父类的构造方法吗？</a></li>
+<li><a href="#orgecdcb14">5. 以下要删除所有元素c的代码有错么？运行完了还会有c没删除么？如有错请改错。</a></li>
+<li><a href="#org833018c">6. <span class="done DONE">DONE</span> 关于文件的创建时间。</a></li>
+<li><a href="#org371ffbe">7. <span class="todo TODO">TODO</span> 你了解Java中equal和==区别及字符串创建过程吗？</a>
+<ul>
+<li><a href="#org69b02ff">7.1. 起因出处</a></li>
+<li><a href="#org7515637">7.2. 原因分析</a>
+<ul>
+<li><a href="#org9719a2a">7.2.1. 创建字符串对象原理</a></li>
+</ul>
+</li>
+<li><a href="#org0c8b5c5">7.3. 字符串缓存池</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org169d30e" class="outline-2">
-<h2 id="org169d30e"><span class="section-number-2">1</span> main方法为什么只能那么写？</h2>
+<div id="outline-container-orgd6e694b" class="outline-2">
+<h2 id="orgd6e694b"><span class="section-number-2">1</span> main方法为什么只能那么写？</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 main()方法的声明为public static void main(String args[])，且必须这么定义，这是Java的规范。
@@ -258,8 +269,8 @@ main()方法的声明为public static void main(String args[])，且必须这么
 </div>
 </div>
 
-<div id="outline-container-orgdcb17fd" class="outline-2">
-<h2 id="orgdcb17fd"><span class="section-number-2">2</span> 抽象类有必要存在构造方法吗？</h2>
+<div id="outline-container-org06aec2c" class="outline-2">
+<h2 id="org06aec2c"><span class="section-number-2">2</span> 抽象类有必要存在构造方法吗？</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 抽象类虽然自身不可以实例化，但是其子类覆盖了所有的抽象方法后是可以实例化的，所以抽象类的构造函数，适用于给其子类对象进行初始化。
@@ -267,8 +278,8 @@ main()方法的声明为public static void main(String args[])，且必须这么
 </div>
 </div>
 
-<div id="outline-container-orgd4f0bc2" class="outline-2">
-<h2 id="orgd4f0bc2"><span class="section-number-2">3</span> 对于构造函数，大家知道应该注意什么吗？</h2>
+<div id="outline-container-org4dc179c" class="outline-2">
+<h2 id="org4dc179c"><span class="section-number-2">3</span> 对于构造函数，大家知道应该注意什么吗？</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 构造函数是对象的基本，没有构造函数就没有对象。如果在父类中（这里就是你的抽象类）中显示的定义了有参数的构造函数，在子类继承时就必须写一个构造函数来调用父类的构造函数。
@@ -285,8 +296,8 @@ main()方法的声明为public static void main(String args[])，且必须这么
 </div>
 </div>
 
-<div id="outline-container-orgbd5423f" class="outline-2">
-<h2 id="orgbd5423f"><span class="section-number-2">4</span> 子类会继承父类的构造方法吗？</h2>
+<div id="outline-container-org13a966e" class="outline-2">
+<h2 id="org13a966e"><span class="section-number-2">4</span> 子类会继承父类的构造方法吗？</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 父类中的构造方法是不能继承的，但是在实例化子类的时候会调用父类的构造方法。
@@ -294,8 +305,8 @@ main()方法的声明为public static void main(String args[])，且必须这么
 </div>
 </div>
 
-<div id="outline-container-org56ee846" class="outline-2">
-<h2 id="org56ee846"><span class="section-number-2">5</span> 以下要删除所有元素c的代码有错么？运行完了还会有c没删除么？如有错请改错。</h2>
+<div id="outline-container-orgecdcb14" class="outline-2">
+<h2 id="orgecdcb14"><span class="section-number-2">5</span> 以下要删除所有元素c的代码有错么？运行完了还会有c没删除么？如有错请改错。</h2>
 <div class="outline-text-2" id="text-5">
 <div class="org-src-container">
 <pre class="src src-java"><span style="color: #932092;">import</span> <span style="color: #008b8b;">java</span>.<span style="color: #008b8b;">util</span>.<span style="color: #228b22;">ArrayList</span>;
@@ -329,8 +340,8 @@ main()方法的声明为public static void main(String args[])，且必须这么
 </div>
 </div>
 
-<div id="outline-container-org511b8a4" class="outline-2">
-<h2 id="org511b8a4"><span class="section-number-2">6</span> <span class="todo TODO">TODO</span> 关于文件的创建时间。</h2>
+<div id="outline-container-org833018c" class="outline-2">
+<h2 id="org833018c"><span class="section-number-2">6</span> <span class="done DONE">DONE</span> 关于文件的创建时间。</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 在Linux系统中没有文件创建时间的概念，只有文件的访问时间、修改时间、状态改变时间，即不能在文件的生命周期内永远知道文件的创建时间。与文件相关的几个时间包括：
@@ -352,10 +363,220 @@ main()方法的声明为public static void main(String args[])，且必须这么
 </ul>
 </div>
 </div>
+
+
+<div id="outline-container-org371ffbe" class="outline-2">
+<h2 id="org371ffbe"><span class="section-number-2">7</span> <span class="todo TODO">TODO</span> 你了解Java中equal和==区别及字符串创建过程吗？</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+(感谢 @方政 提出问题并整理）
+</p>
+</div>
+
+<div id="outline-container-org69b02ff" class="outline-3">
+<h3 id="org69b02ff"><span class="section-number-3">7.1</span> 起因出处</h3>
+<div class="outline-text-3" id="text-7-1">
+<p>
+在一段Java代码中，使用了两种方式获取字符串：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #b22222;">//</span><span style="color: #b22222;">&#31532;&#19968;&#31181;&#65306;&#33719;&#21462;&#21629;&#20196;&#34892;&#36755;&#20837;&#21442;&#25968;&#25968;&#32452;</span>
+<span style="color: #932092;">public</span> <span style="color: #932092;">static</span> <span style="color: #228b22;">void</span> <span style="color: #0000ff;">main</span> (<span style="color: #228b22;">String</span>[] <span style="color: #a0522d;">args</span>) {
+  <span style="color: #932092;">if</span>(args[0] == <span style="color: #8b2252;">"-logdb"</span>) {
+  System.out.println(<span style="color: #8b2252;">"args==-logdb"</span>);
+  } <span style="color: #932092;">else</span> {
+    System.out.println(<span style="color: #8b2252;">"args!=-logdb"</span>);
+  }
+}
+<span style="color: #b22222;">//</span><span style="color: #b22222;">&#31532;&#20108;&#31181;&#65306;&#20351;&#29992;&#20869;&#32622;&#23383;&#31526;&#20018;&#25968;&#32452;</span>
+<span style="color: #932092;">public</span> <span style="color: #932092;">static</span> <span style="color: #228b22;">void</span> <span style="color: #0000ff;">main</span> (<span style="color: #228b22;">String</span>[] <span style="color: #a0522d;">args</span>) {
+  <span style="color: #228b22;">String</span>[] <span style="color: #a0522d;">args1</span> = {<span style="color: #8b2252;">"-logdb"</span>};
+  <span style="color: #932092;">if</span>(args1[0] == <span style="color: #8b2252;">"-logdb"</span>) {
+    System.out.println(<span style="color: #8b2252;">"args==-logdb"</span>);
+  } <span style="color: #932092;">else</span> {
+    System.out.println(<span style="color: #8b2252;">"args!=-logdb"</span>);
+  }
+}
+</pre>
+</div>
+
+<p>
+结果发现，第一种显示的是args!=-logdb，而第二种显示的却是args!=-logdb。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7515637" class="outline-3">
+<h3 id="org7515637"><span class="section-number-3">7.2</span> 原因分析</h3>
+<div class="outline-text-3" id="text-7-2">
+</div>
+<ol class="org-ol">
+<li><a id="org73be052"></a>==和equals<br />
+<div class="outline-text-5" id="text-7-2-0-1">
+<p>
+首先，在Java中，==和equals是不一样的。对于基本类型，如int，char之类的，==比较的是他们的值。而对于复合类型（类），当使用==比较的就不是他们的值，而是他们的地址，==的意思可以看成是参与比较的两个对象是不是同一个对象，即是否具有相同的地址。而equals的初始行为是比较地址，但在一些类中被重写覆盖，如String类中的equals方法：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #932092;">public</span> <span style="color: #228b22;">boolean</span> <span style="color: #0000ff;">equals</span>(<span style="color: #228b22;">Object</span> <span style="color: #a0522d;">anObject</span>) {
+        <span style="color: #932092;">if</span> (<span style="color: #932092;">this</span> == anObject) {
+                <span style="color: #932092;">return</span> <span style="color: #008b8b;">true</span>;
+        }
+        <span style="color: #932092;">if</span> (anObject <span style="color: #932092;">instanceof</span> String) {
+                <span style="color: #228b22;">String</span> <span style="color: #a0522d;">anotherString</span> = (<span style="color: #228b22;">String</span>) anObject;
+                <span style="color: #228b22;">int</span> <span style="color: #a0522d;">n</span> = value.length;
+                <span style="color: #932092;">if</span> (n == anotherString.value.length) {
+                        <span style="color: #228b22;">char</span> <span style="color: #a0522d;">v1</span>[] = value;
+                        <span style="color: #228b22;">char</span> <span style="color: #a0522d;">v2</span>[] = anotherString.value;
+                        <span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 0;
+                        <span style="color: #932092;">while</span> (n-- != 0) {
+                                <span style="color: #932092;">if</span> (v1[i] != v2[i])
+                                <span style="color: #932092;">return</span> <span style="color: #008b8b;">false</span>;
+                                i++;
+                        }
+                        <span style="color: #932092;">return</span> <span style="color: #008b8b;">true</span>;
+                }
+        }
+        <span style="color: #932092;">return</span> <span style="color: #008b8b;">false</span>;
+}
+</pre>
+</div>
+
+<p>
+我们可以很明白地看出，在开始比较地址如果相同就返回true，后续则是比较String的内容。所以，当我们需要比较两个字符串是否相同的时候，最好使用equals来进行比较。
+</p>
+</div>
+</li>
+
+<div id="outline-container-org9719a2a" class="outline-4">
+<h4 id="org9719a2a"><span class="section-number-4">7.2.1</span> 创建字符串对象原理</h4>
+<div class="outline-text-4" id="text-7-2-1">
+<ul class="org-ul">
+<li>在创建一个字符串对象str = X时，JVM会拿着X去字符串缓存池中找到是否有内容相同的字符串，若有，则将str与其联系起来，若没有，则在池中创建。</li>
+<li>使用new创建对象时，会在堆栈区中创建一个对象。</li>
+<li>如果直接指定，如第二个例子，则会去字符串缓存池中检查是否存在字符串，不存在则创建，不会在堆栈区创建。</li>
+</ul>
+
+<p>
+示例A：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #228b22;">String</span> <span style="color: #a0522d;">str1</span> = <span style="color: #8b2252;">"abc"</span>; 
+System.out.println(str1 == <span style="color: #8b2252;">"abc"</span>);   <span style="color: #b22222;">//</span><span style="color: #b22222;">true</span>
+</pre>
+</div>
+
+<p>
+步骤分析： 
+</p>
+
+<ol class="org-ol">
+<li>栈中开辟一块空间存放引用str1；</li>
+<li>字符串缓存池中开辟一块空间，存放String常量"abc"；</li>
+<li>引用str1指向池中字符串缓存池"abc"；</li>
+<li>str1所指代的地址即常量"abc"所在地址，输出为true。</li>
+</ol>
+
+<p>
+示例B：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #228b22;">String</span> <span style="color: #a0522d;">str2</span> = <span style="color: #932092;">new</span> <span style="color: #228b22;">String</span>(<span style="color: #8b2252;">"abc"</span>);  
+System.out.println(str2 == <span style="color: #8b2252;">"abc"</span>);  <span style="color: #b22222;">//</span><span style="color: #b22222;">false</span>
+</pre>
+</div>
+
+<p>
+步骤分析： 
+</p>
+
+<ol class="org-ol">
+<li>栈中开辟一块空间存放引用str2；</li>
+<li>检查维护串池，若串池中有"abc"，copy到堆中，若没有，在堆中创建，并添加到串池中；</li>
+<li>引用str2指向堆中的新建的String对象"abc"；</li>
+<li>str2所指代的对象地址为堆中地址，而常量"abc"地址在池中，输出为false；</li>
+</ol>
+
+<p>
+示例C：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #228b22;">String</span> <span style="color: #a0522d;">str3</span> = <span style="color: #932092;">new</span> <span style="color: #228b22;">String</span>(<span style="color: #8b2252;">"abc"</span>); 
+System.out.println(str3 == str2); <span style="color: #b22222;">//</span><span style="color: #b22222;">false</span>
+</pre>
+</div>
+
+<p>
+步骤分析： 
+</p>
+<ol class="org-ol">
+<li>栈中开辟一块空间存放引用str3；</li>
+<li>堆中开辟一块新空间存放另外一个（不同于str2所指）新建的String对象；</li>
+<li>引用str3指向另外新建的那个String对象 ；</li>
+<li>str3和str2指向堆中不同的String对象，地址也不相同，输出为false；</li>
+</ol>
+
+<p>
+参考链接：
+</p>
+
+<ul class="org-ul">
+<li><a href="http://www.voidcn.com/article/p-wwfksnxk-vw.html">http://www.voidcn.com/article/p-wwfksnxk-vw.html</a></li>
+<li><a href="http://www.cnblogs.com/zhxhdean/archive/2011/03/25/1995431.html#undefined">http://www.cnblogs.com/zhxhdean/archive/2011/03/25/1995431.html#undefined</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0c8b5c5" class="outline-3">
+<h3 id="org0c8b5c5"><span class="section-number-3">7.3</span> 字符串缓存池</h3>
+<div class="outline-text-3" id="text-7-3">
+<p>
+在程序运行过程中，会创建一个字符串缓存池。下面，让我们来看一看第一个例子。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #932092;">public</span> <span style="color: #932092;">static</span> <span style="color: #228b22;">void</span>  <span style="color: #0000ff;">main</span> (<span style="color: #228b22;">String</span>[] <span style="color: #a0522d;">args</span>) {
+  <span style="color: #932092;">if</span>(args[0] == <span style="color: #8b2252;">"-logdb"</span>) {
+    System.out.println(<span style="color: #8b2252;">"args==-logdb"</span>);
+  } <span style="color: #932092;">else</span> {
+    System.out.println(<span style="color: #8b2252;">"args!=-logdb"</span>);
+  }
+}
+</pre>
+</div>
+
+<p>
+我们可以看到，在new出一个args字符串数组的时候，在字符串缓存池中，并没有存在着"-logdb"。
+所以，这两个字符串进行比较时，比较的是他们的地址,一个位于堆中，一个位于缓存池中，地址当然是不同的，所以返回的是不等于。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span> (<span style="color: #228b22;">String</span>[] <span style="color: #a0522d;">args</span>) {
+  <span style="color: #228b22;">String</span>[] <span style="color: #a0522d;">args1</span> = {<span style="color: #8b2252;">"-logdb"</span>};
+  <span style="color: #932092;">if</span>(args1[0] == <span style="color: #8b2252;">"-logdb"</span>) {
+    System.out.println(<span style="color: #8b2252;">"args==-logdb"</span>);
+  } <span style="color: #932092;">else</span> {
+    System.out.println(<span style="color: #8b2252;">"args!=-logdb"</span>);
+  }
+}
+</pre>
+</div>
+
+<p>
+而在第二个例子中，我们先示例化了一个字符串数组，其中存在着"-logdb"，所以，当后续比较时，程序先在String缓存池中寻找相同值的对象，即这两比较对象的地址其实是一样的，都是缓存池中的地址，所以返回等于。
+</p>
+</div>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Xiaodong Wang</p>
-<p class="date">Created: 2017-11-09 Thu 21:57</p>
+<p class="date">Created: 2017-11-19 Sun 21:30</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

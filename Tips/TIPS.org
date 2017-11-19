@@ -73,7 +73,7 @@ public class Test {
 }
 #+END_SRC
 
-* TODO 关于文件的创建时间。
+* DONE 关于文件的创建时间。
 
 在Linux系统中没有文件创建时间的概念，只有文件的访问时间、修改时间、状态改变时间，即不能在文件的生命周期内永远知道文件的创建时间。与文件相关的几个时间包括：
 - 访问时间 :: 读一次这个文件的内容，这个时间就会更新。比如对这个文件使用more命令。ls、stat命令都不会修改文件的访问时间。
@@ -87,3 +87,146 @@ public class Test {
 - 如果文件创建后没有被读取过，那么访问时间 = 创建时间
 
 
+* TODO 你了解Java中equal和==区别及字符串创建过程吗？
+
+(感谢 @方政 提出问题并整理）
+
+** 起因出处
+
+在一段Java代码中，使用了两种方式获取字符串：
+
+#+BEGIN_SRC java
+//第一种：获取命令行输入参数数组
+public static void main (String[] args) {
+  if(args[0] == "-logdb") {
+  System.out.println("args==-logdb");
+  } else {
+    System.out.println("args!=-logdb");
+  }
+}
+//第二种：使用内置字符串数组
+public static void main (String[] args) {
+  String[] args1 = {"-logdb"};
+  if(args1[0] == "-logdb") {
+    System.out.println("args==-logdb");
+  } else {
+    System.out.println("args!=-logdb");
+  }
+}
+#+END_SRC
+
+结果发现，第一种显示的是args!=-logdb，而第二种显示的却是args!=-logdb。
+
+** 原因分析
+
+**** ==和equals
+
+首先，在Java中，==和equals是不一样的。对于基本类型，如int，char之类的，==比较的是他们的值。而对于复合类型（类），当使用==比较的就不是他们的值，而是他们的地址，==的意思可以看成是参与比较的两个对象是不是同一个对象，即是否具有相同的地址。而equals的初始行为是比较地址，但在一些类中被重写覆盖，如String类中的equals方法：
+
+#+BEGIN_SRC java
+public boolean equals(Object anObject) {
+	if (this == anObject) {
+		return true;
+	}
+	if (anObject instanceof String) {
+		String anotherString = (String) anObject;
+		int n = value.length;
+		if (n == anotherString.value.length) {
+			char v1[] = value;
+			char v2[] = anotherString.value;
+			int i = 0;
+			while (n-- != 0) {
+				if (v1[i] != v2[i])
+				return false;
+				i++;
+			}
+			return true;
+		}
+	}
+	return false;
+}
+#+END_SRC
+
+我们可以很明白地看出，在开始比较地址如果相同就返回true，后续则是比较String的内容。所以，当我们需要比较两个字符串是否相同的时候，最好使用equals来进行比较。
+
+*** 创建字符串对象原理
+
+- 在创建一个字符串对象str = X时，JVM会拿着X去字符串缓存池中找到是否有内容相同的字符串，若有，则将str与其联系起来，若没有，则在池中创建。
+- 使用new创建对象时，会在堆栈区中创建一个对象。
+- 如果直接指定，如第二个例子，则会去字符串缓存池中检查是否存在字符串，不存在则创建，不会在堆栈区创建。
+
+示例A：
+
+#+BEGIN_SRC java 
+String str1 = "abc"; 
+System.out.println(str1 == "abc");   //true
+#+END_SRC
+
+步骤分析： 
+
+1) 栈中开辟一块空间存放引用str1；
+2) 字符串缓存池中开辟一块空间，存放String常量"abc"； 
+3) 引用str1指向池中字符串缓存池"abc"；
+4) str1所指代的地址即常量"abc"所在地址，输出为true。
+
+示例B：
+
+#+BEGIN_SRC java
+String str2 = new String("abc");  
+System.out.println(str2 == "abc");  //false
+#+END_SRC
+
+步骤分析： 
+
+1) 栈中开辟一块空间存放引用str2； 
+2) 检查维护串池，若串池中有"abc"，copy到堆中，若没有，在堆中创建，并添加到串池中；
+3) 引用str2指向堆中的新建的String对象"abc"；
+4) str2所指代的对象地址为堆中地址，而常量"abc"地址在池中，输出为false；
+
+示例C：
+
+#+BEGIN_SRC java
+String str3 = new String("abc"); 
+System.out.println(str3 == str2); //false
+#+END_SRC
+
+步骤分析： 
+1) 栈中开辟一块空间存放引用str3；
+2) 堆中开辟一块新空间存放另外一个（不同于str2所指）新建的String对象； 
+3) 引用str3指向另外新建的那个String对象 ；
+4) str3和str2指向堆中不同的String对象，地址也不相同，输出为false；
+
+参考链接：
+
+- http://www.voidcn.com/article/p-wwfksnxk-vw.html
+- http://www.cnblogs.com/zhxhdean/archive/2011/03/25/1995431.html#undefined
+
+** 字符串缓存池
+
+在程序运行过程中，会创建一个字符串缓存池。下面，让我们来看一看第一个例子。
+
+#+BEGIN_SRC java
+public static void  main (String[] args) {
+  if(args[0] == "-logdb") {
+    System.out.println("args==-logdb");
+  } else {
+    System.out.println("args!=-logdb");
+  }
+}
+#+END_SRC
+
+我们可以看到，在new出一个args字符串数组的时候，在字符串缓存池中，并没有存在着"-logdb"。
+所以，这两个字符串进行比较时，比较的是他们的地址,一个位于堆中，一个位于缓存池中，地址当然是不同的，所以返回的是不等于。
+
+#+BEGIN_SRC java
+int main (String[] args) {
+  String[] args1 = {"-logdb"};
+  if(args1[0] == "-logdb") {
+    System.out.println("args==-logdb");
+  } else {
+    System.out.println("args!=-logdb");
+  }
+}
+#+END_SRC
+
+而在第二个例子中，我们先示例化了一个字符串数组，其中存在着"-logdb"，所以，当后续比较时，程序先在String缓存池中寻找相同值的对象，即这两比较对象的地址其实是一样的，都是缓存池中的地址，所以返回等于。
