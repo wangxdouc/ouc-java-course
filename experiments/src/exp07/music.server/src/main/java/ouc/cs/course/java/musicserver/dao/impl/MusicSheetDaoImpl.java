@@ -176,19 +176,20 @@ public class MusicSheetDaoImpl implements MusicSheetDao {
 		ResultSet rs = null;
 		MusicSheet ms = null;
 		List<MusicSheet> musicSheetList = new ArrayList<MusicSheet>();
-		String sql = "select uuid, name, creatorId, creator, dateCreated, picture from musicsheet";
+		String sql = "select id, uuid, name, creatorId, creator, dateCreated, picture from musicsheet";
 		try {
 			conn = DatabaseUtil.getConnection();
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				ms = new MusicSheet();
-				ms.setUuid(rs.getString(1));
-				ms.setName(rs.getString(2));
-				ms.setCreatorId(rs.getString(3));
-				ms.setCreator(rs.getString(4));
-				ms.setDateCreated(rs.getString(5));
-				ms.setPicture(rs.getString(6));
+				ms.setId(rs.getInt(1));
+				ms.setUuid(rs.getString(2));
+				ms.setName(rs.getString(3));
+				ms.setCreatorId(rs.getString(4));
+				ms.setCreator(rs.getString(5));
+				ms.setDateCreated(rs.getString(6));
+				ms.setPicture(rs.getString(7));
 				musicSheetList.add(ms);
 			}
 		} catch (SQLException e) {

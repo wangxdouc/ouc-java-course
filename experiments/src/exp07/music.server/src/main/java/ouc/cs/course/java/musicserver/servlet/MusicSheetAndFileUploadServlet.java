@@ -2,6 +2,7 @@ package ouc.cs.course.java.musicserver.servlet;
 
 import java.sql.SQLException;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,23 +21,22 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import net.sf.json.JSONObject;
-import ouc.cs.course.java.musicserver.model.Music;
 import ouc.cs.course.java.musicserver.model.MusicSheet;
-import ouc.cs.course.java.musicserver.model.MusicSheetToMusic;
-import ouc.cs.course.java.musicserver.service.MusicService;
 import ouc.cs.course.java.musicserver.service.MusicSheetService;
-import ouc.cs.course.java.musicserver.service.MusicSheetToMusicService;
 
 @WebServlet("/upload")
 public class MusicSheetAndFileUploadServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private static final String path = "/Users/xiaodong/musicUpload/";
 	private static final Properties properties = new Properties(System.getProperties());
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		request.setCharacterEncoding("UTF-8");
+
+		ServletContext ctx = this.getServletContext();
+		String path = ctx.getInitParameter("musicFilePath");
+
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 
 		System.out.println("File Storage on Server: " + path);
@@ -44,6 +44,8 @@ public class MusicSheetAndFileUploadServlet extends HttpServlet {
 		factory.setRepository(new File(path));
 		factory.setSizeThreshold(1024 * 1024);
 		ServletFileUpload upload = new ServletFileUpload(factory);
+		// 试图解决Linux服务器写入MySQL数据库中文文件名乱码，未成功
+		upload.setHeaderEncoding("UTF-8");
 
 		Map<String, String> musicSheetMetadata = new HashMap<String, String>();
 		Map<String, String> musicSheetFileData = new HashMap<String, String>();
@@ -122,10 +124,10 @@ public class MusicSheetAndFileUploadServlet extends HttpServlet {
 			e.printStackTrace();
 			token = false;
 		}
-		
+
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
-		
+
 		Writer out = response.getWriter();
 		JSONObject jsonObject = new JSONObject();
 

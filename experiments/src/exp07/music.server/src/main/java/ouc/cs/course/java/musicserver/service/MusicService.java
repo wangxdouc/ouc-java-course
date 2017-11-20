@@ -20,5 +20,10 @@ public class MusicService {
 	public void getAll() throws SQLException {
 		System.out.println(musicDao.findAll());
 	}
+	
+	public String getFilePathByMd5value(String md5value) throws SQLException {
+		Music mu = musicDao.findByMd5value(md5value);
+		return mu.getName();
+	}
 
 }

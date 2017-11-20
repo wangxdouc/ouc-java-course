@@ -119,7 +119,8 @@ public class MusicDaoImpl implements MusicDao {
 			if (rs.next()) {
 				mu = new Music();
 				mu.setMd5value(rs.getString(1));
-				mu.setSinger(rs.getString(2));
+				mu.setName(rs.getString(2));
+				mu.setSinger(rs.getString(3));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

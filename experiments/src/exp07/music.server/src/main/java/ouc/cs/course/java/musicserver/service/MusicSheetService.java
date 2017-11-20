@@ -1,6 +1,9 @@
 package ouc.cs.course.java.musicserver.service;
 
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import ouc.cs.course.java.musicserver.dao.MusicDao;
 import ouc.cs.course.java.musicserver.dao.MusicSheetDao;
@@ -47,7 +50,6 @@ public class MusicSheetService {
 					mu.setName(ms.getMusicItems().get(key));
 					musicDao.update(mu);
 					musicId = mu.getId();
-
 				}
 
 				mstm = new MusicSheetToMusic(musicSheetId, musicId);
@@ -72,14 +74,27 @@ public class MusicSheetService {
 				} else {
 					mu.setName(ms.getMusicItems().get(key));
 					musicDao.update(mu);
-
 				}
 			}
 		}
 	}
 
-	public void getAll() throws SQLException {
-		System.out.println(musicSheetDao.findAll());
+	public List<MusicSheet> getAll() throws SQLException {
+		List<MusicSheet> mslist = musicSheetDao.findAll();
+
+		Music mu = null;
+		for (MusicSheet ms : mslist) {
+			Map<String, String> musicItems = new HashMap<String, String>();
+
+			for (int musicId : mstmDao.findByMusicSheetId(ms.getId())) {
+				mu = musicDao.findById(musicId);
+				musicItems.put(mu.getMd5value(), mu.getName());
+			}
+
+			ms.setMusicItems(musicItems);
+		}
+
+		return mslist;
 	}
 
 	public void delete(String uuid) throws SQLException {

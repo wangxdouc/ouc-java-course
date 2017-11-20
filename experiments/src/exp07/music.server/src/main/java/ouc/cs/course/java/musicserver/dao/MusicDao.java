@@ -20,6 +20,6 @@ public interface MusicDao {
 
 	public List<Music> findAll() throws SQLException;
 
-	Music findByMd5value(String md5value) throws SQLException;
+	public Music findByMd5value(String md5value) throws SQLException;
 
 }

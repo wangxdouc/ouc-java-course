@@ -33,7 +33,7 @@ public class MusicSheetToMusicDaoImpl implements MusicSheetToMusicDao {
 			ps.setInt(2, mstm.getMusicId());
 
 			ps.executeUpdate();
-			
+
 			ResultSet rs = ps.getGeneratedKeys();
 			if (rs.next()) {
 				autoIncKey = rs.getInt(1);
@@ -45,7 +45,7 @@ public class MusicSheetToMusicDaoImpl implements MusicSheetToMusicDao {
 		} finally {
 			DatabaseUtil.close(null, ps, conn);
 		}
-		
+
 		return autoIncKey;
 	}
 
@@ -67,4 +67,31 @@ public class MusicSheetToMusicDaoImpl implements MusicSheetToMusicDao {
 		}
 	}
 
+	@Override
+	public List<Integer> findByMusicSheetId(int musicsheetId) throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<Integer> musicIdList = new ArrayList<Integer>();
+		
+		String sql = "select musicId from musicsheet_music where musicsheetId=?";
+		
+		try {
+			conn = DatabaseUtil.getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, musicsheetId);
+			rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				musicIdList.add(rs.getInt(1));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new SQLException("query by musicsheetId failed.");
+		} finally {
+			DatabaseUtil.close(rs, ps, conn);
+		}
+		return musicIdList;
+
+	}
 }
