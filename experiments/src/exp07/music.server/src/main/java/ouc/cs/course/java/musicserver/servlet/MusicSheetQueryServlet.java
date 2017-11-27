@@ -27,51 +27,56 @@ public class MusicSheetQueryServlet extends HttpServlet {
 		MusicSheetService musicSheetService = new MusicSheetService();
 		List<MusicSheet> mslist = null;
 
-		String queryType = request.getParameter("type");
-		
-		if (queryType == null) {
-			System.out.println("Please check parameter: type.");
-			return;
-		}
-
-		switch (queryType) {
-		case "all":
-			System.out.println("Show all music sheets");
-			try {
-				mslist = musicSheetService.getAll();
-			} catch (SQLException e) {
-				token = false;
-				e.printStackTrace();
-			}
-			break;
-
-		case "top10":
-			System.out.println("top10");
-			break;
-
-		case "random10":
-			System.out.println("random10");
-			break;
-
-		default:
-			System.out.println("default");
-			break;
-		}
-
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("application/json;charset=utf-8");
 
-		Writer out = response.getWriter();
-		JSONObject jsonObject = new JSONObject();
+		String queryType = request.getParameter("type");
 
-		if (token) {
-			jsonObject.put("musicSheetList", JSONArray.fromObject(mslist));
-			jsonObject.put("message", "Get musicsheet list successfully.");
+		if (queryType != null) {
+
+			switch (queryType) {
+			case "all":
+				System.out.println("Show all music sheets");
+				try {
+					mslist = musicSheetService.getAll();
+				} catch (SQLException e) {
+					token = false;
+					e.printStackTrace();
+				}
+				break;
+
+			case "top10":
+				System.out.println("top10");
+				break;
+
+			case "random10":
+				System.out.println("random10");
+				break;
+
+			default:
+				System.out.println("default");
+				break;
+			}
+
+			Writer out = response.getWriter();
+			JSONObject jsonObject = new JSONObject();
+
+			if (token) {
+				jsonObject.put("musicSheetList", JSONArray.fromObject(mslist));
+				jsonObject.put("message", "Get musicsheet list successfully.");
+			} else {
+				jsonObject.put("message", "Get musicsheet list failed.");
+			}
+			out.write(jsonObject.toString());
+			out.flush();
+
 		} else {
-			jsonObject.put("message", "Get musicsheet list failed.");
+			Writer out = response.getWriter();
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("message", "Please set query type correctly.");
+			out.write(jsonObject.toString());
+			out.flush();
 		}
-		out.write(jsonObject.toString());
-		out.flush();
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

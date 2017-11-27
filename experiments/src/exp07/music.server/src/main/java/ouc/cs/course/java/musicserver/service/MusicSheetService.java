@@ -97,6 +97,11 @@ public class MusicSheetService {
 		return mslist;
 	}
 
+	public String getMusicSheetPictureUrl(String uuid) throws SQLException {
+		MusicSheet musicSheet = musicSheetDao.findByUuid(uuid);
+		return musicSheet.getPicture();
+	}
+
 	public void delete(String uuid) throws SQLException {
 		musicSheetDao.deleteByUuid(uuid);
 	}

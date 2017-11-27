@@ -133,6 +133,7 @@ public class MusicSheetAndFileUploadServlet extends HttpServlet {
 
 		if (token) {
 			jsonObject.put("musicSheet", JSONObject.fromObject(ms));
+			
 			jsonObject.put("message", "Upload musicsheet successfully.");
 		} else {
 			jsonObject.put("message", "Upload musicsheet failed.");
