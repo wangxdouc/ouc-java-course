@@ -3,8 +3,8 @@ package music.client;
 import java.util.ArrayList;
 import java.util.List;
 
-import ouc.cs.course.java.httpclient.MusicSheet;
 import ouc.cs.course.java.httpclient.MusicSheetAndFilesUploader;
+import ouc.cs.course.java.model.MusicSheet;
 
 public class MusicSheetAndFilesUploaderTest {
 	public static void main(String[] args) {

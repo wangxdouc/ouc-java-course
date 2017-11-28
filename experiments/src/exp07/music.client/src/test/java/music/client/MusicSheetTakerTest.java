@@ -1,7 +1,7 @@
 package music.client;
 
-import ouc.cs.course.java.httpclient.MusicSheet;
 import ouc.cs.course.java.httpclient.MusicSheetTaker;
+import ouc.cs.course.java.model.MusicSheet;
 
 /**
  * MusicSheetTaker 测试类

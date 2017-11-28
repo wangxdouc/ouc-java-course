@@ -19,6 +19,8 @@ import org.apache.commons.httpclient.methods.PostMethod;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import ouc.cs.course.java.model.MusicSheet;
+
 /**
  * MusicSheetTaker
  * 

@@ -9,8 +9,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
@@ -21,6 +19,8 @@ import javax.activation.MimetypesFileTypeMap;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.IOUtils;
+
+import ouc.cs.course.java.model.MusicSheet;
 
 /**
  * 功能：通过模拟POST方式提交数据

@@ -1,4 +1,4 @@
-package ouc.cs.course.java.httpclient;
+package ouc.cs.course.java.model;
 
 public class Music {
 
