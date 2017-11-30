@@ -817,7 +817,7 @@ suspend()和resume()方法已不提倡使用，原因是：suspend()方法挂起
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
 \frametitle{线程等待与通知}
 
-\wxd{将运行中的线程专为阻塞状态的另外一种途径}
+\wxd{将运行中的线程转为阻塞状态的另外一种途径}
 
 调用该线程中被锁定资源（Java对象）的wait()方法，该方法在Object类中定义，其功能是让当前线
 程等待，直到有其他线程调用了同一个对象的notify()或notifyAll()方法通知其结束等待，或是经历
@@ -832,13 +832,184 @@ suspend()和resume()方法已不提倡使用，原因是：suspend()方法挂起
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% \section{线程的同步}
-% \subsection{临界资源问题}
-% \subsection{互斥锁}
-% \subsection{死锁}
-% \subsection{线程同步通讯}
-% \subsection{生产者—消费者问题}
-% \section{多线程编程专题}
+\section{线程的同步}
+
+\begin{frame}[fragile] % [fragile]参数使得能够插入代码
+\frametitle{临界资源问题}
+
+两个线程A和B在同时操纵Stack类的同一个实例(栈)，A向栈里push一个数据，B要从堆栈中pop一个数据。
+
+\wxd{代码}
+
+\begin{javaCode}
+public class Stack {
+  int idx = 0;
+  char[ ] data = new char[6];
+  
+  public void push(char c) {
+    data[idx] = c;
+    idx++;
+  }
+  public char pop() {
+    idx--;
+    return data[idx];
+  }
+}
+\end{javaCode}
+\end{frame}
+
+\begin{frame}[fragile] % [fragile]参数使得能够插入代码
+\frametitle{临界资源问题}
+
+\wxd{问题分析}
+\begin{enumerate}
+\item 操作之前，假设data = |a|b| | | | |，idx = 2；
+\item 线程A执行push中的第一个语句，将c推入堆栈; data = |a|b|c| | | |，idx = 2；
+\item 线程A还未执行idx++语句，A的执行被线程B中断，B执行pop方法，data = |a|b|c| | | | idx = 1；
+\item 线程A继续执行push的第二个语句: data = |a|b|c| | | |， idx = 2；
+\item 最后的结果相当于c没有入栈，产生这种问题的原因在于对共享数据访问的操作的不完整性。
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile] % [fragile]参数使得能够插入代码
+  \frametitle{互斥锁}
+  
+  \begin{itemize}
+  \item Java引入了{\hei 对象互斥锁}的概念来保证共享数据操作的完整性。
+  \item 每个对象都对应于一个可称为“互斥锁”的标记，这个标记用来保证在任一时刻，只能有一个线程访问该对象。
+  \item 关键字{\Red\bf synchronized}来与对象的互斥锁联系。当某个对象用synchronized修饰时，表明该对象在任一时刻只能由一个线程访问。
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile] % [fragile]参数使得能够插入代码
+  \frametitle{synchronized的用法}
+
+  \wxd{用于方法声明中，标明整个方法为同步方法}
+
+  \begin{javaCode}
+    public synchronized void push(char c) {
+      data[idx] = c;
+      idx++;
+    }
+  \end{javaCode}
+  \wxd{用于修饰语句快，标明整个语句块为同步块}
+  \begin{javaCode}
+    // Other code
+    public char pop() {
+      synchronized(this) {
+        idx--;
+        return data[idx];
+      }
+      // Other code
+    }
+  \end{javaCode}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{线程死锁}
+
+  并发运行的多个线程间彼此等待、都无法运行的状态称为线程死锁。
+
+  为避免死锁，在线程进入阻塞状态时应尽量释放其锁定的资源，以为其他的线程提供运行的机会。
+
+  \wxd{相关方法}
+  
+  \begin{itemize}
+  \item public final void wait()
+  \item public final void notify()
+  \item public final void notifyAll()
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{生产者—消费者问题}
+
+  \begin{javaCode}
+    public class SyncStack {
+      private int index = 0;
+      private char[] data = new char[6];
+
+      public synchronized void push(char c) {
+        while(index == data.length) {
+          try {
+            this.wait();
+          } catch(InterruptedException e) {
+          }
+        }
+        this.notify();
+        data[index] = c;
+        index++;
+        System.out.println("生产: " + c);
+      }
+      
+      public synchronized char pop() {
+        while(index == 0) {
+          try {
+            this.wait();
+          } catch(InterruptedException e) {
+          }
+        }
+        this.notify();
+        index--;
+        System.out.println("消费: " + data[index]);
+        return data[index];
+      }
+    }
+  \end{javaCode}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{标题生产者—消费者问题}
+
+  \wxd{生产者}
+  
+  \begin{javaCode}
+    public class Producer implements Runnable {
+      SyncStack stack;
+      public Producer(SyncStack s) {
+        stack = s;
+      }
+      public void run() {
+        for(int i=0; i<20; i++) {
+          char c = (char)(Math.random() * 26 + 'A');
+          stack.push(c);
+          try {
+            Thread.sleep((int)(Math.random() * 300));
+          } catch(InterruptedException e) {
+            e.printStackTrace();
+          }
+        }
+      }
+    }    
+  \end{javaCode}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{标题生产者—消费者问题}
+
+  \wxd{消费者}
+  
+  \begin{javaCode}
+    public class Consumer implements Runnable {
+      SyncStack stack;
+      public Consumer(SyncStack s) {
+        stack = s;
+      }
+      public void run() {
+        for(int i=0; i<20; i++) {
+          char c = stack.pop();
+          try {
+            Thread.sleep((int)(Math.random() * 800));
+          } catch(InterruptedException e) {
+            e.printStackTrace();
+          }
+        }
+      }
+    }
+  \end{javaCode}
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 %% \begin{frame}

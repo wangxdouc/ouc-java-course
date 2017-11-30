@@ -124,6 +124,22 @@
 \def\White{\color{white}}
 \def\Black{\color{black}}
 
+\lstnewenvironment{xmlCode}[1][]{% for Java
+  \lstset{
+    basicstyle=\tiny\ttfamily,%
+    columns=flexible,%
+    framexleftmargin=.7mm, %
+    % frame=shadowbox,%
+    % rulesepcolor=\color{cyan},%
+     frame=single,%
+    backgroundcolor=\color{white},%
+    xleftmargin=4\fboxsep,%
+    xrightmargin=4\fboxsep,%
+    numbers=left,numberstyle=\tiny,%
+    numberblanklines=false,numbersep=7pt,%
+    language=xml, %
+    }\lstset{#1}}{}
+
 \lstnewenvironment{javaCode}[1][]{% for Java
   \lstset{
     basicstyle=\tiny\ttfamily,%
