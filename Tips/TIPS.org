@@ -231,3 +231,9 @@ int main (String[] args) {
 #+END_SRC
 
 而在第二个例子中，我们先示例化了一个字符串数组，其中存在着"-logdb"，所以，当后续比较时，程序先在String缓存池中寻找相同值的对象，即这两比较对象的地址其实是一样的，都是缓存池中的地址，所以返回等于。
+
+* 原码、反码和补码
+
+参考：http://www.cnblogs.com/zhangziqiu/archive/2011/03/30/ComputerCode.html
+
+
