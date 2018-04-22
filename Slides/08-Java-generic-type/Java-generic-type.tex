@@ -190,7 +190,7 @@
 \title[KevinW@OUC]{\hei {\huge Java 应用程序设计}\\  
   泛型}
 \author[王晓东]{王晓东\\
-  \href{mailto:wxd2870@163.com}{\footnotesize wxd2870@163.com}}
+  \href{mailto:wangxiaodong@ouc.edu.cn}{\footnotesize wangxiaodong@ouc.edu.cn}}
 \institute[中国海洋大学]{\small 中国海洋大学}
 \date{\today}
 \titlegraphic{\vspace{-6em}\includegraphics[height=6cm]{static/ouc.pdf}\vspace{-6em}}
@@ -249,12 +249,11 @@
 \section{泛型}
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
 \frametitle{什么是泛型}
-泛型（Gernerics）机制自JDK 5.0开始引入，其实质是将原本确定不变的数据类型参数化。
+泛型（Gernerics）机制自JDK 5.0开始引入，其实质是{\hei\Blue 将原本确定不变的数据类型参数化}。
 
-\xyy{泛型优势}\\
+\wxd{泛型优势}\\
 作为对原有Java类型体系的扩充，使用泛型可以提高Java应用程序的类型安全、可维护性和可
 靠性。
-
 \end{frame}
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
@@ -349,8 +348,8 @@ public class Testhashtable {
 }
 \end{javaCode}
 
-程序中直接将int型数据当作映射“键”使用，是由于Java的自动封装机制——系统已自动将int型数据值
-转换为Integer类型对象。
+{\kai\Blue 注：程序中直接将int型数据当作映射“键”使用，是由于Java的自动封装机制——系统已自动将int型数据值
+转换为Integer类型对象。}
 \end{frame}
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
@@ -386,10 +385,12 @@ public class TestSuppressWarnings {
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
 \frametitle{类型参数}
 
-如Vector<String>，其中，尖括号括起来的部分被称为{\hei 类型参数}，而这种由类型参数修饰的类
-型则被称为{\hei 泛型类}，我们可以将泛型类理解为一种新的构造类型，当然也一定属于引用类型。
-
-\emph{注意：应在声明泛型类变量和创建对象时均给出类型参数，且两者应保持一致。}
+\begin{itemize}
+\item 如Vector<String>，其中，尖括号括起来的部分被称为{\Red\hei 类型参
+    数}，而这种由类型参数修饰的类型则被称为{\Blue\hei 泛型类}。
+\item 我们可以将泛型类理解为一种新的构造类型，当然也一定属于引用类型。
+\end{itemize}
+\emph{\Red 注意：应在声明泛型类变量和创建对象时均给出类型参数，且两者应保持一致。}
 
 \end{frame}
 
@@ -448,7 +449,7 @@ public class Test {
     System.out.println(p1.getId() + "\t 密码是：" + s);
   
     Person<Double> p2 = new Person<Double>(102);
-    p2.setSecrecy("8700.85");
+    p2.setSecrecy(8700.85);
     double money = p2.getSecrecy();
     System.out.println(p2.getId() + "\t 秘密资金数额是：" + money);
 }
@@ -508,7 +509,9 @@ public void overview(Vector<String> v) {
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
 \frametitle{泛型类型的处理}
 
-一种可能的处理方法：将遍历方法的形参定义为不带任何类型参数的原型类型Vector，但这样会破坏已有的类型安全性。
+\cxf{一种可能的处理方法}
+
+将遍历方法的形参定义为不带任何类型参数的原型类型Vector，但这样会破坏已有的类型安全性。
 
 \begin{javaCode}
 public void overview(Vector v) {
@@ -589,26 +592,27 @@ v.clear(); //不需要参数，运行不受影响
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
 \frametitle{泛型方法}
 
-与泛型类的情况类似，方法也可以被泛型化，且无论其所属的类是否为泛型类。
+与泛型类的情况类似，{\Red\hei 方法也可以被泛型化，且无论其所属的类是否为泛型类。}
 
 \xyy{使用泛型方法}
+
 \begin{javaCode}
 import java.utils.Vector;
 
 public class Test {
+  public <T>T evaluate(T a, T b) {
+    if(a.equals(b)) 
+      return a;
+    else
+      return null;
+  }
+
   public static void main(String[] args) {
     Test t = new Test();
     String valid = t.evaluate("tiger", "tiger")
     Integer i = t.evaluate(new Integer(300), new Integer(350));
     System.out.println(valid);
     System.out.println(i);
-  }
-
-  public <T>T evaluate(T a, T b) {
-    if(a.equals(b)) 
-      return a;
-    else
-      return null;
   }
 }  
 \end{javaCode}
@@ -641,9 +645,10 @@ public class Test<T> {
 \wxd{使用泛型方法，而不是定义泛型类的原则}
 \small
 \begin{enumerate}
-\item 不涉及到类中的其他方法时，则应将之定义为泛型方法，因为泛型方法的类型参数是局部性的，这样可以简化其所在类型的声明和处理开销；
-\item 要施加类型约束的方法为静态方法时，只能将之定义为泛型方法，因为静态方法不能使用其所
-  在类的类型参数。
+\item 不涉及到类中的其他方法时，则应将之定义为泛型方法，因为泛型方法的
+  类型参数是局部性的，这样可以简化其所在类型的声明和处理开销；
+\item {\Red 要施加类型约束的方法为静态方法时，只能将之定义为泛型方法，因为静态方法不能使用其所
+  在类的类型参数。}
 \end{enumerate}
 \end{frame} 
 
@@ -722,7 +727,7 @@ public class Test {
 \centering
 {\Huge \textcolor{blue}{THE END}} \\
 \vspace{5mm}
-{\Large wxd2870@163.com} \\
+{\Large wangxiaodong@ouc.edu.cn} \\
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}
