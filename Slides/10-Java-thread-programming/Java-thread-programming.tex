@@ -188,7 +188,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % \titlepage
 \title[KevinW@OUC]{\hei {\huge Java 应用程序设计}\\  
-  简单线程编程}
+  线程编程}
 \author[王晓东]{王晓东\\
   \href{mailto:wxd2870@163.com}{\footnotesize wxd2870@163.com}}
 \institute[中国海洋大学]{\small 中国海洋大学}
@@ -217,20 +217,11 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-\frametitle{参考书目}
-\begin{enumerate}
-\item 张利国、刘伟[编著], Java SE应用程序设计, 北京理工大学出版社, 2007.10.
-
-\end{enumerate}  
-\end{frame}
-
-\begin{frame}
 \frametitle{本章学习目标}
 \begin{enumerate}
 \item 线程基础
 \item 线程控制
-\item 线程的同步（后续课程）
-\item 多线程编程问题（后续课程）
+\item 线程的同步
 \end{enumerate}  
 \end{frame}
 
@@ -239,6 +230,39 @@
 
 \section{线程基础}
 % \subsection{线程的概念模型}
+
+\begin{frame}[fragile]
+  \frametitle{概念回顾}
+
+  \wxd{任务调度}
+  
+  \begin{itemize}
+  \item 大部分操作系统的任务调度是采用时间片轮转的抢占式调度方式，一个
+    任务执行一小段时间后强制暂停去执行下一个任务，每个任务轮流执行。
+  \item CPU的执行效率非常高，时间片非常短，在各个任务之间快速地切换，让
+    人感觉像是多个任务在“同时进行”，这也就是我们所说的并发。
+  \end{itemize}
+
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.9\textwidth]{time-split.pdf}
+  \end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{概念回顾}
+
+  \wxd{进程}
+  
+  \begin{itemize}
+  \item 进程是一个具有一定独立功能的程序在一个数据集上的一次动态执行的
+    过程，是操作系统进行资源分配和调度的一个独立单位，是应用程序运行的
+    载体。
+  \item 进程一般由{\hei\Blue 程序段、数据段和进程控制块}三部分构成进程实体。
+  \end{itemize}
+\end{frame}
+
+
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
 \frametitle{什么是线程}
 
@@ -247,27 +271,71 @@
 \end{frame}
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{线程和进程的区别}
-\begin{enumerate}
-\item 每个进程都有独立的代码和数据空间（进程上下文），进程切换的开销大。
-\item 线程作为轻量的进程，同一类线程共享代码和数据空间，每个线程有独立的运行栈和程序计数
-  器（PC），线程切换的开销小。
-\item 多进程——在操作系统中能同时运行多个任务（程序）。
-\item 多线程——在同一应用程序中有多个顺序流同时执行。
-\end{enumerate}
+\frametitle{线程和进程的区别和联系}
+
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.6\textwidth]{threads-within-process.pdf}
+  \end{figure}
+  \pause
+  \begin{enumerate}\small\kai
+  \item 每个进程都有独立的代码和数据空间（进程上下文），进程切换的开销大。
+  \item 线程作为“轻量的进程”，同一类线程共享代码和数据空间，每个线程有独立
+    的运行栈和程序计数器（PC），线程切换的开销小。
+  \item 多进程——在操作系统中能同时运行多个任务（程序）。
+  \item 多线程——在同一应用程序中有多个顺序流同时执行。
+  \end{enumerate}
 \end{frame}
 
+\begin{frame}[fragile]
+  \frametitle{多核与多线程}
+  \begin{itemize}
+  \item 多核处理器是指在一个处理器上集成多个运算核心以提高并行计算能力，
+    每一个处理核心对应一个内核线程（Kernel Thread， KLT）。
+  \item 内核线程是直接由操作系统内核支持的线程，由内核来完成线程切换，
+    内核通过操作调度器对线程进行调度，并负责将线程的任务映射到各个处理
+    器上。
+  \end{itemize}
+
+  %% https://blog.csdn.net/luoweifu/article/details/46595285
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{多核与多线程}
+  一般一个处理核心对应一个内核线程，比如单核处理器对应一个内核线程，双
+  核处理器对应两个内核线程。
+
+  {\Red\kai 而现代计算机采用超线程技术将一个物理处理核心模拟成两个逻辑
+    处理核心对应两个内核线程，一般是双核四线程、四核八线程。}
+
+  \begin{figure}
+\centering
+\fbox{\includegraphics[width=0.5\textwidth]{multi-cores-and-threads.png}}
+\end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{课后自行学习}
+  \begin{enumerate}
+  \item 超线程的概念
+  \item 内核线程与用户线程的映射
+  \end{enumerate}
+\end{frame}
+
+
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{线程的概念模型}
+\frametitle{Java线程的概念模型}
+
 在Java语言中，多线程的机制通过虚拟CPU来实现。
-\begin{enumerate}
+
+\begin{enumerate}\kai
 \item 虚拟的CPU，由java.lang.Thread类封装和虚拟；
 \item CPU所执行的代码，传递给Thread类对象；
 \item CPU所处理的数据，传递给Thread类代码对象。
 \end{enumerate}
 \begin{figure}
 \centering
-\includegraphics[width=0.5\textwidth]{fig01.pdf}
+\includegraphics[width=0.5\textwidth]{virtual-cpu.pdf}
 \end{figure}
 \end{frame}
 
@@ -309,8 +377,8 @@ class Runner1 implements Runnable {
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
 \frametitle{多线程}
 
-Java中引入线程机制的目的在于实现{\hei 多线程（Multi-Thread）}。
-\xyy{使用多线程}
+Java中引入线程机制的目的在于实现{\hei 多线程（Multi-Thread）并发执行任
+  务，以及实现多任务之间的协同}。\xyy{使用多线程}
 \begin{javaCode}
 public class TestThread2 {
   public static void main(String args[]) {
@@ -345,10 +413,10 @@ Thread t2 = new Thread(r);
 \footnotesize
 \setlength{\extrarowheight}{1.2mm}
 \rowcolors[]{1}{blue!20}{blue!10}
-\begin{tabular}{c|c|c|c}
-{\bf 线程} & {\bf 虚拟CPU} & {\bf 代码} & {\bf 数据} \\
-t1 & Thread类对象 & Runner2类中的run()方法 & Runnable类型对象r \\
-t2 & Thread类对象 & Runner2类中的run()方法 & Runnable类型对象r \\
+\begin{tabular}{c|c|c}
+{\bf 线程} & {\bf 虚拟CPU} & {\bf 代码} \\
+t1 & Thread类对象 & Runner2类中的run()方法 \\
+t2 & Thread类对象 & Runner2类中的run()方法 \\
 \end{tabular}
 \end{table}
 \end{frame}
@@ -400,20 +468,22 @@ class Runner3 extends Thread {
 \frametitle{后台线程}
 
 \wxd{相关概念}\\
-\xyy{后台处理} 也称为后台运行，是指在分时处理或多任务系统中，当实时、会话式、高优先级或需
-迅速相应的计算机程序不再使用系统资源时，计算机去执行较低优先级程序的过程。批量处理、文件
-打印通常采取后台处理的形式。
+\xyy{后台处理} 也称为后台运行，是指在分时处理或多任务系统中，当实时、会
+话式、高优先级或需迅速响应的计算机程序不再使用系统资源时，计算机去执行
+较低优先级程序的过程。批量处理、文件打印通常采取后台处理的形式。\pause
 
-\xyy{后台线程} 是指那些在后台运行的，为其他线程提供服务的功能，如JVM的垃圾回收线程等，后
-台线程也称为守护线程（Daemon Thread）。
+\xyy{后台线程} 是指那些在后台运行的，为其他线程提供服务的功能，如JVM的
+垃圾回收线程等，后台线程也称为守护线程（Daemon Thread）。\pause
 
-\xyy{用户线程} 和后台线程相对应，其他完成用户任务的线程可称为“用户线程”。
+\xyy{用户线程} 和后台线程相对应，其他完成用户任务的线程可称为“用户线
+程”。
 \end{frame}
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
 \frametitle{后台线程}
 Thread类提供的与后台线程相关的方法包括：
-\begin{enumerate}
+
+\begin{enumerate}\kai
 \item 测试当前线程是否为守护线程，如果是则返回true，否则返回false。
 \begin{javaCode}
 public final boolean isDaemon()
@@ -427,10 +497,11 @@ public final void setDaemon(Boolean on)
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
 \frametitle{后台线程}
-\xyy{使用后台线程}
-%% \samp{TestDaemonThread.java}
+
+\samp{sample.thread.DaemonThreadSample.java}
+
 \begin{javaCode}
-public class TestDaemonThread {
+public class DaemonThreadSample {
   public static void main(String[] args) {
     Thread t1 = new MyRunner(10);
     t1.setName("用户线程t1");
@@ -477,20 +548,24 @@ class MyRunner extends Thread {
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
 \frametitle{GUI线程}
 
-GUI程序运行过程中，系统会自动创建若干GUI线程，以提供所需的功能，包括{\Blue\it 窗体显示和重绘、GUI
-事件处理、关闭抽象窗口工具集等}。
+GUI程序运行过程中，系统会自动创建若干GUI线程，以提供GUI所需的功能，主要包括：
+\begin{enumerate}\Blue\kai
+\item 窗体显示和重绘；
+\item GUI事件处理；
+\item 关闭抽象窗口工具集等。
+\end{enumerate}
 \end{frame}
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
 \frametitle{GUI线程}
 
 \xyy{使用GUI线程示例}
-\samp{TestGUIThread.java: Part 1}
+\samp{GUIThreadSample.java: Part 1}
 \begin{javaCode}
 import java.awt.*;
 import java.awt.event.*;
 
-public class TestGUIThread {
+public class GUIThreadSample {
   public static void main(String[] args) throws Exception {
     Frame f = new Frame();
     Button b = new Button("Press Me");
@@ -514,7 +589,7 @@ class MyMonitor extends WindowAdapter implements ActionListener {
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
 \frametitle{GUI线程}
 
-\samp{TestGUIThread.java: Part 2}
+\samp{GUIThreadSample.java: Part 2}
 \begin{javaCode}
 class MyThreadViewer {
   public static void view() {
@@ -534,36 +609,37 @@ class MyThreadViewer {
 \end{javaCode}
 \end{frame}
 
+%% \begin{frame}[fragile] % [fragile]参数使得能够插入代码
+%% \frametitle{GUI线程}
+%% 
+%% \xyy{[API] Thread.enumerate}\\
+%% Copies into the specified array every active thread in the current thread's thread group
+%% and its subgroups. This method simply calls the enumerate method of the current thread's
+%% thread group with the array argument.
+%% 
+%% First, if there is a security manager, that enumerate method calls the security
+%% manager's checkAccess method with the thread group as its argument. This may result in
+%% throwing a SecurityException.
+%% 
+%% Parameters: 
+%% \begin{itemize}
+%% \item tarray an array of Thread objects to copy to
+%% \end{itemize}
+%% Returns: 
+%% \begin{itemize}
+%% \item the number of threads put into the array
+%% \end{itemize}
+%% Throws:
+%% \begin{itemize}
+%% \item SecurityException - if a security manager exists and its checkAccess method
+%%   doesn't allow the operation.
+%% \end{itemize}
+%% \end{frame}
+
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{GUI线程}
-
-\xyy{[API] Thread.enumerate}\\
-Copies into the specified array every active thread in the current thread's thread group
-and its subgroups. This method simply calls the enumerate method of the current thread's
-thread group with the array argument.
-
-First, if there is a security manager, that enumerate method calls the security
-manager's checkAccess method with the thread group as its argument. This may result in
-throwing a SecurityException.
-
-Parameters: 
-\begin{itemize}
-\item tarray an array of Thread objects to copy to
-\end{itemize}
-Returns: 
-\begin{itemize}
-\item the number of threads put into the array
-\end{itemize}
-Throws:
-\begin{itemize}
-\item SecurityException - if a security manager exists and its checkAccess method
-  doesn't allow the operation.
-\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{GUI自动创建的线程}
-\begin{itemize}[<+-| alert@+>]
+  \frametitle{GUI自动创建的线程}
+  
+\begin{itemize}[<+-| alert@+>]\kai
 \item {\hei AWT-Windows线程}\\
   \only<1>{负责从操作系统获取底层事件通知，并将之发送到系统事件队列（EventQueue）等待处理。
     在其他平台上运行时，此线程的名字也会作相应变化，例如在Unix系统则为“AWT-Unix”。}
@@ -582,15 +658,16 @@ Throws:
 \section{线程控制}
 % \subsection{线程生命的周期}
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{线程的生命周期}
+  \frametitle{线程的生命周期}
+  
+  \begin{description}[<+-| alert@+>]\kai
+  \item[新建状态] 调用Thread构造方法，未显式调用start()方法前；
+  \item[就绪状态] 调用start()方法后，线程在就绪队列里等候；
+  \item[运行状态] 开始执行线程体代码；
+  \item[阻塞状态] 因某事件发生，例如线程进行I/O操作，等待用户输入数据；
+  \item[终止状态] 线程run()方法执行完毕。
+  \end{description}
 
-\begin{itemize}
-\item 新建状态——调用Thread构造方法，未显式调用start()方法前；
-\item 就绪状态——调用start()方法后，线程在就绪队列里等候；
-\item 运行状态——开始执行线程体代码；
-\item 阻塞状态——因某事件发生，例如线程进行I/O操作，等待用户输入数据；
-\item 终止状态——线程run()方法执行完毕。
-\end{itemize}
 \begin{figure}
 \centering
 \includegraphics[width=0.7\textwidth]{fig02.pdf}
@@ -602,8 +679,9 @@ Throws:
 \frametitle{线程优先级}
 
 线程的优先级用数字来表示，范围从1到10。主线程的缺省优先级是5，子线程的优先级默认与其父线
-程相同。可以使用Thread类的下述方法获得和设置线程的优先级。
-\begin{itemize}
+程相同。可以使用Thread类提供的方法获得和设置线程的优先级：
+
+\begin{itemize}\kai
 \item 获取当前线程优先级
   \begin{javaCode}
     public final int getPriority();
@@ -639,11 +717,13 @@ public final void join(long millis, int nanos)
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
 \frametitle{线程串行化}
 \xyy{实现线程的串行化}
-\samp{TestJoin.java}
+
+\samp{sample.thread.ThreadJoinSample.java}
+
 \begin{javaCode}
-public class TestJoin {
+public class ThreadJoinSample {
   public static void main(String[] args) {
-    MyRunner r = new MyRunner();
+    JoinRunner r = new JoinRunner();
     Thread t = new Thread(r);
     t.start();
     try {
@@ -656,7 +736,7 @@ public class TestJoin {
     }
   }
 }
-class MyRunner implements Runable {
+class JoinRunner implements Runable {
   public void run() {
     for(int i = 0; i < 50; i++) {
       System.out.println("子线程：" + i);
@@ -667,9 +747,13 @@ class MyRunner implements Runable {
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
 \frametitle{线程串行化}
-
-上述程序，主线程在执行过程中调用了线程t的join()方法，该方法导致当前线程（主线程）阻塞，直
-到线程t运行终止后，主线程才会获得继续执行的机会。这相当于将线程t串行加入到主线程中。
+\wxd{线程串行化程序说明}
+\begin{itemize}
+\item 主线程在执行过程中调用了线程t的join()方法，该方法导致当前线程（主
+  线程）阻塞。
+\item 直到线程t运行终止后，主线程才会获得继续执行的机会，相当于将线
+  程t串行加入到主线程中。
+\end{itemize}
 \end{frame}
 
 % \subsection{线程休眠}
@@ -688,10 +772,8 @@ public static void sleep(long millis, int nanos)
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
 \frametitle{线程休眠}
 \xyy{数字计数器}
-\samp{Digitaltimer.java}
+\samp{sample.thread.DigitaltimerByThreadSleep.java}
 \begin{javaCode}
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import javax.swing.*;
 
 public class DigitalClock {
@@ -809,8 +891,11 @@ Thread类提供的相关方法：
 public final void suspend()
 public final void resume()
 \end{javaCode}
-suspend()和resume()方法已不提倡使用，原因是：suspend()方法挂起线程时并不释放其锁定的资
-源，这可能会影响到其他线程的执行，且容易导致线程死锁。
+
+\xyy{注意}
+
+{\kai suspend()和resume()方法已不提倡使用，原因是suspend()方法挂起线程时并不释放其锁定的资
+源，这可能会影响到其他线程的执行，且容易导致线程死锁。}
 \end{frame}
 
 % \subsection{线程等待与通知}
@@ -823,6 +908,7 @@ suspend()和resume()方法已不提倡使用，原因是：suspend()方法挂起
 程等待，直到有其他线程调用了同一个对象的notify()或notifyAll()方法通知其结束等待，或是经历
 了约定的等待时间后，等待线程才会醒来，重新进入可执行状态。
 
+\pause
 \wxd{等待线程与suspend()方法导致的线程挂起比较}
 \begin{itemize}
 \item 线程挂起时不会释放所占用的资源；
@@ -961,7 +1047,7 @@ public class Stack {
 
 
 \begin{frame}[fragile]
-  \frametitle{标题生产者—消费者问题}
+  \frametitle{生产者—消费者问题}
 
   \wxd{生产者}
   
