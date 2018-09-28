@@ -181,13 +181,25 @@
 \newcommand\xyy[1]{\vskip 2bp \tikz \node[rectangle,minimum size=3mm,
   fill=black!80!white,]{\White \msyh\scriptsize #1};}
 
+\newcommand\homework[1]{\vskip 2bp \tikz \node[rectangle,minimum size=3mm,
+  fill=red!80!white,]{\White \ding{45} \msyh\scriptsize 课后小作业 } ; {\kai\small #1}} 
+
 \newcommand\cxf[1]{\vskip 4bp \tikz \node[rectangle,rounded corners,minimum size=6mm,
-  fill=orange!60!white,]{\White \ding{42} \msyh #1};}
+  fill=purple!60!white,]{\White \ding{42} \msyh #1};}
+
+\newcommand\notice[1]{\vskip 4bp \tikz \node[rectangle,rounded corners,minimum size=6mm,
+  fill=red!80!white,]{\White \scriptsize \ding{42} \msyh #1};}
 
 \newcommand\samp[1]{\vskip 2bp \tikz \node[rectangle,minimum size=3mm,
-  fill=white!100!white,]{Mage\msyh \small CODE \ding{231} \Black #1};\vskip -8bp}
+  fill=white!100!white,]{\Mage\msyh \small CODE \ding{231} \Black #1};\vskip -8bp}
 
-\newcommand\zhyfly[1]{\tikz \node[rectangle,rounded corners,minimum size=6mm,ball color=red!25!blue,text=white,]{#1};}
+\newcommand\codeset[1]{\vskip 2bp \tikz \node[rectangle,minimum size=3mm,
+  fill=white!100!white,]{\Mage\msyh \small 课程配套代码 \ding{231} \Black #1};\vskip -8bp}
+
+\newcommand\pptlink[2]{\vskip 4bp \tikz \node[rectangle,rounded corners,minimum size=6mm,
+  fill=blue!70!white,]{\href{run:#1}{\White \scriptsize \msyh 动画演示 #2}};}
+
+
 
 \setbeamerfont{frametitle}{series=\msyh} % 修改Beamer标题字体
 
