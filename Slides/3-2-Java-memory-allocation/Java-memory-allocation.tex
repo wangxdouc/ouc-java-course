@@ -600,16 +600,17 @@ public class Test {
       private Hashtable table = new Hashtable(); 
       public A() { 
         table = new Hashtable();
-      } 
-    \end{javaCode}
+      }
+    }
+  \end{javaCode}
 
-    \pause
-    \xyy{内存性能分析}
+  \pause
+  \xyy{内存性能分析}
 
-    {\small\kai 上述代码new了两个Hashtable，但是却只使用了一个，另外一
-      个则没有被引用而被忽略掉，浪费了内存。并且由于进行了两次new操作，
-      也影响了代码的执行速度。另外，不要提前创建对象，尽量在需要的时候
-      创建对象。}
+  {\small\kai 上述代码new了两个Hashtable，但是却只使用了一个，另外一个
+    则没有被引用而被忽略掉，浪费了内存。并且由于进行了两次new操作，也影
+    响了代码的执行速度。另外，不要提前创建对象，尽量在需要的时候创建对
+    象。}
 \end{frame}
 
 %%%\begin{frame}[fragile] % [fragile]参数使得能够插入代码
