@@ -1,207 +1,10 @@
-% Full instructions available at:
-% https://github.com/elauksap/focus-beamertheme
-
-\documentclass{beamer}
-\usetheme{focus}
-
-% package for font
-\usepackage{fontspec}
-\defaultfontfeatures{Mapping=tex-text}  %%如果没有它，会有一些 tex 特殊字符无法正常使用，比如连字符。
-\usepackage{xunicode,xltxtra}
-\usepackage[BoldFont,SlantFont,CJKnumber,CJKchecksingle]{xeCJK}  % \CJKnumber{12345}: 一万二千三百四十五
-\usepackage{CJKfntef}  %%实现对汉字加点、下划线等。
-\usepackage{pifont}  % \ding{}
-% package for math
-\usepackage{amsfonts}
-
-% package for graphics
-\usepackage[americaninductors,europeanresistors]{circuitikz}
-\usepackage{tikz}
-\usetikzlibrary{plotmarks}  % placements=positioning
-\usepackage{graphicx}  % \includegraphics[]{}
-\usepackage{subfigure}  %%图形或表格并排排列
-% package for table
-\usepackage{colortbl,dcolumn}  %% 彩色表格
-\usepackage{multirow}
-\usepackage{multicol}
-\usepackage{booktabs}
-% package for code
-\usepackage{fancyvrb}
-\usepackage{listings}
-
-
-
-% setting for font
-%%\setCJKmainfont{Adobe Kaiti Std}
-\setCJKmainfont{SimSun}
-%%\setCJKmainfont{Microsoft YaHei}
-%%\setCJKmainfont{FangSong_GB2312} 
-%%\setmainfont{Times New Roman}
-%\setsansfont[Mapping=tex-text]{Adobe Song Std}
-%如果装了Adobe Acrobat，可在font.conf中配置Adobe字体的路径以使用其中文字体。
-%也可直接使用系统中的中文字体如SimSun、SimHei、微软雅黑等。
-%原来beamer用的字体是sans family；注意Mapping的大小写，不能写错。
-%设置字体时也可以直接用字体名，以下三种方式等同：
-%\setromanfont[BoldFont={黑体}]{宋体}
-%\setromanfont[BoldFont={SimHei}]{SimSun}
-%\setromanfont[BoldFont={"[simhei.ttf]"}]{"[simsun.ttc]"}
-
-% font setting by xeCJK
-\setCJKfamilyfont{NSimSun}{NSimSun}
-\newcommand{\song}{\CJKfamily{NSimSun}}
-%%%\setCJKfamilyfont{AdobeSongStd}{Adobe Song Std}
-%%%\newcommand{\AdobeSong}{\CJKfamily{AdobeSongStd}}
-\setCJKfamilyfont{FangSong}{FangSong_GB2312}
-\newcommand{\fang}{\CJKfamily{FangSong}}
-%%%\setCJKfamilyfont{AdobeFangsongStd}{Adobe Fangsong Std}
-%%%\newcommand{\AdobeFang}{\CJKfamily{AdobeFangsongStd}}
-\setCJKfamilyfont{SimHei}{SimHei}
-\newcommand{\hei}{\CJKfamily{SimHei}}
-%%%\setCJKfamilyfont{AdobeHeitiStd}{Adobe Heiti Std}
-%%%\newcommand{\AdobeHei}{\CJKfamily{AdobeHeitiStd}}
-\setCJKfamilyfont{KaiTi}{KaiTi}
-\newcommand{\kai}{\CJKfamily{KaiTi}}
-%%%\setCJKfamilyfont{AdobeKaitiStd}{Adobe Kaiti Std}
-\newcommand{\AdobeKai}{\CJKfamily{AdobeKaitiStd}}
-\setCJKfamilyfont{LiSu}{LiSu}
-\newcommand{\li}{\CJKfamily{LiSu}}
-\setCJKfamilyfont{YouYuan}{YouYuan}
-\newcommand{\you}{\CJKfamily{YouYuan}}
-\setCJKfamilyfont{FZJingLei}{FZJingLeiS-R-GB}
-\newcommand{\jinglei}{\CJKfamily{FZJingLei}}
-\setCJKfamilyfont{MSYH}{Microsoft YaHei}
-\newcommand{\msyh}{\CJKfamily{MSYH}}
-
-\setbeamerfont{frametitle}{series=\Large\hei} % 修改Beamer标题字体
-
-\graphicspath{{figures/}}  %%图片路径
-\renewcommand\figurename{图}
-
-% setting for pdf
-\hypersetup{% pdfpagemode=FullScreen,%
-  pdfauthor={Xiaodong Wang},%
-  pdftitle={Title},%
-  CJKbookmarks=true,%
-  bookmarksnumbered=true,%
-  bookmarksopen=false,%
-  plainpages=false,%
-  colorlinks=true,%
-  citecolor=green,%
-  filecolor=magenta,%
-  linkcolor=blue,%red(default)
-  urlcolor=cyan}
-
-% setting for fontspec
-\XeTeXlinebreaklocale "zh"  %%表示用中文的断行
-\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt  %%多一点调整的空间
-%%%%%
-
-% 自定义颜色
-\def\Red{\color{red}}
-\def\Green{\color{green}}
-\def\Blue{\color{blue}}
-\def\Mage{\color{magenta}}
-\def\Cyan{\color{cyan}}
-\def\Brown{\color{brown}}
-\def\White{\color{white}}
-\def\Black{\color{black}}
-
-\lstnewenvironment{xmlCode}[1][]{% for Java
-  \lstset{
-    basicstyle=\tiny\ttfamily,%
-    columns=flexible,%
-    framexleftmargin=.7mm, %
-    % frame=shadowbox,%
-    % rulesepcolor=\color{cyan},%
-     frame=single,%
-    backgroundcolor=\color{white},%
-    xleftmargin=4\fboxsep,%
-    xrightmargin=4\fboxsep,%
-    numbers=left,numberstyle=\tiny,%
-    numberblanklines=false,numbersep=7pt,%
-    language=xml, %
-    }\lstset{#1}}{}
-
-\lstnewenvironment{javaCode}[1][]{% for Java
-  \lstset{
-    basicstyle=\tiny\ttfamily,%
-    columns=flexible,%
-    framexleftmargin=.7mm, %
-    frame=shadowbox,%
-    rulesepcolor=\color{cyan},%
-    % frame=single,%
-    backgroundcolor=\color{white},%
-    xleftmargin=4\fboxsep,%
-    xrightmargin=4\fboxsep,%
-    numbers=left,numberstyle=\tiny,%
-    numberblanklines=false,numbersep=7pt,%
-    language=Java, %
-    }\lstset{#1}}{}
-
-\lstnewenvironment{shCode}[1][]{% for Java
-  \lstset{
-    basicstyle=\scriptsize\ttfamily,%
-    columns=flexible,%
-    framexleftmargin=.7mm, %
-    frame=shadowbox,%
-    rulesepcolor=\color{brown},%
-    % frame=single,%
-    backgroundcolor=\color{white},%
-    xleftmargin=4\fboxsep,%
-    xrightmargin=4\fboxsep,%
-    numbers=left,numberstyle=\tiny,%
-    numberblanklines=false,numbersep=7pt,%
-    language=sh, %
-    }\lstset{#1}}{}
-
-\newcommand\ask[1]{\vskip 4bp \tikz \node[rectangle,rounded corners,minimum size=6mm,
-  fill=white,]{\Cyan \includegraphics[height=1.5cm]{question} \Large \msyh #1};}
-
-\newcommand\wxd[1]{\vskip 4bp \tikz \node[rectangle,minimum size=6mm,
-  fill=blue!60!white,]{\White \ding{118} \msyh #1};}
-
-\newcommand\cxf[1]{\vskip 4bp \tikz \node[rectangle,rounded corners,minimum size=6mm,
-  fill=purple!60!white,]{\White \ding{42} \msyh #1};}
-
-\newcommand\xyy[1]{\vskip 2bp \tikz \node[rectangle,minimum size=3mm,
-  fill=black!80!white,]{\White \msyh\scriptsize #1};}
-
-\newcommand\tta[1]{\vskip 4bp \tikz \node[rectangle,minimum size=6mm,
-  fill=blue!60!white,]{\White \ding{118} \msyh #1};}
-
-\newcommand\ttb[1]{\vskip 4bp \tikz \node[rectangle,rounded corners,minimum size=6mm,
-  fill=purple!60!white,]{\White \ding{42} \msyh #1};}
-
-\newcommand\ttc[1]{\vskip 2bp \tikz \node[rectangle,minimum size=3mm,
-  fill=black!80!white,]{\White \msyh\scriptsize #1};}
-
-\newcommand\homework[1]{\vskip 2bp \tikz \node[rectangle,minimum size=3mm,
-  fill=red!80!white,]{\White \ding{45} \msyh\scriptsize 课后小作业 } ; {\kai\small #1}} 
-
-\newcommand\notice[1]{\vskip 4bp \tikz \node[rectangle,rounded corners,minimum size=6mm,
-  fill=red!80!white,]{\White \scriptsize \ding{42} \msyh #1};}
-
-\newcommand\samp[1]{\vskip 2bp \tikz \node[rectangle,minimum size=3mm,]{\Mage\msyh \small CODE \ding{231} \Black #1};\vskip -8bp}
-
-\newcommand\codeset[1]{\vskip 2bp \tikz \node[rectangle,minimum
-  size=3mm]{\Mage\msyh \small 课程配套代码 \ding{231} \Black
-    #1};\vskip -8bp}
-
-\newcommand\pptlink[2]{\vskip 4bp \tikz \node[rectangle,rounded corners,minimum size=6mm,
-  fill=blue!70!white,]{\href{run:#1}{\White \scriptsize \msyh 动画演示 #2}};}
-
-
-
-
-\makeatletter
-\newcommand{\Extend}[5]{\ext@arrow 0099{\arrowfill@#1#2#3}{#4}{#5}}
-\makeatother
-
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{../SLIDE-MAIN/slide-focus}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title{\hei JAVA应用与开发\\  高级类特性}
 \subtitle{\it 让我们愉快的Coding起来吧...}
 \author{王晓东}
-\titlegraphic{\vspace{-5em}\includegraphics[height=8cm]{static/ouc.pdf}\vspace{-6em}}
+\titlegraphic{\vspace{-8em}\includegraphics[height=10cm]{static/ouc.pdf}\vspace{-6em}} 
 \institute{中国海洋大学信息学院计算机系}
 \date{\today}
 
@@ -431,7 +234,7 @@
         System.out.println("弯腰、蹬腿、咬牙、瞪眼、开跑");
       }
       public void run(){
-        System.out.println("摆动手臂、 维持直线方向");
+        System.out.println("摆动手臂、维持直线方向");
       }
       public void stop(){
         System.out.println("减速直至停止、喝水");
@@ -520,6 +323,9 @@ class D implements C {
       之处使用一次。
     \end{description}
   \end{description}
+
+  {\kai （仅讲授包含静态嵌套类和匿名内部类，其他自行学习）}
+  
 \end{frame}
 
 
@@ -695,274 +501,216 @@ class D implements C {
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
 \frametitle{匿名内部类}
 
-匿名内部类是局部类的一种简化。{\kai 当我们只在一处使用到某个类型时，可
-  以将之定义为局部类，进而如果我们只是创建并使用该类的一个实例的话，那
-  么连类的名字都可以省略。}
+匿名内部类是局部类的一种简化。
+
+{\kai 当我们只在一处使用到某个类型时，可以将之定义为局部类，进而如果我
+  们只是创建并使用该类的一个实例的话，那么连类的名字都可以省略。}
 \end{frame}
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{使用匿名内部类\ding{182}}
+  \frametitle{使用匿名内部类}
 
-\samp{JavaSE\_03/TestAnonymousInnerClass.java}
+  \samp{Person.java}
 
-\samp{Person.java}
-\begin{javaCode}
-public abstract class Person {
-  private String name;
-  private int age;
-  public Person() {}
-  public Person(String name, int age) {
-    this.name = name;
-    this.age = age;
-  }
-  public String getInfo() {
-    return "Name: " + name + "\t Age: " + age;
-  }
-  public abstract void work();
-}  
-\end{javaCode}
+  \begin{javaCode}
+    public abstract class Person {
+      private String name;
+      private int age;
+      
+      public Person() {}
+      
+      public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+      }
+      
+      public String getInfo() {
+        return "Name: " + name + "\t Age: " + age;
+      }
+      
+      public abstract void work();
+    }  
+  \end{javaCode}
 \end{frame}
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{使用匿名内部类\ding{182}}
+  \frametitle{使用匿名内部类}
 
-\samp{TestAnonymous.java}
-\begin{javaCode}
-public class TestAnonymous {
-  public static void main(String[] args) {
-    Person sp = new Person() { \\ 匿名内部类
+  \samp{TestAnonymous.java}
+
+  \begin{javaCode}
+    public class TestAnonymous {
+      public static void main(String[] args) {
+        Person sp = new Person() { \\ 匿名内部类
+          public void work() {
+            System.out.println("个人信息：" + this.getInfo());
+            System.out.println("I am sailing.");
+          }
+        };
+        
+        sp.work();
+      }
+    }
+  \end{javaCode}
+
+  \pause
+  
+  \ttc{上述代码的解释}
+
+  {\small\Red 定义一个新的Java内部类，该类本身没有名字，但继承了指定的父
+    类Person，并在此匿名子类中重写了父类的work()方法，然后立即创建了一
+    个该匿名子类的对象，再将其地址保存到引用变量sp中待用。}
+\end{frame}
+
+\begin{frame}[fragile] % [fragile]参数使得能够插入代码
+  \frametitle{使用匿名内部类}
+
+  由于匿名类没有类名，而构造方法必须与类同名，所以{\hei 匿名类不能显式的定义构造方
+    法}，但系统允许在创建匿名类对象时将参数传给父类构造方法（使用父类的构造方法）。
+
+  \begin{javaCode}
+    Person sp = new Person("Kevin", 30) {
       public void work() {
         System.out.println("个人信息：" + this.getInfo());
         System.out.println("I am sailing.");
       }
     };
-    sp.work();
-  }
-}
-\end{javaCode}
-
-\xyy{上述代码的解释}
-
-{\small
-定义一个新的Java内部类，该类本身没有名字，但继承了指定的父类Person，并在此匿名子类中重写
-了父类的work()方法，然后立即创建了一个该匿名子类的对象，再将其句柄保存到引用变量sp中待
-用。}
+  \end{javaCode}
 \end{frame}
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{使用匿名内部类\ding{182}}
+  \frametitle{使用匿名内部类}
 
-由于匿名类没有类名，而构造方法必须与类同名，所以{\hei 匿名类不能显式的定义构造方
-  法}，但系统允许在创建匿名类对象时将参数传给父类构造方法（使用父类的构造方法）。
+  匿名类除了可以继承现有父类之外，还可以实现接口，但不允许实现多个接口，
+  且实现接口时就不能再继承父类了，反之亦然。
 
-\begin{javaCode}
-Person sp = new Person("Kevin", 30) {
-  public void work() {
-    System.out.println("个人信息：" + this.getInfo());
-    System.out.println("I am sailing.");
-  }
-};
-\end{javaCode}
-\end{frame}
+  \samp{Swimmer.java}
 
-\begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{使用匿名内部类\ding{183}}
-
-匿名类除了可以继承现有父类之外，还可以实现接口，但不允许实现多个接口，且实现接口时就不能
-再继承父类了，反之亦然。
-
-\samp{JavaSE\_03/TestAnonymousInnerClass02.java}
-
-\samp{Swimmer.java}
-\begin{javaCode}
-public interface Swimmer {
-  public abstract void swim();
-}
-\end{javaCode}
-
-\samp{TestAnonymous2.java}
-\begin{javaCode}
-public class TestAnonymous2 {
-  public static void main(String[] args) {
-    TestAnonymous2 ta = new TestAnonymous2();
-    ta.test(new Swimmer() { // 匿名类实现接口
-      public void swim() {
-        System.out.println("I am swimming.");
-      }
-    });
-  
-  public void test(Swimmer swimmer) {
-    swimmer.swim();
-  }
-}
-\end{javaCode}
-\end{frame}
-
-\begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{使用匿名内部类\ding{183}}
-
-上述程序main()方法中的代码相当于：
-
-\begin{javaCode}
-public static void main(String[] args) {
-  TestAnonymous2 ta = new TestAnonymous2();
-  class Person implements Swimmer {
-    public void swim() {
-      System.out.println("I am swimming.")
+  \begin{javaCode}
+    public interface Swimmer {
+      public abstract void swim();
     }
-  }
-  ta.test(new Person());
-}
-\end{javaCode}
+  \end{javaCode}
+
+  \samp{TestAnonymous2.java}
+  
+  \begin{javaCode}
+    public class TestAnonymous2 {
+      public static void main(String[] args) {
+        TestAnonymous2 ta = new TestAnonymous2();
+        ta.test(new Swimmer() { // 匿名类实现接口
+          public void swim() {
+            System.out.println("I am swimming.");
+          }
+        });
+        
+        public void test(Swimmer swimmer) {
+          swimmer.swim();
+        }
+      }
+    \end{javaCode}
 \end{frame}
-
-
-
 
 \section{枚举类型}
-\begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{枚举类型}
-
-{\hei Java SE 5.0开始，引入了一种新的引用数据结构——枚举（Enum）。}
-
-{\kai Java语言中枚举类型均自动继承了java.lang.Enum类（该类继承自Object类）。枚举类型使用一组常
-量值来表示特定的数据集合，该集合中数据的数目确定（通常较少），且这些数据只能取预先定义的
-值。}
-
-\begin{javaCode}
-public enum Week {
-  MON, TUE, WED, THU, FRI, SAT, SUN
-}
-\end{javaCode}
-
-\wxd{之前我们如何解决上述需求？}
-
-之前实现枚举类的功能，Java开发者一般采用声明多个整型常量的做法。
-
-\begin{javaCode}
-public class Week {
-  public static final int MON = 1;
-  public static final int TUE = 2;
-  ...
-}    
-\end{javaCode}
-\end{frame}
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{使用枚举类型}
-\begin{javaCode}
-public enum Week {
-  MON, TUE, WED, THU, FRI, SAT, SUN
-}  
-\end{javaCode}
-\begin{javaCode}
-public class TestEnum {
-  public static void main(String[] args) {
-    TestEnum te = new TestEnum();
-    te.work(Week.SUN);
-  }
-  public void work(Week day) {
-    if (day.equals(Week.SAT)) {
-      System.out.println("购物!");
-    }else if (day.equals(Week.SUN)) {
-      System.out.println("祈祷!");
-    } else {
-      System.out.println("工作!");
+  \frametitle{枚举类型}
+
+  \begin{block}{}
+    Java SE 5.0开始，引入了一种新的引用数据结构{\hei\Red 枚举类
+      型}。{\kai 枚举类型均自动继承java.lang.Enum类，使用一组常量值来表示
+      特定的数据集合，该集合中数据的数目确定（通常较少），且这些数据只能
+      取预先定义的值。}
+  \end{block}
+
+  \pause
+  \begin{javaCode}
+    public enum Week {
+      MON, TUE, WED, THU, FRI, SAT, SUN
     }
-  }
-}
-\end{javaCode}
+  \end{javaCode}
+  \pause
+  \notice{无枚举类型前如何解决上述需求？}
+
+  一般采用声明多个整型常量的做法实现枚举类的功能。
+
+  \begin{javaCode}
+    public class Week {
+      public static final int MON = 1;
+      public static final int TUE = 2;
+      ...
+    }    
+  \end{javaCode}
 \end{frame}
 
-\begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{遍历枚举类型常量值}
+%%\begin{frame}[fragile] % [fragile]参数使得能够插入代码
+%%\frametitle{使用枚举类型}
+%%\begin{javaCode}
+%%public enum Week {
+%%  MON, TUE, WED, THU, FRI, SAT, SUN
+%%}  
+%%\end{javaCode}
+%%\begin{javaCode}
+%%public class TestEnum {
+%%  public static void main(String[] args) {
+%%    TestEnum te = new TestEnum();
+%%    te.work(Week.SUN);
+%%  }
+%%  public void work(Week day) {
+%%    if (day.equals(Week.SAT)) {
+%%      System.out.println("购物!");
+%%    }else if (day.equals(Week.SUN)) {
+%%      System.out.println("祈祷!");
+%%    } else {
+%%      System.out.println("工作!");
+%%    }
+%%  }
+%%}
+%%\end{javaCode}
+%%\end{frame}
 
-可以使用静态方法values()遍历枚举类型常量值。
-
-\samp{ListEnum.java}
-\begin{javaCode}
-public class ListEnum {
-  public static void main(String[] args) {
-    Week[] days = Week.values();
-    for(Week d: days) {
-      System.out.println(d);
-    }
-  }
-}
-\end{javaCode}
-\end{frame}
+%%\begin{frame}[fragile] % [fragile]参数使得能够插入代码
+%%\frametitle{遍历枚举类型常量值}
+%%
+%%可以使用静态方法values()遍历枚举类型常量值。
+%%
+%%\samp{ListEnum.java}
+%%\begin{javaCode}
+%%public class ListEnum {
+%%  public static void main(String[] args) {
+%%    Week[] days = Week.values();
+%%    for(Week d: days) {
+%%      System.out.println(d);
+%%    }
+%%  }
+%%}
+%%\end{javaCode}
+%%\end{frame}
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
 \frametitle{组合使用枚举类型与switch}
 
-使用枚举类型通常是为了实现多路分支性结构。
+\codeset{package sample.advance.enumclass}
 
-\begin{javaCode}
-public class TestEnumInSwitch {
-  public static void main(String[] args) {
-    TestEnumInSwitch teis = new TestEnumInSwitch();
-    teis.work(Week.FRI);
-  }
-  public void work(Week day) {
-    switch(day) {
-      case MON:
-      case TUE:
-      case WED:
-      case THU:
-      case FRI:
-        System.out.println("工作日，去上班！");
-        break;
-      case SAT:
-        System.out.println("星期六，去购物！");
-        break;
-      case SUN:
-        System.out.println("礼拜天，去教堂！");
-        break;
-      default:
-        System.out.println("你有没有搞错！");
-    }
-  }
-}
-\end{javaCode}
-\end{frame}
+\pause
 
-\begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{组合使用枚举类型与switch}
+\notice{注意}
 
-\wxd{注意}
 \begin{enumerate}
 \item case字句必须省略其枚举类型的前缀，即只需要写成 case SUN:，而不允许写成 case
   Week.SUN:，否则编译出错。
 \item 不必担心系统无法搞清这些常量名称的出处，因为switch后的小括号中的表达式已经指明本次
   要区分处理的是Week类型常量。
 \end{enumerate}
-
-
 \end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \begin{frame}[fragile] % [fragile]参数使得能够插入代码
-% \frametitle{}
-% 
-% \end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% \begin{frame}
-%% \frametitle{本章习题}
-%% \begin{enumerate}
-%% \item a
-%% \item b
-%% \end{enumerate}
-%% \end{frame}
 
-%% \begin{figure}
-%% \centering
-%% \includegraphics[width=0.6\textwidth]{fig01.png}
-%% \end{figure}
+
 % TKS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
+\begin{frame}[focus]
 \centering
-{\Huge \textcolor{blue}{THE END}} \\
+{\Huge {THE END}} \\
 \vspace{5mm}
-{\Large wxd2870@163.com} \\
+{\Large wangxiaodong@ouc.edu.cn} \\
 \end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}
