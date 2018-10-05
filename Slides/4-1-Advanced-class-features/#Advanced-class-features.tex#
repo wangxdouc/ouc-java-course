@@ -848,7 +848,18 @@ class D implements C {
 \begin{frame}[fragile]
   \frametitle{本节习题}
 
+  \wxd{简答题}
+  \begin{enumerate}
+  \item 为什么建议Java类需要编写无参构造方法，哪怕该方法什么都没做？
+  \item 关键字static都可以用来修饰Java类的那些成员？
+  \end{enumerate}
 
+  \wxd{小编程}
+  \begin{enumerate}
+  \item 练习本节中所有示例代码，理解并掌握其用法。
+  \item 自行调试单例设计模式程序，学习Eclipse的Debug方法，练习断点、单
+    步执行、跟进方法等操作，查看内存变化。
+  \end{enumerate}
 
 \end{frame}
 

@@ -1,4 +1,4 @@
-#+TITLE:     Tips
+#+TITLE:     不断丰富的Java小知识
 #+AUTHOR:    Xiaodong Wang
 #+EMAIL:     wangxiaodong@ouc.edu.cn
 
@@ -72,7 +72,7 @@ public class Test {
 }
 #+END_SRC
 
-* DONE 关于文件的创建时间。
+* 关于文件的创建时间。
 
 在Linux系统中没有文件创建时间的概念，只有文件的访问时间、修改时间、状态改变时间，即不能在文件的生命周期内永远知道文件的创建时间。与文件相关的几个时间包括：
 - 访问时间 :: 读一次这个文件的内容，这个时间就会更新。比如对这个文件使用more命令。ls、stat命令都不会修改文件的访问时间。
@@ -86,7 +86,7 @@ public class Test {
 - 如果文件创建后没有被读取过，那么访问时间 = 创建时间
 
 
-* TODO 你了解Java中equals和==区别及字符串创建过程吗？
+* 你了解Java中equals和==区别及字符串创建过程吗？
 
 (感谢 @方政 提出问题并整理）
 
