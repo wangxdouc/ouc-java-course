@@ -353,8 +353,8 @@
 Vector<String> vs = new Vector<String>();
 vs.add("Tom");
 Vector<?> v = vs;
-v.add("Billy");  //非法，编译器不知道具体类型参数
-Object e = v.elementAt(0); //合法，允许检索元素，此时读取的元素均当作 Object 类型处理
+v.add("Billy");  // 非法，编译器不知道具体类型参数
+Object e = v.elementAt(0); // 合法，允许检索元素，此时读取的元素均当作 Object 类型处理
 System.out.println(e);
 \end{javaCode}
 \end{frame}
@@ -369,25 +369,26 @@ Vector<String> vs = new Vector<String>();
 vs.add("Tom");
 vs.add("Billy");
 Vector<?> v = vs;
-v.remove(new Integer(200));  //形参为 Object 类型，运行不受影响
-v.clear(); //不需要参数，运行不受影响
+v.remove(new Integer(200));  // 形参为 Object 类型，运行不受影响
+v.clear(); // 不需要参数，运行不受影响
 \end{javaCode}
 \end{frame}
 
+\begin{frame}[fragile]
+  \frametitle{本节习题}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% \begin{frame}
-%% \frametitle{本章习题}
-%% \begin{enumerate}
-%% \item a
-%% \item b
-%% \end{enumerate}
-%% \end{frame}
+  \wxd{简答题}
+  \begin{enumerate}
+  \item 什么是泛型？泛型有什么作用？
+  \end{enumerate}
 
-%% \begin{figure}
-%% \centering
-%% \includegraphics[width=0.6\textwidth]{fig01.png}
-%% \end{figure}
+  \wxd{小编程}
+  \begin{enumerate}
+  \item 自行定义一个泛型类，尝试写出代码。
+  \item 练习泛型化集合类型基于通配符的遍历方法。
+  \end{enumerate}
+
+\end{frame}
 
 % TKS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[focus]
