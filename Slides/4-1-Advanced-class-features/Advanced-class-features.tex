@@ -253,7 +253,7 @@
   
   \begin{figure}
     \centering
-    \includegraphics[width=0.5\textwidth]{a.pdf}
+    \includegraphics[width=0.5\textwidth]{fig-interface-implement-sample.pdf}
   \end{figure}
 
   \notice{类允许实现多重接口}
@@ -682,7 +682,7 @@ class D implements C {
   \begin{javaCode}
     public class TestAnonymous {
       public static void main(String[] args) {
-        Person sp = new Person() { \\ 匿名内部类
+        Person sp = new Person() { // 匿名内部类
           public void work() {
             System.out.println("个人信息：" + this.getInfo());
             System.out.println("I am sailing.");
@@ -749,39 +749,36 @@ class D implements C {
           swimmer.swim();
         }
       }
-    \end{javaCode}
+    }
+  \end{javaCode}
 \end{frame}
 
 \section{枚举类型}
-
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
-  \frametitle{枚举类型}
+\frametitle{什么是枚举类型}
 
-  \begin{block}{}
-    Java SE 5.0开始，引入了一种新的引用数据结构{\hei\Red 枚举类
-      型}。{\kai 枚举类型均自动继承java.lang.Enum类，使用一组常量值来表示
-      特定的数据集合，该集合中数据的数目确定（通常较少），且这些数据只能
-      取预先定义的值。}
-  \end{block}
+Java SE 5.0开始，引入了一种新的引用数据结构{\hei\Red 枚举类
+  型}。{\kai 枚举类型均自动继承java.lang.Enum类，使用一组常量值来表示
+  特定的数据集合，该集合中数据的数目确定（通常较少），且这些数据只能
+  取预先定义的值。}
 
-  \pause
-  \begin{javaCode}
-    public enum Week {
-      MON, TUE, WED, THU, FRI, SAT, SUN
-    }
-  \end{javaCode}
-  \pause
-  \notice{无枚举类型前如何解决上述需求？}
+\begin{javaCode}
+  public enum Week {
+    MON, TUE, WED, THU, FRI, SAT, SUN
+  }
+\end{javaCode}
 
-  一般采用声明多个整型常量的做法实现枚举类的功能。
+\notice{无枚举类型前如何解决上述需求？}
 
-  \begin{javaCode}
-    public class Week {
-      public static final int MON = 1;
-      public static final int TUE = 2;
-      ...
-    }    
-  \end{javaCode}
+一般采用声明多个整型常量的做法实现枚举类的功能。
+
+\begin{javaCode}
+  public class Week {
+    public static final int MON = 1;
+    public static final int TUE = 2;
+    ...
+  }    
+\end{javaCode}
 \end{frame}
 
 %%\begin{frame}[fragile] % [fragile]参数使得能够插入代码
