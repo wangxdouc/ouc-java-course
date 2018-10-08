@@ -14,5 +14,7 @@
     <module>sample.oop</module>
     <module>sample.memory</module>
     <module>sample.jvm</module>
+    <module>sample.advance</module>
+    <module>sample.generics</module>
   </modules>
 </project>
