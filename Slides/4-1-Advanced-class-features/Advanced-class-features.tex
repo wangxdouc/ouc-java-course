@@ -367,6 +367,7 @@ class D implements C {
         public abstract void close();
       }
     \end{javaCode}
+
     \column{0.5\textwidth}
 
     \begin{javaCode}
@@ -389,15 +390,15 @@ class D implements C {
   \tta{思路一} 
   
   将这三个功能都放在抽象类里面，这样一来所有继承这个抽象类的子类都具备
-  了报警功能，但是有的门并不一定需要具备报警功能。\pause {\hei\Red 不合理抽象}
+  了报警功能。\pause {\kai 但是有的门并不一定需要具备报警功能。}{\hei\Red 不合理抽象}
 
   \pause
   
   \tta{思路二} 
 
   将这三个功能都放在接口里面，但需要用到报警功能的类就需要实现这个接口
-  中的open()和close()，也许这个类根本就不具备open()和close()这两个功能，
-  比如火灾报警器。\pause {\hei\Red 不合理规划}
+  中的open()和close()。\pause {\kai 也许这个类根本就不具备open()和close()这两个功能，
+  比如火灾报警器。}{\hei\Red 不合理规划}
 
 \end{frame}
 
