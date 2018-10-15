@@ -192,6 +192,7 @@
 \def\Brown{\color{brown}}
 \def\Gray{\color{gray}}
 \def\Black{\color{black}}
+\def\White{\color{white}}
 
 %% 自定义命令
 % 注意
@@ -210,6 +211,16 @@
 
 % 其他
 \newcommand{\sline}[1][magenta]{{\color{#1}\vspace{-5mm}\noindent\rule{\textwidth}{.4mm}}}
+
+\newcommand\tta[1]{\vskip 4bp \tikz \node[rectangle,minimum size=6mm,
+  fill=blue!60!white]{\White \ding{118} \msyh #1};}
+
+\newcommand\ttb[1]{\vskip 4bp \tikz \node[rectangle,rounded
+  corners,minimum size=6mm, fill=purple!60!white,]{\White \ding{42}
+    \msyh #1};}
+
+\newcommand\ttc[1]{\vskip 2bp \tikz \node[rectangle,minimum size=3mm,
+  fill=black!80!white,]{\White \msyh\scriptsize #1};}
 
 % 示例代码
 \newcommand{\samplecode}[2][blue]{{\vspace{3mm}\noindent\hskip5pt\color{#1}
@@ -458,8 +469,12 @@ keywordstyle=\Cyan \bfseries
 %\include{lecturenotes/Java-memory-allocation}
 
 %% Week 04 %%
-\include{lecturenotes/Advanced-class-features}
-\include{lecturenotes/Java-generic-type}
+%\include{lecturenotes/Advanced-class-features}
+%\include{lecturenotes/Java-generic-type}
+
+%% Week 04 %%
+\include{lecturenotes/Terminal-application-programming}
+%\include{lecturenotes/Set-list-map}
 
 % \include{lecturenotes/Java-exception-handling}
 % \include{lecturenotes/Java-thread-programming}
