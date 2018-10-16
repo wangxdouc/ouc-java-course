@@ -21,7 +21,5 @@ public class UserDefinedGenericsSample {
 		p2.setSecrecy(8700.85);
 		double money = p2.getSecrecy();
 		System.out.println(p2.getId() + "\t 秘密资金数额是：" + money);
-
 	}
-
 }

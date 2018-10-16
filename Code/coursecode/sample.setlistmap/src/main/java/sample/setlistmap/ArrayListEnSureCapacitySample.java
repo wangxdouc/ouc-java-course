@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class ArrayListEnSureCapacitySample {
 
 	public static void main(String[] args) {
-		final int N = 10000;
+		final int N = 1000;
 		Object obj = new Object();
 
 		ArrayList<Object> list1 = new ArrayList<Object>();

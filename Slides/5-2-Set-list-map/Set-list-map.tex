@@ -16,8 +16,10 @@
 \begin{frame}
   \frametitle{学习目标}
   \begin{itemize}
-  \item 掌握列表（List）、集（Set）、映射（Map）的概念、层次关系及应用
+  \item 掌握列表（List）、集（Set）、映射（Map）的概念、层次关系
+  \item 熟练应用相关集合容器
   \item 掌握迭代器（iterator）、Enumeration接口等容器操作常用API
+  \item 了解集合容器的人为性能提升及线程安全等
   \end{itemize}
 \end{frame}
 
@@ -144,17 +146,16 @@
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
   \frametitle{Set和List接口}
 
-  \begin{block}
+  \begin{block}{}
     java.util.Set和java.util.List分别描述前述的集和列表结构，二者均
-    为Collection的子接口。
+    为Collection的子接口。Set接口模拟了数学意义的集合；List接口规定使用
+    者可以对列表元素的插入位置进行精确控制，并添加了根据元素索引来访问
+    元素等功能。
   \end{block}
-
 
   \pause
   
-  {\kai Set接口模拟了数学意义的集合。List接口规定使用者可以对列表元素的插入位置
-    进行精确控制，并添加了根据元素索引来访问元素等功能，接口中新添加了相应
-    方法：}
+  \tta{List接口中新添加的方法}
 
   \begin{itemize}[<+-| alert@+>]\kai
   \item void add(int index, Object element)
@@ -173,7 +174,8 @@
   
   \begin{itemize}[<+-| alert@+>]\kai
   \item Object put(Object key, Object value)\\
-    \only<1>{向当前映射中加入一组新的健—值对，并返回所加入元素的“值”，如果此映射中以前包含一个该键的映射关系，则用新值替换旧值。}
+    \only<1>{向当前映射中加入一组新的健—值对，并返回所加入元素的“值”，
+      如果此映射中以前包含一个该键的映射关系，则用新值替换旧值。}
   \item Object get(Object key)\\
     \only<2>{返回此映射中映射到指定键的值，没有则返回null。}
   \item boolean isEmpty()
@@ -183,9 +185,11 @@
     \only<6>{如果映射中包含指定键的映射关系，则返回true，否则返回false。}
   \item boolean containsValue(Object value)
   \item Set keySet()\\
-    \only<8>{返回此映射中包含的键的set视图，此Set受映射支持，所以对映射的改变可以在此Set中反映出来，反之亦然。}
+    \only<8>{返回此映射中包含的键的set视图，此Set受映射支持，所以对映射
+      的改变可以在此Set中反映出来，反之亦然。}
   \item Collection values()\\
-    \only<9>{返回此映射包含值的Collection视图，此Collection受映射支持，所以对映射的改变可以在此Collection中反映出来，反之亦然。}
+    \only<9>{返回此映射包含值的Collection视图，此Collection受映射支持，
+      所以对映射的改变可以在此Collection中反映出来，反之亦然。}
   \end{itemize}
 \end{frame}
 

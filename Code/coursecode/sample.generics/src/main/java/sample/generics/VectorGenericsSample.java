@@ -9,7 +9,7 @@ import java.util.Vector;
  * @author xiaodong
  *
  */
-//@SuppressWarnings(value = { "unchecked" }) // 关闭编译提示或警告信息
+@SuppressWarnings(value = { "unchecked" }) // 关闭编译提示或警告信息
 public class VectorGenericsSample {
 
 	public static void main(String[] args) {

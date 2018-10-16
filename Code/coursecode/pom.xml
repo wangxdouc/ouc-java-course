@@ -16,5 +16,6 @@
     <module>sample.jvm</module>
     <module>sample.advance</module>
     <module>sample.generics</module>
+    <module>sample.commandline</module>
   </modules>
 </project>
