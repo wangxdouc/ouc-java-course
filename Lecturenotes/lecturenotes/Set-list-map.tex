@@ -6,7 +6,7 @@
 \begin{description}
 \item[课程名称：] Java应用与开发
 \item[授课教师：] 王晓东
-\item[授课时间：] 第五周
+\item[授课时间：] 第五周；第六周
 \item[参考教材：] 本课程参考教材及资料如下：
   \begin{itemize}
   \item 陈国君主编，Java程序设计基础（第5版），清华大学出版社，2015.5
@@ -430,139 +430,131 @@ java.lang.Comparable接口中定义的compareTo()方法用于提供对其实现�
 \item Comparable接口并不专用于集合框架。
 \end{enumerate}
 
-%\section{映射}
-%
-%\begin{frame}[fragile] % [fragile]参数使得能够插入代码
-%  \subsection{HashMap类}
-%
-%  java.util.HashMap类实现了java.util.Map接口，该类基于{\hei\Blue 哈希表}实现了前述的映射集合结构。
-%
-%  \begin{itemize}\kai
-%  \item HashMap结构不保证其中元素（映射信息）的先后顺序，且允许使用null“值”和null“键”。
-%  \item 当集合中不存在当前检索的“键”所对应的映射值时，HashMap的get()方法会返回空值null，而不会运行出错。
-%  \item 影响HashMap性能的两个参数：初始容量（Initial Capacity）和加载因子（Load Factor）。
-%  \end{itemize}
-%\end{frame}
-%
-%\begin{frame}[fragile] % [fragile]参数使得能够插入代码
-%  \subsection{HashTable类}
-%
-%  java.util.Hashtable与HashMap作用基本相同，也实现了Map接口，采用哈希表的方式将“键”映射到相应的“值”。
-%
-%  \wxd{Hashtable与HashMap的差别}
-%
-%  \begin{itemize}\kai
-%  \item Hashtable中元素的“键”和“值”均不允许为null，而HashMap则允许。
-%  \item {\Red Hashtable是同步的，即线程安全的，效率相对要低一些，适合在多
-%      线程环境下使用；而 HashMap是不同步的，效率相对高一些，提倡在单线程
-%      环境中使用。}
-%  \item 除此之外，Hashtable与HashMap的用法格式完全相同。
-%  \end{itemize}
-%\end{frame}
-%
-%%%%\begin{frame}[fragile] % [fragile]参数使得能够插入代码
-%%%%  \subsection{TreeMap类}
-%%%%
-%%%%  java.util.TreeMap类实现了将Map映射中的元素按照“键”进行升序排列的功能，其排序规则可以是默
-%%%%  认的按照“键”的自然顺序排列，也可以使用指定的其他排序规则。
-%%%%
-%%%%  向TreeMap映射中添加的元素“键”所属的类必须实现Comparable接口。
-%%%%
-%%%%  \begin{javaCode}
-%%%%    public MyKey implements Comparable {
-%%%%      private final int id;
-%%%%      ...
-%%%%      public MyKey(int id) {
-%%%%        this.id = id;
-%%%%      }
-%%%%      ...
-%%%%      @Override
-%%%%      public int compareTo(Object o) {
-%%%%        return this.id - ((MyKey) o).id;
-%%%%      }
-%%%%      @Override
-%%%%      public boolean equals(Object o) {
-%%%%        return (o instanceof MyKey) && (this.id == ((MyKey) o).id);
-%%%%      }
-%%%%      @Override
-%%%%      public int hashCode() {
-%%%%        return new Integer(id).hasCode();
-%%%%      }
-%%%%    }  
-%%%%  \end{javaCode}
-%%%%\end{frame}
-%%%%
-%%%%\begin{frame}[fragile] % [fragile]参数使得能够插入代码
-%%%%  \subsection{TreeMap类}
-%%%%  \wxd{对上述程序的说明}
-%%%%
-%%%%  {\kai MyKey类重写equals()方法的同时也重写了hasCode()方法，这是一种规
-%%%%    范的做法，目的是为了维护hasCode()方法的常规协定，该协定要求相等对象
-%%%%    必须具有相等的哈希码，即当两个对象使用equals()方法比较结果为等价时，
-%%%%    它们各自调用hasCode()方法也应该返回相同的结果。}
-%%%%\end{frame}
-%
-%\section{其他相关API}
-%\begin{frame}[fragile] % [fragile]参数使得能够插入代码
-%  \subsection{Enumeration接口}
-%
-%  \xyy{java.util.Enumeration} 接口作用与Iterator接口类似，但只提供了遍
-%  历Vector和Hashtable（及子类Properties）类型集合元素的功能，且不支持集
-%  合元素的移除操作。
-%
-%  \begin{javaCode}
-%    import java.util.*;
-%
-%    public class TestEnumeration {
-%      public static void main(String[] args) {
-%        Vector v = new Vector();
-%        v.addElement("Lisa");
-%        v.addElement("Billy");
-%        v.addElement("Brown");
-%
-%        Enumeration e = v.elements();
-%
-%        while(e.hasMoreElements()) {
-%          String value = (String) e.nextElement();
-%          System.out.println(value);
-%        }
-%      }
-%    }
-%  \end{javaCode}
-%\end{frame}
-%
-%\begin{frame}[fragile] % [fragile]参数使得能够插入代码
-%  \subsection{Collections类}
-%
-%  \xyy{java.util.Collections} 类定义了多种集合操作方法，能够实现了对集
-%  合元素的{\Blue\hei 排序、取极值、批量拷贝、集合结构转换、循环移位以及
-%    匹配性检查}等功能。Collections类的主要方法包括：
-%
-%  \begin{itemize}\small
-%  \item public static void sort(List list)
-%  \item public static void reverse(List list)
-%  \item public static void shuffle(List list)
-%  \item public static void copy(List dest, List src)
-%  \item public static ArrayList list(Enumeration e)
-%  \item public static int frequency(Collection c, Object o)
-%  \item public static T max(Collection coll)
-%  \item public static T min(Collection coll)
-%  \item public static void rotate(List list, int distance)
-%  \end{itemize}
-%\end{frame}
-%
-%\begin{frame}[fragile] % [fragile]参数使得能够插入代码
-%  \subsection{Arrays类}
-%
-%  \xyy{java.util.Arrays} 类定义了多种数组操作方法，实现了对数组元素的排
-%  序、填充、转换为列表或字符串形式、增强的检索和深度比较等功
-%  能。Arrays类的主要方法包括\footnote{自行搜索学习各方法的用法}：
-%
-%  \begin{itemize}
-%  \item public static List asList(Object... a)
-%  \item public static void sort(<类型>[ ] a)
-%  \item public static int binarySearch(int[] a, int key)
-%  \item public static String toString(int[] a)
-%  \end{itemize}
-%\end{frame}
+\section{映射}
+
+\subsection{HashMap类}
+
+java.util.HashMap类实现了java.util.Map接口，该类基于{\hei\Blue 哈希表}实现了前述的映射集合结构。
+
+\begin{itemize}
+\item HashMap结构不保证其中元素（映射信息）的先后顺序，且允许使用null“值”和null“键”。
+\item 当集合中不存在当前检索的“键”所对应的映射值时，HashMap的get()方法会返回空值null，而不会运行出错。
+\item 影响HashMap性能的两个参数：初始容量（Initial Capacity）和加载因子（Load Factor）。
+\end{itemize}
+
+\subsection{HashTable类}
+
+java.util.Hashtable与HashMap作用基本相同，也实现了Map接口，采用哈希表的方式将“键”映射到相应的“值”。
+
+Hashtable与HashMap的差别主要包含以下方面：
+
+\begin{itemize}
+\item Hashtable中元素的“键”和“值”均不允许为null，而HashMap则允许。
+\item {\Red Hashtable是同步的，即线程安全的，效率相对要低一些，适合在多
+    线程环境下使用；而 HashMap是不同步的，效率相对高一些，提倡在单线程
+    环境中使用。}
+\item 除此之外，Hashtable与HashMap的用法格式完全相同。
+\end{itemize}
+
+\subsection{TreeMap类}
+
+java.util.TreeMap类实现了将Map映射中的元素按照“键”进行升序排列的功能，
+其排序规则可以是默认的按照“键”的自然顺序排列，也可以使用指定的其他排序
+规则。
+
+向TreeMap映射中添加的元素“键”所属的类必须实现Comparable接口。
+
+\begin{javaCode}
+  public MyKey implements Comparable {
+    private final int id;
+    ...
+    public MyKey(int id) {
+      this.id = id;
+    }
+    ...
+    @Override
+    public int compareTo(Object o) {
+      return this.id - ((MyKey) o).id;
+    }
+    @Override
+    public boolean equals(Object o) {
+      return (o instanceof MyKey) && (this.id == ((MyKey) o).id);
+    }
+    @Override
+    public int hashCode() {
+      return new Integer(id).hasCode();
+    }
+  }  
+\end{javaCode}
+
+\notice{对上述程序的说明}
+
+{\kai MyKey类重写equals()方法的同时也重写了hasCode()方法，这是一种规
+  范的做法，目的是为了维护hasCode()方法的常规协定，该协定要求相等对象
+  必须具有相等的哈希码，即当两个对象使用equals()方法比较结果为等价时，
+  它们各自调用hasCode()方法也应该返回相同的结果。}
+
+\section{其他相关API}
+
+\subsection{Enumeration接口}
+
+java.util.Enumeration接口作用与Iterator接口类似，但只提供了遍
+历Vector和Hashtable（及子类Properties）类型集合元素的功能，且不支持集合
+元素的移除操作。
+
+\begin{javaCode}
+  import java.util.*;
+
+  public class TestEnumeration {
+    public static void main(String[] args) {
+      Vector v = new Vector();
+      v.addElement("Lisa");
+      v.addElement("Billy");
+      v.addElement("Brown");
+
+      Enumeration e = v.elements();
+
+      while(e.hasMoreElements()) {
+        String value = (String) e.nextElement();
+        System.out.println(value);
+      }
+    }
+  }
+\end{javaCode}
+
+\subsection{Collections类}
+
+java.util.Collections类定义了多种集合操作方法，能够实现了对集合元素
+的{\Blue\hei 排序、取极值、批量拷贝、集合结构转换、循环移位以及匹配性检
+  查}等功能。Collections类的主要方法包括：
+
+\begin{itemize}\small
+\item public static void sort(List list)
+\item public static void reverse(List list)
+\item public static void shuffle(List list)
+\item public static void copy(List dest, List src)
+\item public static ArrayList list(Enumeration e)
+\item public static int frequency(Collection c, Object o)
+\item public static T max(Collection coll)
+\item public static T min(Collection coll)
+\item public static void rotate(List list, int distance)
+\end{itemize}
+
+\subsection{Arrays类}
+
+java.util.Arrays类定义了多种数组操作方法，实现了对数组元素的排序、填充、
+转换为列表或字符串形式、增强的检索和深度比较等功能。Arrays类的主要方法
+包括：
+
+\begin{itemize}
+\item public static List asList(Object... a)
+\item public static void sort(<类型>[] a)
+\item public static int binarySearch(int[] a, int key)
+\item public static String toString(int[] a)
+\end{itemize}
+
+\notice{说明}
+
+Arrays类在前面数组部分有阐述。
+
 
