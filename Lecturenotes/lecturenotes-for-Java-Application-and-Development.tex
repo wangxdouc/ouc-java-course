@@ -20,12 +20,21 @@
 
 %% 页面设置
 \usepackage[paper=a4paper,
-         total={14.8cm,22.2cm},
-         top=2.5cm,
-         left=3cm]{geometry}
+         total={15.8cm,23.2cm},
+         top=2cm,
+         left=2.5cm,]{geometry}
 
 %% 设定行距
-\linespread{1.2} %% 1.5倍
+\linespread{1.5} %% 1.5倍
+
+%% 自定义宏包解决段落首行缩进2个中文字符问题
+\usepackage{cjkindent} 
+
+%% 设定itemize等列表环境的间距
+\usepackage{enumitem}
+\setenumerate[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+\setitemize[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+\setdescription{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
 
 % 目录超链接
 \usepackage[pdfauthor={Xiaodong Wang},%
@@ -472,9 +481,11 @@ keywordstyle=\Cyan \bfseries
 %\include{lecturenotes/Advanced-class-features}
 %\include{lecturenotes/Java-generic-type}
 
-%% Week 04 %%
+%% Week 05 %%
 %\include{lecturenotes/Terminal-application-programming}
 %\include{lecturenotes/Set-list-map}
+
+%% Week 06 %%
 \include{lecturenotes/Java-GUI-programming}
 
 % \include{lecturenotes/Java-exception-handling}
