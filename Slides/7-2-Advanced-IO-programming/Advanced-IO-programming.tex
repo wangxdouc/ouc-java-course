@@ -64,10 +64,13 @@
 
   \tta{按照数据流动的方向}
 
-  {\hei Java流可分为输入流（Input Stream）和输出流（Output Stream）。}输
-  入流只能从中读取数据，而不能向其写出数据；输出流则只能向其写出数据，而不能从中读取数
-  据。{\Mage （特例 java.io.RandomAccessFile类）}
+  {\hei Java流可分为输入流（Input Stream）和输出流（Output Stream）。}
 
+  \begin{itemize}
+  \item 输入流只能从中读取数据，而不能向其写出数据；
+  \item 输出流则只能向其写出数据，而不能从中读取数据。
+  \item {\Mage （特例 java.io.RandomAccessFile类）}
+  \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
@@ -75,9 +78,13 @@
 
   \tta{根据数据流所关联的是数据源还是其他数据流}  
 
-  {\hei 可分为节点流（Node Stream）和处理流（Processing Stream）。}节点流
-  直接连接到数据源；处理流是对一个已存在的流的连接和封装，通过所封装的流
-  的功能调用实现增强的数据读/写功能，处理流并不直接连到数据源。
+  {\hei 可分为节点流（Node Stream）和处理流（Processing Stream）。}
+
+  \begin{itemize}
+  \item 节点流直接连接到数据源；
+  \item 处理流是对一个已存在的流的连接和封装，通过所封装的流的功能调用
+    实现增强的数据读/写功能，处理流并不直接连到数据源。
+  \end{itemize}
 
   \begin{figure}
     \centering
@@ -91,10 +98,13 @@
   \tta{按传输数据的“颗粒大小”}
 
   {\hei 可分为字符流（Character Stream）和字节流（Byte
-    Stream）。}字节流以字节为单位进行数据传输，每次传送一个或多个字节；字符流以字符为单位
-  进行数据传输，每次传送一个或多个字符\footnote{从JDK1.4版本开始，Sun公司引入了新的Java I/O API（NIO, New Input/Output），提供面向
-    数据块、异步I/O操作。}
+    Stream）。}
 
+  \begin{itemize}
+  \item 字节流以字节为单位传输数据，每次传送一个或多个字节。
+  \item 字符流以字符为单位传输数据，每次传送一个或多个字符。\footnote{从JDK1.4版本开始，Sun公司引入了新的Java I/O API（NIO, New Input/Output），提供面向
+    数据块、异步I/O操作。}
+\end{itemize}
   \notice{Java命名惯例}
 
   凡是以InputStream或OutputStream结尾的类型均为{\hei 字节流}，凡是
@@ -401,133 +411,133 @@ java.io.ObjectOutputStream和ObjectInputStream类分别提供了对象的序列�
 
 \end{frame}
 
-\begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{标准输入输出重定向}
-
-Java控制台程序默认是以控制台键盘和显示器作为标准输入/输出设备，在有些有情况下，我们可能希望将程序的标准输入或标准输出进行重新定向。
-
-{\kai\Blue 例如，程序测试时可能需要大量数据，如果使用控制台输入测试数据的话每次都要重新输入，这样很繁琐，此时可以考虑进行输入重定向。}
-\end{frame}
-
-\begin{frame}[fragile] % [fragile]参数使得能够插入代码
-  \frametitle{标准输入输出重定向}
-  
-  \samp{TestSetInput.java}
-  \begin{javaCode}
-    import java.io.*;
-    public class TestSetInput {
-      public static void main(String[] args) {
-        try {
-          FileInputStream fis = new FileInputStream("in.txt");
-          System.setIn(fis);
-          int avg = 0;
-          int total = 0;
-          int num = 0;
-          int i;
-          BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-          String s = br.readLine();
-          while (s != null && !s.equals("over")) {
-            i = Integer.parseInt(s);
-            num++;
-            total += i;
-            avg = total / num;
-            System.out.println("num=" + num + "\ttotal=" + total + "\tavg=" + avg);
-            s = br.readLine();
-          }
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
-      }
-    }
-\end{javaCode}
-其中，in.txt为每行均为整数的文件。
-\end{frame}
-
-\begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{标准输入输出重定向}
-\begin{itemize}
-\item System.setOut(OutputStream output)
-\item System.setErr(OutputStream output)
-\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{随机存取文件}
-\tta{需求}
-\begin{itemize}
-\item 存档游戏，记录新玩家的第一次成绩时，添加一条新纪录。
-\item 老用户重玩时，更新其原有记录信息（不添加新纪录）。
-\item 浏览所有玩家的记录信息。
-\end{itemize}
-
-\tta{一种实现方式} \\
-使用java.io.RandomAccessFile类实现文件的随机存取操作，该方法能够同时提
-供读/写文件的功能。\footnote{代码见tex源文件 ：）}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \begin{javaCode}
-% import java.io.File;
-% import java.io.IOException;
-% import java.io.RandomAccessFile;
-% public class TestRandomAccessFile {
-%   private File file = null;
-%   public void record(String record_breaker, int times) {
-%     try {
-%       RandomAccessFile raf = new RandomAccessFile(file, "rw");
-%       boolean flag = false;
-%       while (raf.getFilePointer() < raf.length()) {
-%         String name = raf.readUTF();
-%         if (record_breaker.equals(name)) {
-%           raf.writeInt(times);
-%           flag = true;
-%           break;
-%         } else {
-%           raf.skipBytes(4);
-%         }
-%       }
-%       if (!flag) {
-%         raf.writeUTF(record_breaker);
-%         raf.writeInt(times);
-%       }
-%       raf.close();
-%     } catch (Exception e) {
-%       e.printStackTrace();
-%     }
-%   }
-%   public void init() {
-%     if (file == null) {
-%       file = new File("record.txt");
-%       try {
-%         file.createNewFile();
-%       } catch (IOException e) {
-%         e.printStackTrace();
-%       }
-%     }
-%   }
-%   public void listAllRecords() {
-%     try {
-%       RandomAccessFile raf = new RandomAccessFile(file, "r");
-%       while (raf.getFilePointer() < raf.length()) {
-%         String name = raf.readUTF();
-%         int times = raf.readInt();
-%         System.out.println("name: " + name + "\trecord: " + times);
-%       }
-%       raf.close();
-%     } catch (Exception e) {
-%       e.printStackTrace();
-%     }
-%   }
-%   public static void main(String[] args) {
-%     TestRandomAccessFile traf = new TestRandomAccessFile();
-%     traf.init();
-%     traf.record("Billy", 30);
-%     traf.record("Kevin", 32);
-%     traf.listAllRecords();
-%   }
-% }
-% \end{javaCode}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\end{frame}
+%%%%\begin{frame}[fragile] % [fragile]参数使得能够插入代码
+%%%%\frametitle{标准输入输出重定向}
+%%%%
+%%%%Java控制台程序默认是以控制台键盘和显示器作为标准输入/输出设备，在有些有情况下，我们可能希望将程序的标准输入或标准输出进行重新定向。
+%%%%
+%%%%{\kai\Blue 例如，程序测试时可能需要大量数据，如果使用控制台输入测试数据的话每次都要重新输入，这样很繁琐，此时可以考虑进行输入重定向。}
+%%%%\end{frame}
+%%%%
+%%%%\begin{frame}[fragile] % [fragile]参数使得能够插入代码
+%%%%  \frametitle{标准输入输出重定向}
+%%%%  
+%%%%  \samp{TestSetInput.java}
+%%%%  \begin{javaCode}
+%%%%    import java.io.*;
+%%%%    public class TestSetInput {
+%%%%      public static void main(String[] args) {
+%%%%        try {
+%%%%          FileInputStream fis = new FileInputStream("in.txt");
+%%%%          System.setIn(fis);
+%%%%          int avg = 0;
+%%%%          int total = 0;
+%%%%          int num = 0;
+%%%%          int i;
+%%%%          BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+%%%%          String s = br.readLine();
+%%%%          while (s != null && !s.equals("over")) {
+%%%%            i = Integer.parseInt(s);
+%%%%            num++;
+%%%%            total += i;
+%%%%            avg = total / num;
+%%%%            System.out.println("num=" + num + "\ttotal=" + total + "\tavg=" + avg);
+%%%%            s = br.readLine();
+%%%%          }
+%%%%        } catch (IOException e) {
+%%%%          e.printStackTrace();
+%%%%        }
+%%%%      }
+%%%%    }
+%%%%\end{javaCode}
+%%%%其中，in.txt为每行均为整数的文件。
+%%%%\end{frame}
+%%%%
+%%%%\begin{frame}[fragile] % [fragile]参数使得能够插入代码
+%%%%\frametitle{标准输入输出重定向}
+%%%%\begin{itemize}
+%%%%\item System.setOut(OutputStream output)
+%%%%\item System.setErr(OutputStream output)
+%%%%\end{itemize}
+%%%%\end{frame}
+%%%%
+%%%%\begin{frame}[fragile] % [fragile]参数使得能够插入代码
+%%%%\frametitle{随机存取文件}
+%%%%\tta{需求}
+%%%%\begin{itemize}
+%%%%\item 存档游戏，记录新玩家的第一次成绩时，添加一条新纪录。
+%%%%\item 老用户重玩时，更新其原有记录信息（不添加新纪录）。
+%%%%\item 浏览所有玩家的记录信息。
+%%%%\end{itemize}
+%%%%
+%%%%\tta{一种实现方式} \\
+%%%%使用java.io.RandomAccessFile类实现文件的随机存取操作，该方法能够同时提
+%%%%供读/写文件的功能。\footnote{代码见tex源文件 ：）}
+%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% \begin{javaCode}
+%%%%% import java.io.File;
+%%%%% import java.io.IOException;
+%%%%% import java.io.RandomAccessFile;
+%%%%% public class TestRandomAccessFile {
+%%%%%   private File file = null;
+%%%%%   public void record(String record_breaker, int times) {
+%%%%%     try {
+%%%%%       RandomAccessFile raf = new RandomAccessFile(file, "rw");
+%%%%%       boolean flag = false;
+%%%%%       while (raf.getFilePointer() < raf.length()) {
+%%%%%         String name = raf.readUTF();
+%%%%%         if (record_breaker.equals(name)) {
+%%%%%           raf.writeInt(times);
+%%%%%           flag = true;
+%%%%%           break;
+%%%%%         } else {
+%%%%%           raf.skipBytes(4);
+%%%%%         }
+%%%%%       }
+%%%%%       if (!flag) {
+%%%%%         raf.writeUTF(record_breaker);
+%%%%%         raf.writeInt(times);
+%%%%%       }
+%%%%%       raf.close();
+%%%%%     } catch (Exception e) {
+%%%%%       e.printStackTrace();
+%%%%%     }
+%%%%%   }
+%%%%%   public void init() {
+%%%%%     if (file == null) {
+%%%%%       file = new File("record.txt");
+%%%%%       try {
+%%%%%         file.createNewFile();
+%%%%%       } catch (IOException e) {
+%%%%%         e.printStackTrace();
+%%%%%       }
+%%%%%     }
+%%%%%   }
+%%%%%   public void listAllRecords() {
+%%%%%     try {
+%%%%%       RandomAccessFile raf = new RandomAccessFile(file, "r");
+%%%%%       while (raf.getFilePointer() < raf.length()) {
+%%%%%         String name = raf.readUTF();
+%%%%%         int times = raf.readInt();
+%%%%%         System.out.println("name: " + name + "\trecord: " + times);
+%%%%%       }
+%%%%%       raf.close();
+%%%%%     } catch (Exception e) {
+%%%%%       e.printStackTrace();
+%%%%%     }
+%%%%%   }
+%%%%%   public static void main(String[] args) {
+%%%%%     TestRandomAccessFile traf = new TestRandomAccessFile();
+%%%%%     traf.init();
+%%%%%     traf.record("Billy", 30);
+%%%%%     traf.record("Kevin", 32);
+%%%%%     traf.listAllRecords();
+%%%%%   }
+%%%%% }
+%%%%% \end{javaCode}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%\end{frame}
 
 \begin{frame}
   \frametitle{本节习题}
