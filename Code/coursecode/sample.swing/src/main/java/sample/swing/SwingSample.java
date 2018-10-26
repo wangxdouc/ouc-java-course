@@ -3,13 +3,19 @@ package sample.swing;
 import java.awt.event.*;
 import javax.swing.*;
 
+/**
+ * Swing示例
+ * 
+ * @author xiaodong
+ *
+ */
 public class SwingSample implements ActionListener {
 
 	public SwingSample() {
 	}
 
 	public void createUI() {
-		JFrame jf = new JFrame("Test Swing");
+		JFrame jf = new JFrame("Swing Sample");
 
 		JMenuBar jmb = new JMenuBar();
 		JMenu menu_file = new JMenu("File");

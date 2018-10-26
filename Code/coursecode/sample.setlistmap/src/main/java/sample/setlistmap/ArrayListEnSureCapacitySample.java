@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class ArrayListEnSureCapacitySample {
 
 	public static void main(String[] args) {
-		final int N = 1000;
+		final int N = 100000;
 		Object obj = new Object();
 
 		ArrayList<Object> list1 = new ArrayList<Object>();
@@ -31,7 +31,7 @@ public class ArrayListEnSureCapacitySample {
 		ArrayList<Object> list2 = new ArrayList<Object>();
 		long start2 = System.currentTimeMillis();
 
-		// 显示的对底层数组进行扩容
+		// 显式的对底层数组进行扩容
 		list2.ensureCapacity(N);
 
 		for (int k = 0; k < N; k++) {

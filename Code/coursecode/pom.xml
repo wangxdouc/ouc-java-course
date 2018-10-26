@@ -17,5 +17,8 @@
     <module>sample.advance</module>
     <module>sample.generics</module>
     <module>sample.commandline</module>
+    <module>sample.awt</module>
+    <module>sample.exception</module>
+    <module>sample.io</module>
   </modules>
 </project>
