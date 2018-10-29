@@ -33,9 +33,9 @@
 \begin{frame}
   \frametitle{学习目标}
   \begin{enumerate}
-    \item 线程基础
-\item 线程控制
-\item 线程的同步
+  \item 线程基础
+  \item 线程控制
+  \item 线程的同步
   \end{enumerate}  
 \end{frame}
 
@@ -49,13 +49,13 @@
 \begin{frame}[fragile]
   \frametitle{概念回顾}
 
-  \wxd{任务调度}
+  \tta{任务调度}
   
   \begin{itemize}
   \item 大部分操作系统的任务调度是采用时间片轮转的抢占式调度方式，一个
     任务执行一小段时间后强制暂停去执行下一个任务，每个任务轮流执行。
   \item CPU的执行效率非常高，时间片非常短，在各个任务之间快速地切换，让
-    人感觉像是多个任务在“同时进行”，这也就是我们所说的并发。
+    人感觉像是多个任务在“同时进行”，这也就是我们所说的{\hei\Red 并发}。
   \end{itemize}
 
   \begin{figure}
@@ -67,26 +67,31 @@
 \begin{frame}[fragile]
   \frametitle{概念回顾}
 
-  \wxd{进程}
+  \tta{进程}
   
   \begin{itemize}
   \item 进程是一个具有一定独立功能的程序在一个数据集上的一次动态执行的
     过程，是操作系统进行资源分配和调度的一个独立单位，是应用程序运行的
     载体。
+
+    {\kai\Red (展示类UNIX系统的进程树)}
+    
   \item 进程一般由{\hei\Blue 程序段、数据段和进程控制块}三部分构成进程实体。
   \end{itemize}
 \end{frame}
 
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{什么是线程}
+  \frametitle{什么是线程}
 
-根据多任务原理，在一个程序内部也可以实现多个任务（顺序控制流）的并发执行，其中每个任务被
-称为线程（Thread）。更专业的表述为：{\hei 线程是程序内部的顺序控制流。}
+  根据多任务原理，在一个程序内部也可以实现多个任务（顺序控制流）的并发执行，其中每个任务被
+  称为线程（Thread）。更专业的表述为：
+
+  {\Blue\hei 线程是程序内部的顺序控制流。}
 \end{frame}
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{线程和进程的区别和联系}
+  \frametitle{线程和进程的区别和联系}
 
   \begin{figure}
     \centering
@@ -130,7 +135,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-  \frametitle{课后自行学习}
+  \frametitle{课后自行搜索了解}
   \begin{enumerate}
   \item 超线程的概念
   \item 内核线程与用户线程的映射
@@ -255,7 +260,7 @@ class Runner3 extends Thread {
   }
 }
 \end{javaCode}
-\wxd{第二种创建线程的方式}
+\tta{第二种创建线程的方式}
 \begin{enumerate}
 \item 定义一个类继承Thread类，重写其中的run()方法，加入所需的处理逻辑；
 \item 创建该Thread类的对象；
@@ -265,13 +270,13 @@ class Runner3 extends Thread {
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
 \frametitle{两种创建线程的方式比较}
-\wxd{使用Runnable接口创建线程}
+\tta{使用Runnable接口创建线程}
 \begin{itemize}
 \item 可以将虚拟CPU、代码和数据分开，形成清晰的模型；
 \item 线程体run()方法所在的类还可以从其他类继承一些有用的属性或方法；
 \item 有利于保持程序风格的一致性。
 \end{itemize}
-\wxd{直接继承Thread类创建线程}
+\tta{直接继承Thread类创建线程}
 \begin{itemize}
 \item Thread子类无法再从其他类继承；
 \item 编写简单，run()方法的当前对象就是线程对象，可直接操纵。
@@ -282,7 +287,7 @@ class Runner3 extends Thread {
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
 \frametitle{后台线程}
 
-\wxd{相关概念}\\
+\tta{相关概念}\\
 \xyy{后台处理} 也称为后台运行，是指在分时处理或多任务系统中，当实时、会
 话式、高优先级或需迅速响应的计算机程序不再使用系统资源时，计算机去执行
 较低优先级程序的过程。批量处理、文件打印通常采取后台处理的形式。\pause
@@ -349,7 +354,7 @@ class MyRunner extends Thread {
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
 \frametitle{后台线程}
 
-\wxd{对上述代码的分析}
+\tta{对上述代码的分析}
 
 {\Mage 后台线程线程t2并没有如预期的输出数字$0$-$9999$，而是提前终止。这是因为，待用户线
   程（这里包括主线程和线程t1）全部运行结束后，JVM检测到只剩下后台线程在运行的时候，就退出
@@ -562,7 +567,7 @@ class JoinRunner implements Runable {
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
 \frametitle{线程串行化}
-\wxd{线程串行化程序说明}
+\tta{线程串行化程序说明}
 \begin{itemize}
 \item 主线程在执行过程中调用了线程t的join()方法，该方法导致当前线程（主
   线程）阻塞。
@@ -717,14 +722,14 @@ public final void resume()
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
 \frametitle{线程等待与通知}
 
-\wxd{将运行中的线程转为阻塞状态的另外一种途径}
+\tta{将运行中的线程转为阻塞状态的另外一种途径}
 
 调用该线程中被锁定资源（Java对象）的wait()方法，该方法在Object类中定义，其功能是让当前线
 程等待，直到有其他线程调用了同一个对象的notify()或notifyAll()方法通知其结束等待，或是经历
 了约定的等待时间后，等待线程才会醒来，重新进入可执行状态。
 
 \pause
-\wxd{等待线程与suspend()方法导致的线程挂起比较}
+\tta{等待线程与suspend()方法导致的线程挂起比较}
 \begin{itemize}
 \item 线程挂起时不会释放所占用的资源；
 \item 线程等待时则会释放资源，以使其他线程获得运行机会。
@@ -740,7 +745,7 @@ public final void resume()
 
 两个线程A和B在同时操纵Stack类的同一个实例(栈)，A向栈里push一个数据，B要从堆栈中pop一个数据。
 
-\wxd{代码}
+\tta{代码}
 
 \begin{javaCode}
 public class Stack {
@@ -762,7 +767,7 @@ public class Stack {
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
 \frametitle{临界资源问题}
 
-\wxd{问题分析}
+\tta{问题分析}
 \begin{enumerate}
 \item 操作之前，假设data = |a|b| | | | |，idx = 2；
 \item 线程A执行push中的第一个语句，将c推入堆栈; data = |a|b|c| | | |，idx = 2；
@@ -785,7 +790,7 @@ public class Stack {
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
   \frametitle{synchronized的用法}
 
-  \wxd{用于方法声明中，标明整个方法为同步方法}
+  \tta{用于方法声明中，标明整个方法为同步方法}
 
   \begin{javaCode}
     public synchronized void push(char c) {
@@ -793,7 +798,7 @@ public class Stack {
       idx++;
     }
   \end{javaCode}
-  \wxd{用于修饰语句快，标明整个语句块为同步块}
+  \tta{用于修饰语句快，标明整个语句块为同步块}
   \begin{javaCode}
     // Other code
     public char pop() {
@@ -813,7 +818,7 @@ public class Stack {
 
   为避免死锁，在线程进入阻塞状态时应尽量释放其锁定的资源，以为其他的线程提供运行的机会。
 
-  \wxd{相关方法}
+  \tta{相关方法}
   
   \begin{itemize}
   \item public final void wait()
@@ -864,7 +869,7 @@ public class Stack {
 \begin{frame}[fragile]
   \frametitle{生产者—消费者问题}
 
-  \wxd{生产者}
+  \tta{生产者}
   
   \begin{javaCode}
     public class Producer implements Runnable {
@@ -890,7 +895,7 @@ public class Stack {
 \begin{frame}[fragile]
   \frametitle{标题生产者—消费者问题}
 
-  \wxd{消费者}
+  \tta{消费者}
   
   \begin{javaCode}
     public class Consumer implements Runnable {
@@ -912,25 +917,16 @@ public class Stack {
   \end{javaCode}
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% \begin{frame}
-%% \frametitle{本章习题}
-%% \begin{enumerate}
-%% \item a
-%% \item b
-%% \end{enumerate}
-%% \end{frame}
-
-%% \begin{figure}
-%% \centering
-%% \includegraphics[width=0.6\textwidth]{fig01.png}
-%% \end{figure}
-% TKS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-\centering
-{\Huge \textcolor{blue}{THE END}} \\
-\vspace{5mm}
-{\Large wxd2870@163.com} \\
+  \frametitle{本节习题}
+  \begin{enumerate}
+  \item 简述线程的基本概念，程序、进程、线程的关系是什么？
+  \item 线程的生命周期包括哪些基本状态？这些状态的关系如何？状态间的切换控制如何进行？
+  \end{enumerate}
 \end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{../SLIDE-MAIN/slide-thanks}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}
+
