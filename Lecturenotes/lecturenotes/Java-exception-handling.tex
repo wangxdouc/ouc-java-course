@@ -1,17 +1,41 @@
 \chapter*{异常处理}
 \label{chp:Java-exception-handling}
 
-\section*{本章要点}
+\section*{基本信息}
+\sline
+\begin{description}
+\item[课程名称：] Java应用与开发
+\item[授课教师：] 王晓东
+\item[授课时间：] 第七周
+\item[参考教材：] 本课程参考教材及资料如下：
+  \begin{itemize}
+  \item 陈国君主编，Java程序设计基础（第5版），清华大学出版社，2015.5
+  \item Bruce Eckel, Thinking in Java (3rd)
+  \end{itemize}
+\end{description}
+
+\section*{教学目标}
 
 \sline
+
 \begin{enumerate}
-\item Java异常的概念和分类；
-\item Java异常处理机制；
-\item 用户自定义异常；
-\item 使用断言。
+\item 掌握Java异常的概念和分类
+\item 深入理解Java异常处理机制
 \end{enumerate}  
+
+\section*{授课方式}
+
+\sline
+\begin{description}
+\item[理论课：] 多媒体教学、程序演示
+\item[实验课：] 上机编程
+\end{description}
+
+\newpage
+\section*{教学内容}
 \sline
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{异常的概念及分类}
 
 \subsection{什么是异常}
@@ -60,7 +84,7 @@ Throwable类是Java语言中所有异常类的父类。Java异常分类如
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.95\textwidth]{images/fig-exception-class.png}
+\includegraphics[width=0.95\textwidth]{images/Java-exception-handling/fig-exception-class.png}
 \caption{Java异常分类}
 \label{fig:exception-class}
 \end{figure}
@@ -666,16 +690,4 @@ Exception in thread "main" java.lang.AssertionError: 年龄值不合理
 而将其转换为一个消息字符串保存起来，这样就可以在获得更多/更有针对性的检
 查失败细节信息。因此，其中的表达式2可以是任何基本数据类型或引用数据类型，
 但必须提供一个值，即不能为空值。
-
-\section*{习题}
-
-\sline
-\begin{enumerate}
-\item 简述Java异常的概念和分类。
-\item 处理异常的方法有哪些？
-\item 使用断言的目的是什么？
-\end{enumerate}
-\sline
-
-%% \section*{Coding Time}
 
