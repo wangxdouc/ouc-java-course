@@ -42,6 +42,38 @@
 \frame{\frametitle{大纲} \tableofcontents }
 
 
+\begin{frame}[fragile]
+  \frametitle{C++中的异常处理}
+
+  \tta{《The C++ Programming Language》}
+  
+  \begin{itemize}[<+-|alert@+>]\kai
+  \item 一个库的作者可以检测出发生了运行时错误，但一般不知道怎样去处理
+    它们（因为和用户具体的应用有关）；
+  \item 另一方面，库的用户知道怎样处理这些错误，但却无法检查它们何时发
+    生（如果能检测，就可以再用户的代码里处理了，不用留给库去发现）。
+  \end{itemize}
+
+  \pause
+  
+  \notice{提供异常处理机制的的基本思想}
+
+  让一个函数在发现了自己无法处理的错误时抛出（throw）一个异常，然后它的
+  （直接或者间接）调用者能够处理这个问题。
+  
+  %% The fundamental idea is that a function that finds a problem it
+  %% cannot cope with throws an exception, hoping that its (direct or
+  %% indirect) caller can handle the problem.
+
+  \tta{《C++ primer》}
+
+  将{\hei\Red 问题检测}和{\hei\Red 问题处理}相分离。
+  
+  (Exceptions let us separate problem detection from problem resolution.)
+
+\end{frame}
+
+
 \section{异常的概念及分类}
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
   \frametitle{什么是异常}
