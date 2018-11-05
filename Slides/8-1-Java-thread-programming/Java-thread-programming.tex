@@ -33,9 +33,13 @@
 \begin{frame}
   \frametitle{学习目标}
   \begin{enumerate}
-  \item 线程基础
-  \item 线程控制
-  \item 线程的同步
+  \item 线程基础：理解任务调度、进程和线程，掌握其联系和区别；掌
+    握Java的线程模型，以及如何创建线程；理解后台线程。
+  \item 线程控制：理解线程的生命周期，明白各阶段的含义；掌握线程控制方
+    法，理解各线程控制方法对线程状态切换的作用。
+  \item 线程的同步：理解临界资源问题，进一步明白线程安全的意义；了解关
+    键字synchronized的用法；了解死锁的概念；通过生产者—消费者问题分析理
+    解线程同步。
   \end{enumerate}  
 \end{frame}
 
@@ -44,7 +48,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{线程基础}
-% \subsection{线程的概念模型}
+
+\subsection{相关知识回顾}
 
 \begin{frame}[fragile]
   \frametitle{概念回顾}
@@ -52,8 +57,9 @@
   \tta{任务调度}
   
   \begin{itemize}
-  \item 大部分操作系统的任务调度是采用{\hei\Red 时间片轮转的抢占式调度方式}，一个
-    任务执行一小段时间后强制暂停去执行下一个任务，每个任务轮流执行。
+  \item 大部分操作系统的任务调度是采用{\hei\Red 时间片轮转的抢占式调度
+      方式}，一个任务执行一小段时间后强制暂停去执行下一个任务，每个任务
+    轮流执行。
   \item CPU的执行效率非常高，时间片非常短，在各个任务之间快速地切换，让
     人感觉像是多个任务在“同时进行”，这也就是我们所说的{\hei\Red 并发}。
   \end{itemize}
@@ -136,6 +142,8 @@
 \end{figure}
 \end{frame}
 
+\subsection{线程的概念模型}
+
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
 \frametitle{Java线程的概念模型}
 
@@ -151,7 +159,7 @@
 \end{figure}
 \end{frame}
 
-% \subsection{创建线程}
+\subsection{创建线程}
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
   \frametitle{创建和启动线程的一般步骤}
@@ -159,7 +167,7 @@
   每个线程都是通过某个特定Thread对象所对应的方法run()来完成其操作，方
   法run()称为{\hei\Red 线程体}。
   
-  \begin{enumerate}[<+-| alert@+>]\kai
+  \begin{enumerate}[<+-|alert@+>]\kai
   \item 定义一个类实现Runable接口，重写其中的run()方法，加入所需的处理逻辑；
   \item 创建Runable接口实现类的对象；
   \item 创建Thread类的对象（封装Runable接口实现类型对象）；
@@ -168,6 +176,55 @@
 
   \codeset{sample.thread.FirstThreadSample.java}
 \end{frame}
+
+
+
+\begin{frame}[fragile] % [fragile]参数使得能够插入代码
+  \frametitle{创建线程的第二种方式}
+
+  \tta{直接继承Thread类创建线程}
+  
+  \begin{javaCode}
+    public class TestThread3 {
+      public static void main(String args[]) {
+        Thread t = new Runner3();
+        t.start();
+      }
+    }
+    class Runner3 extends Thread {
+      public void run() {
+        for(int i=0; i<30; i++) {
+          System.out.println("No. " + i);
+        }
+      }
+    }
+  \end{javaCode}
+
+  \begin{enumerate}
+  \item 定义一个类继承Thread类，重写其中的run()方法，加入所需的处理逻辑；
+  \item 创建该Thread类的对象；
+  \item 调用该对象的start()方法。
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile] % [fragile]参数使得能够插入代码
+  \frametitle{两种创建线程的方式比较}
+  \tta{使用Runnable接口创建线程}
+  \begin{itemize}
+  \item 可以将虚拟CPU、代码和数据分开，形成清晰的模型；
+  \item 线程体run()方法所在的类还可以从其他类继承一些有用的属性或方法；
+  \item 有利于保持程序风格的一致性。
+  \end{itemize}
+
+  \pause
+  
+  \tta{直接继承Thread类创建线程}
+  \begin{itemize}
+  \item Thread子类无法再从其他类继承；
+  \item 编写简单，run()方法的当前对象就是线程对象，可直接操纵。
+  \end{itemize}
+\end{frame}
+
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
   \frametitle{多线程}
@@ -202,53 +259,28 @@
   \end{table}
 \end{frame}
 
-\begin{frame}[fragile] % [fragile]参数使得能够插入代码
-  \frametitle{创建线程的第二种方式}
+\begin{frame}[fragile]
+  \frametitle{多线程间数据共享}
 
-  \ttc{直接继承Thread类创建线程}
-  \begin{javaCode}
-    public class TestThread3 {
-      public static void main(String args[]) {
-        Thread t = new Runner3();
-        t.start();
-      }
-    }
-    class Runner3 extends Thread {
-      public void run() {
-        for(int i=0; i<30; i++) {
-          System.out.println("No. " + i);
-        }
-      }
-    }
-  \end{javaCode}
-
-  \tta{第二种创建线程的方式}
-  \begin{enumerate}
-  \item 定义一个类继承Thread类，重写其中的run()方法，加入所需的处理逻辑；
-  \item 创建该Thread类的对象；
-  \item 调用该对象的start()方法。
-  \end{enumerate}
-\end{frame}
-
-\begin{frame}[fragile] % [fragile]参数使得能够插入代码
-  \frametitle{两种创建线程的方式比较}
-  \tta{使用Runnable接口创建线程}
   \begin{itemize}
-  \item 可以将虚拟CPU、代码和数据分开，形成清晰的模型；
-  \item 线程体run()方法所在的类还可以从其他类继承一些有用的属性或方法；
-  \item 有利于保持程序风格的一致性。
+  \item 当多个线程的执行代码都是同一个类的run()方法时，称这个多线程共享相同的{\bf\Red 代码}。
+  \item 当多个线程共享访问相同的对象时，则称它们共享相同的{\bf\Red 数据}。    
   \end{itemize}
 
   \pause
   
-  \tta{直接继承Thread类创建线程}
-  \begin{itemize}
-  \item Thread子类无法再从其他类继承；
-  \item 编写简单，run()方法的当前对象就是线程对象，可直接操纵。
-  \end{itemize}
+  两种线程的创建方法主要区别在于{\hei\Blue 数据的共享}。
+
+  {\kai 只要用同一个实现了Runnable接口的类的对象作为参数创建多个线程即
+    可以实现多个线程共享相同的数据。}
+
+  \codeset{sample.thread.ShareDataWithinThreadsSample.java}
 \end{frame}
 
-% \subsection{后台线程}
+
+
+\subsection{后台线程}
+
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
   \frametitle{后台线程}
 
@@ -283,7 +315,6 @@
   \codeset{sample.thread.DaemonThreadSample.java}
 \end{frame}
 
-% \subsection{GUI线程}
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
   \frametitle{GUI线程}
 
@@ -294,59 +325,9 @@
   \item GUI事件处理；
   \item 关闭抽象窗口工具集等。
   \end{enumerate}
-\end{frame}
 
-\begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{GUI线程}
-
-\ttc{使用GUI线程示例}
-\samp{GUIThreadSample.java: Part 1}
-\begin{javaCode}
-import java.awt.*;
-import java.awt.event.*;
-
-public class GUIThreadSample {
-  public static void main(String[] args) throws Exception {
-    Frame f = new Frame();
-    Button b = new Button("Press Me");
-    MyMonitor mm = new MyMonitor();
-    b.addActionListener(mm);
-    f.addWindowListener(mm);
-    f.add(b, "Center");
-    f.setSize(100, 60);
-    f.setVisible(true);
-    MyThreadViewer.view();
-  }
-}
-class MyMonitor extends WindowAdapter implements ActionListener {
-  public void actionPerformed(ActionEvent e) {
-    MyThreadViewer.view();
-  }
-}
-\end{javaCode}
-\end{frame}
-
-\begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{GUI线程}
-
-\samp{GUIThreadSample.java: Part 2}
-\begin{javaCode}
-class MyThreadViewer {
-  public static void view() {
-    Thread current = Thread.currentThread();
-    System.out.println("当前线程名称：" + current.getName());
-    int total = Thread.activeCount();
-    System.out.println("活动线程总数：" + total + "个");
-    Thread[] threads = new Thread[total];
-    current.enumerate(threads);
-    for(Thread t: threads) {
-      String role = t.isDaemon() ? "后台线程" : "用户线程";
-      System.out.println("   -" + role + t.getName());
-    }
-    System.out.println("-------------------");
-  }
-}
-\end{javaCode}
+  \codeset{sample.thread.GUIThreadSample.java}
+  
 \end{frame}
 
 %% \begin{frame}[fragile] % [fragile]参数使得能够插入代码
@@ -379,24 +360,25 @@ class MyThreadViewer {
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
   \frametitle{GUI自动创建的线程}
   
-\begin{itemize}[<+-| alert@+>]\kai
-\item {\hei AWT-Windows线程}\\
-  \only<1>{负责从操作系统获取底层事件通知，并将之发送到系统事件队列（EventQueue）等待处理。
-    在其他平台上运行时，此线程的名字也会作相应变化，例如在Unix系统则为“AWT-Unix”。}
-\item {\hei AWT-EventQueue-n线程}\\
-  \only<2>{也称事件分派线程，该线程负责从事件队列中获取事件，将之分派到相应的GUI组件（事
-    件源）上，进而触发各种GUI事件处理对象，并将之传递给相应的事件监听器进行处理。}
-\item {\hei AWT-Shutdown线程}\\
-\only<3>{负责关闭已启用的抽象窗口工具，释放其所占用的资源，该线程将等到其他GUI线程均退出
-  后才开始其清理工作。}
-\item {\hei DestroyJavaVM线程}\\
-\only<4>{在所有其他用户线程退出后，负责释放任意线程所占用系统资源并卸载Java虚拟机。该线
-  程在主线程运行结束时由系统自动启动，但要等到所有其他用户线程均退出后才开始其卸载工作。}
-\end{itemize}
+  \begin{itemize}[<+-| alert@+>]\kai
+  \item {\hei AWT-Windows线程}\\
+    \only<1>{负责从操作系统获取底层事件通知，并将之发送到系统事件队列（EventQueue）等待处理。
+      在其他平台上运行时，此线程的名字也会作相应变化，例如在Unix系统则为“AWT-Unix”。}
+  \item {\hei AWT-EventQueue-n线程}\\
+    \only<2>{也称事件分派线程，该线程负责从事件队列中获取事件，将之分派到相应的GUI组件（事
+      件源）上，进而触发各种GUI事件处理对象，并将之传递给相应的事件监听器进行处理。}
+  \item {\hei AWT-Shutdown线程}\\
+    \only<3>{负责关闭已启用的抽象窗口工具，释放其所占用的资源，该线程将等到其他GUI线程均退出
+      后才开始其清理工作。}
+  \item {\hei DestroyJavaVM线程}\\
+    \only<4>{在所有其他用户线程退出后，负责释放任意线程所占用系统资源并卸载Java虚拟机。该线
+      程在主线程运行结束时由系统自动启动，但要等到所有其他用户线程均退出后才开始其卸载工作。}
+  \end{itemize}
 \end{frame}
 
 \section{线程控制}
-% \subsection{线程生命的周期}
+
+\subsection{线程生命的周期}
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
   \frametitle{线程的生命周期}
   
@@ -410,250 +392,153 @@ class MyThreadViewer {
 
 \begin{figure}
 \centering
-\includegraphics[width=0.7\textwidth]{fig02.pdf}
+\includegraphics[width=0.7\textwidth]{thread-lifecycle.pdf}
 \end{figure}
 \end{frame}
 
-% \subsection{线程优先级}
+\subsection{线程优先级}
+
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{线程优先级}
+  \frametitle{线程优先级}
 
-线程的优先级用数字来表示，范围从1到10。主线程的缺省优先级是5，子线程的优先级默认与其父线
-程相同。可以使用Thread类提供的方法获得和设置线程的优先级：
+  线程的优先级用数字来表示，范围从1到10。主线程的缺省优先级是5，子线程的优先级默认与其父线
+  程相同。可以使用Thread类提供的方法获得和设置线程的优先级：
 
-\begin{itemize}\kai
-\item 获取当前线程优先级
+  \begin{itemize}\kai
+  \item 获取当前线程优先级
+    \begin{javaCode}
+      public final int getPriority();
+    \end{javaCode}
+  \item 设定当前线程优先级
+    \begin{javaCode}
+      public final void setPriority(int newPriority);
+    \end{javaCode}
+  \end{itemize}
+  相关静态整型常量：
   \begin{javaCode}
-    public final int getPriority();
+    Thread.MIN_PRIORITY = 1
+    Thread.MAX_PRIORITY = 10
+    Thread.NORM_PRIORITY = 5
   \end{javaCode}
-\item 设定当前线程优先级
-  \begin{javaCode}
-    public final void setPriority(int newPriority);
-  \end{javaCode}
-\end{itemize}
-相关静态整型常量：
-\begin{javaCode}
-Thread.MIN_PRIORITY = 1
-Thread.MAX_PRIORITY = 10
-Thread.NORM_PRIORITY = 5
-\end{javaCode}
-\cxf{练习} 请自行编写线程优先级测试代码。
+
+  \notice{练习} 请自行编写线程优先级测试代码。
+  
 \end{frame}
+
+\subsection{线程串行化}
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
 \frametitle{线程串行化}
 
-在多线程程序中，如果在一个线程运行的过程中要用到另一个线程的运行结果，则可进行线程的串型
-化处理。
+在多线程程序中，如果在一个线程运行的过程中要用到另一个线程的运行结果，则可进行线程的{\hei\Red 串型
+化}处理。
 
 Thread类提供的相关方法：
+
 \begin{javaCode}
 public final void join()
 public final void join(long millis)
 public final void join(long millis, int nanos)
 \end{javaCode}
+
+\codeset{sample.thread.ThreadJoinSample.java}
 \end{frame}
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{线程串行化}
-\ttc{实现线程的串行化}
+  \frametitle{线程串行化}
+  \tta{线程串行化程序说明}
 
-\samp{sample.thread.ThreadJoinSample.java}
-
-\begin{javaCode}
-public class ThreadJoinSample {
-  public static void main(String[] args) {
-    JoinRunner r = new JoinRunner();
-    Thread t = new Thread(r);
-    t.start();
-    try {
-      t.join();
-    } catch(InterruptedException e) {
-      e.printStackTrace();
-    }
-    for(int i = 0; i < 50; i++) {
-      System.out.println("主线程：" + i);
-    }
-  }
-}
-class JoinRunner implements Runable {
-  public void run() {
-    for(int i = 0; i < 50; i++) {
-      System.out.println("子线程：" + i);
-  }
-}
-\end{javaCode}
+  \begin{itemize}
+  \item 主线程在执行过程中调用了线程t的join()方法，该方法导致当
+    前{\hei\Blue 线程阻塞}（主线程）。
+  \item 直到线程t运行终止后，主线程才会获得继续执行的机会，相当于将线
+    程t串行加入到主线程中。
+  \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{线程串行化}
-\tta{线程串行化程序说明}
-\begin{itemize}
-\item 主线程在执行过程中调用了线程t的join()方法，该方法导致当前线程（主
-  线程）阻塞。
-\item 直到线程t运行终止后，主线程才会获得继续执行的机会，相当于将线
-  程t串行加入到主线程中。
-\end{itemize}
-\end{frame}
+\subsection{线程休眠}
 
-% \subsection{线程休眠}
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
 \frametitle{线程休眠}
-线程休眠，即暂停执行当前运行中的线程，使之进入阻塞状态，待经过指定的“延
-迟时间”后再醒来并转入到就绪状态。
+
+{\hei\Red 线程休眠}，即暂停执行当前运行中的线程，使之进入{\hei\Blue 阻塞状态}，待经过指定的“延
+迟时间”后再醒来并转入到{\hei\Blue 就绪状态}。
 
 Thread类提供的相关方法：
+
 \begin{javaCode}
 public static void sleep(long millis)
 public static void sleep(long millis, int nanos)
 \end{javaCode}
+
+\codeset{sample.thread.DigitaltimerByThreadSleep.java}
+
 \end{frame}
 
+\subsection{线程让步}
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{线程休眠}
-\ttc{数字计数器}
-\samp{sample.thread.DigitaltimerByThreadSleep.java}
-\begin{javaCode}
-import javax.swing.*;
 
-public class DigitalClock {
-  public static void main(String[] args) {
-    JFrame jf = new JFrame("Clock");
-    JLabel clock = new JLabel("clock");
-    clock.setHorizontalAlignment(JLabel.CENTER);
-    jf.add(clock, "Center");
-    jf.setSize(140, 80);
-    jf.setLocation(500, 300);
-    jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    jf.setVisible(true);
-    Thread t = new MyThread(clock);
-    t.start();
-  }
-}
-\end{javaCode}
+  \frametitle{线程让步}
+
+  {\hei\Red 线程让步}，让运行中的线程主动放弃当前获得的CPU处理机会，但不是使该线程阻塞，而是使之转入{\hei\Blue 就
+  绪状态}。
+
+  Thread类提供的相关方法：
+
+  \begin{javaCode}
+    public static void yield()  
+  \end{javaCode}
+
+  \notice{注意}
+  
+  从代码执行结果来看，由于设置了线程让步，thread-1（第二个线程）明显执行时间长。
+  调用yield()方法只是令当前线程主动在时间片到期前使其他线程获得运行机会。
+  
+  \codeset{sample.thread.ThreadYieldSample.java}
 \end{frame}
 
+\subsection{线程挂起与恢复}
+
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{线程休眠}
-\samp{DigitalTimer.java+}
-\begin{javaCode}
-class MyThread extends Thread {
-  private JLabel clock;
-  private int i;
-  public MyThread(JLabel clock) {
-    this.clock = clock;
-    this.i = 1;
-  }
-  public void run() {
-    while(true) {
-      clock.setText(String.valueOf(i++));
-      try {
-        Thread.sleep(1000);
-      } catch(InterruptedException e) {
-        e.printStackTrace();
-      }
-    }
-  }
-}  
-\end{javaCode}
+  \frametitle{线程挂起与恢复}
+
+  \begin{description}
+  \item[线程挂起] 暂时停止当前运行中的线程，使之转入{\hei\Blue 阻塞状态}，并且不会自动恢复运行。
+  \item[线程恢复] 使得一个已挂起的线程恢复运行。
+  \end{description}
+  
+  Thread类提供的相关方法：
+  \begin{javaCode}
+    public final void suspend()
+    public final void resume()
+  \end{javaCode}
+
+  \notice{注意}
+
+  {\kai suspend()和resume()方法已不提倡使用，原因是suspend()方法挂起线程时并不释放其锁定的资
+    源，这可能会影响到其他线程的执行，且容易导致线程死锁。}
 \end{frame}
 
-% \subsection{线程让步}
-\begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{线程让步}
-
-线程让步，让运行中的线程主动放弃当前获得的CPU处理机会，但不是使该线程阻塞，而是使之转入就
-绪状态。
-
-Thread类提供的相关方法：
-\begin{javaCode}
-public static void yield()  
-\end{javaCode}
-\ttc{线程让步示例}
-\samp{TestYield.java}
-\begin{javaCode}
-import java.util.Date;
-
-public class TestYield {
-  public static void main(String[] args) {
-    Thread t1 = new MyThread(false);
-    Thread t2 = new MyThread(true);
-    Thread t3 = new MyThread(false);
-    t1.start();
-    t2.start();
-    t3.start();
-  }
-}
-\end{javaCode}
-\end{frame}
+\subsection{线程等待与通知}
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{线程让步}
+  \frametitle{线程等待与通知}
 
-\samp{TestYield.java+}
-\begin{javaCode}
-class MyThread extends Thread {
-  private boolean flag;
-  public MyThread(boolean flag) {
-    this.flag = flag;
-  }
-  public void setFlag(boolean flag) {
-    this.flag = flag;
-  }
-  public void run() {
-    long start = new Date().getTime();
-    for(int i = 0; i < 200; i++) {
-      if(flag) {
-        Thread.yield();
-      }
-      System.out.println(this.getName() + ": " + i + "\t");
-    }
-    long end = new Date().getTime();
-    System.out.println("\n" + this.getName() + "执行时间：" + (end - start) + "ms");
-  }
-}
-\end{javaCode}
+  \tta{将运行中的线程转为阻塞状态的另外一种途径}
 
-从执行结果来看，由于设置了线程让步，thread-1（第二个线程）明显执行时间长。
-调用yield()方法只是令当前线程主动在时间片到期前使其他线程获得运行机会。
-\end{frame}
+  调用该线程中被锁定资源（Java对象）的wait()方法，该方法在Object类中定
+  义，其功能是让当前线程等待{（进入\hei\Blue 阻塞状态）}，直到有其他线程调用了同一个对象
+  的notify()或notifyAll()方法通知其结束等待，或是经历了约定的等待时间后
+  等待线程才会醒来，重新进入可执行状态（{\hei\Blue 就绪状态}）。
 
-% \subsection{线程挂起与恢复}
-\begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{线程挂起与恢复}
-
-\begin{description}
-\item[线程挂起] 暂时停止当前运行中的线程，使之转入阻塞状态，并且不会自动恢复运行。
-\item[线程恢复] 使得一个已挂起的线程恢复运行。
-\end{description}
-Thread类提供的相关方法：
-\begin{javaCode}
-public final void suspend()
-public final void resume()
-\end{javaCode}
-
-\ttc{注意}
-
-{\kai suspend()和resume()方法已不提倡使用，原因是suspend()方法挂起线程时并不释放其锁定的资
-源，这可能会影响到其他线程的执行，且容易导致线程死锁。}
-\end{frame}
-
-% \subsection{线程等待与通知}
-\begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{线程等待与通知}
-
-\tta{将运行中的线程转为阻塞状态的另外一种途径}
-
-调用该线程中被锁定资源（Java对象）的wait()方法，该方法在Object类中定义，其功能是让当前线
-程等待，直到有其他线程调用了同一个对象的notify()或notifyAll()方法通知其结束等待，或是经历
-了约定的等待时间后，等待线程才会醒来，重新进入可执行状态。
-
-\pause
-\tta{等待线程与suspend()方法导致的线程挂起比较}
-\begin{itemize}
-\item 线程挂起时不会释放所占用的资源；
-\item 线程等待时则会释放资源，以使其他线程获得运行机会。
-\end{itemize}
+  \pause
+  
+  \tta{等待线程与suspend()方法导致的线程挂起比较}
+  
+  \begin{itemize}
+  \item 线程挂起时不会释放所占用的资源；
+  \item 线程等待时则会释放资源，以使其他线程获得运行机会。
+  \end{itemize}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -688,7 +573,7 @@ public class Stack {
 \frametitle{临界资源问题}
 
 \tta{问题分析}
-\begin{enumerate}
+\begin{enumerate}[<+-| alert@+>]\kai
 \item 操作之前，假设data = |a|b| | | | |，idx = 2；
 \item 线程A执行push中的第一个语句，将c推入堆栈; data = |a|b|c| | | |，idx = 2；
 \item 线程A还未执行idx++语句，A的执行被线程B中断，B执行pop方法，data = |a|b|c| | | | idx = 1；
@@ -697,18 +582,67 @@ public class Stack {
 \end{enumerate}
 \end{frame}
 
+\begin{frame}[fragile]
+  \frametitle{什么是临界资源}
+
+  在并发程序设计中，对多线程共享的资源或数据称为{\bf\Red 临界资源}（或
+  同步资源），而把每个线程中访问临界资源的那一段代码称为{\bf\Blue 临界
+    代码}（或临界区）。
+
+  \begin{itemize}
+  \item 在一个时刻只能被一个线程访问的资源就是临界资源。
+  \item 访问临界资源的那段代码就是临界区，{\kai\Red 临界区必须互斥地使用}。
+  \end{itemize}
+
+\end{frame}
+
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
   \frametitle{互斥锁}
   
   \begin{itemize}
-  \item Java引入了{\hei 对象互斥锁}的概念来保证共享数据操作的完整性。
-  \item 每个对象都对应于一个可称为“互斥锁”的标记，这个标记用来保证在任一时刻，只能有一个线程访问该对象。
-  \item 关键字{\Red\bf synchronized}来与对象的互斥锁联系。当某个对象用synchronized修饰时，表明该对象在任一时刻只能由一个线程访问。
+  \item Java引入对象{\Red\hei 互斥锁}机制来实现线程的互斥操作，保证共享
+    数据操作的完整性。
+  \item Java中每个对象都有一个互斥锁与之相连，用来保证在任一时刻，只能
+    有一个线程访问该对象。
+  \item 多线程对临界资源的并发访问是通过竞争互斥锁实现的。
   \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile] % [fragile]参数使得能够插入代码
+\begin{frame}[fragile]
   \frametitle{synchronized的用法}
+
+  为了保证互斥，Java语言使用{\bf\Red synchronized}关键字标识同步的{\hei\Blue 资源}，包括：
+
+  \begin{itemize}
+  \item 对象
+    \begin{javaCode}
+      synchronized(对象) {
+        临界代码段
+      }
+    \end{javaCode}
+  \item 方法
+    \begin{javaCode}
+      public synchronized 返回值类型 方法名 {
+        方法体
+      }
+    \end{javaCode}
+
+    等效方式：
+    
+    \begin{javaCode}
+      public 返回值类型 方法名 {
+        synchronized(this) {
+          方法体
+        }
+      }
+    \end{javaCode}
+  \item 语句块（一段代码），用法同方法的等效方式
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile] % [fragile]参数使得能够插入代码
+  \frametitle{synchronized的用法示例}
 
   \tta{用于方法声明中，标明整个方法为同步方法}
 
@@ -718,7 +652,9 @@ public class Stack {
       idx++;
     }
   \end{javaCode}
-  \tta{用于修饰语句快，标明整个语句块为同步块}
+
+  \tta{用于修饰语句块，标明整个语句块为同步块}
+  
   \begin{javaCode}
     // Other code
     public char pop() {
@@ -732,11 +668,24 @@ public class Stack {
 \end{frame}
 
 \begin{frame}[fragile]
+  \frametitle{synchronized的功能}
+
+  \begin{itemize}\kai
+  \item 首先判断对象或者方法的{\bf\Red 互斥锁}是或否存在，若存在就获得互斥锁，然后执行紧随其后的临界代码段或方法体；
+  \item 如果对象或方法的互斥锁不在（已经被其他线程拿走），就进入线程{\bf\Blue 等待状态}，直到获得互斥锁。
+  \end{itemize}
+
+  \codeset{sample.thread.syn.WithdrawMoneyFromBankSample.java}
+  
+\end{frame}
+
+
+\begin{frame}[fragile]
   \frametitle{线程死锁}
 
-  并发运行的多个线程间彼此等待、都无法运行的状态称为线程死锁。
+  并发运行的多个线程间彼此等待、都无法运行的状态称为{\hei\Blue 线程死锁}。
 
-  为避免死锁，在线程进入阻塞状态时应尽量释放其锁定的资源，以为其他的线程提供运行的机会。
+  {\kai\Red 为避免死锁，在线程进入阻塞状态时应尽量释放其锁定的资源，以为其他的线程提供运行的机会。}
 
   \tta{相关方法}
   
@@ -745,104 +694,194 @@ public class Stack {
   \item public final void notify()
   \item public final void notifyAll()
   \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{线程间通信}
+
+  通过线程间的{\Red\hei 对话}来解决线程间的同步问题。
+
+  \pause
+  \tta{线程间通信的有效手段}
+
+  \ttc{wait()} {\small\kai 如果一个正在执行同步代码（synchronized）的线
+    程A执行了wait()调用（在对象x上），该线程暂停执行而进入对象x的等待队
+    列，并释放已获得的对象x的互斥锁。线程A要一直等到其他线程在对象x上调
+    用notify()或notifyAll()方法，才能重新获得对象x的互斥锁后继续执行
+    （从wait()语句后继续执行）。}
+
+  \pause\ttc{notify()} {\small\kai 唤醒正在等待该对象互斥锁的第一个线程。}
+
+  \pause\ttc{notifyAll()} {\small\kai 唤醒正在等待该对象互斥锁的所有线程，具有最高优先级的线程首先被唤醒并执行。}
+  
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Object.wait()和notify()}
+
+  \begin{itemize}
+  \item wait()和notify()只能在同步代码块中调用。
+  \item wait()在放弃CPU资源的同时交出了对资源的控制权。
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Thread.sleep()与Object.wait()、notify()的区别}
+  
+  \begin{itemize}[<+-|alert@+>]
+  \item 所属对象不同。\only<1>{\kai sleep()是Thread类的方法，
+    而wait()，notify()，notifyAll()是Object类中定义的方法，都会影响线程
+    的执行行为。}
+\item 锁行为不同。\only<2>{\kai Thread.sleep()不会导致锁行为的改变，如果当前
+    线程是拥有锁的，那么Thread.sleep()不会让线程释放锁。可以简单认为和
+    锁相关的方法都定义在Object类中，因此调用Thread.sleep()不会影响锁
+    的相关行为。}
+\item 线程恢复方式不同。\only<3>{\kai Thread.sleep和Object.wait都会暂停当前的
+    线程，即表示它暂时不再需要CPU的执行时间。区别是调用wait后，需要别的
+    线程执行notify/notifyAll才能够重新获得CPU执行时间。}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{生产者—消费者问题}
+
+  生产者消费者模型就是在一个系统中存在{\hei\Red 生产者}和{\hei\Red 消费
+    者}两种角色，他们之间通过{\hei\Blue 内存缓冲区}进行通信，生产者生产
+  消费者需要的资料，消费者把资料做成产品。
 
 \end{frame}
 
 \begin{frame}[fragile]
   \frametitle{生产者—消费者问题}
-
-  \begin{javaCode}
-    public class SyncStack {
-      private int index = 0;
-      private char[] data = new char[6];
-
-      public synchronized void push(char c) {
-        while(index == data.length) {
-          try {
-            this.wait();
-          } catch(InterruptedException e) {
-          }
-        }
-        this.notify();
-        data[index] = c;
-        index++;
-        System.out.println("生产: " + c);
-      }
-      
-      public synchronized char pop() {
-        while(index == 0) {
-          try {
-            this.wait();
-          } catch(InterruptedException e) {
-          }
-        }
-        this.notify();
-        index--;
-        System.out.println("消费: " + data[index]);
-        return data[index];
-      }
-    }
-  \end{javaCode}
-\end{frame}
-
-
-\begin{frame}[fragile]
-  \frametitle{生产者—消费者问题}
-
-  \tta{生产者}
   
-  \begin{javaCode}
-    public class Producer implements Runnable {
-      SyncStack stack;
-      public Producer(SyncStack s) {
-        stack = s;
-      }
-      public void run() {
-        for(int i=0; i<20; i++) {
-          char c = (char)(Math.random() * 26 + 'A');
-          stack.push(c);
-          try {
-            Thread.sleep((int)(Math.random() * 300));
-          } catch(InterruptedException e) {
-            e.printStackTrace();
-          }
-        }
-      }
-    }    
-  \end{javaCode}
-\end{frame}
-
-\begin{frame}[fragile]
-  \frametitle{标题生产者—消费者问题}
-
-  \tta{消费者}
+  \tta{生产者消费者问题是线程模型中的经典问题}
   
-  \begin{javaCode}
-    public class Consumer implements Runnable {
-      SyncStack stack;
-      public Consumer(SyncStack s) {
-        stack = s;
-      }
-      public void run() {
-        for(int i=0; i<20; i++) {
-          char c = stack.pop();
-          try {
-            Thread.sleep((int)(Math.random() * 800));
-          } catch(InterruptedException e) {
-            e.printStackTrace();
-          }
-        }
-      }
-    }
-  \end{javaCode}
+  \begin{itemize}
+  \item 生产者和消费者在同一时间段内共用同一存储空间，生产者向空间里生
+    产数据，而消费者取走数据。
+  \item 阻塞队列就相当于一个缓冲区，平衡了生产者和消费者的处理能力。这
+    个阻塞队列就是用来给生产者和消费者解耦的。
+    \end{itemize}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.6\textwidth]{producer-and-consumer.png}
+\end{figure}
+
+\codeset{sample.thread.syn.ProducerAndConsumer.java}
 \end{frame}
+
+
+
+%%%%\begin{frame}[fragile]
+%%%%  \frametitle{生产者—消费者问题}
+%%%%
+%%%%  \begin{javaCode}
+%%%%    public class SyncStack {
+%%%%      private int index = 0;
+%%%%      private char[] data = new char[6];
+%%%%
+%%%%      public synchronized void push(char c) {
+%%%%        while(index == data.length) {
+%%%%          try {
+%%%%            this.wait();
+%%%%          } catch(InterruptedException e) {
+%%%%          }
+%%%%        }
+%%%%        this.notify();
+%%%%        data[index] = c;
+%%%%        index++;
+%%%%        System.out.println("生产: " + c);
+%%%%      }
+%%%%      
+%%%%      public synchronized char pop() {
+%%%%        while(index == 0) {
+%%%%          try {
+%%%%            this.wait();
+%%%%          } catch(InterruptedException e) {
+%%%%          }
+%%%%        }
+%%%%        this.notify();
+%%%%        index--;
+%%%%        System.out.println("消费: " + data[index]);
+%%%%        return data[index];
+%%%%      }
+%%%%    }
+%%%%  \end{javaCode}
+%%%%\end{frame}
+%%%%
+%%%%
+%%%%\begin{frame}[fragile]
+%%%%  \frametitle{生产者—消费者问题}
+%%%%
+%%%%  \tta{生产者}
+%%%%  
+%%%%  \begin{javaCode}
+%%%%    public class Producer implements Runnable {
+%%%%      SyncStack stack;
+%%%%      public Producer(SyncStack s) {
+%%%%        stack = s;
+%%%%      }
+%%%%      public void run() {
+%%%%        for(int i=0; i<20; i++) {
+%%%%          char c = (char)(Math.random() * 26 + 'A');
+%%%%          stack.push(c);
+%%%%          try {
+%%%%            Thread.sleep((int)(Math.random() * 300));
+%%%%          } catch(InterruptedException e) {
+%%%%            e.printStackTrace();
+%%%%          }
+%%%%        }
+%%%%      }
+%%%%    }    
+%%%%  \end{javaCode}
+%%%%\end{frame}
+%%%%
+%%%%\begin{frame}[fragile]
+%%%%  \frametitle{生产者—消费者问题}
+%%%%
+%%%%  \tta{消费者}
+%%%%  
+%%%%  \begin{javaCode}
+%%%%    public class Consumer implements Runnable {
+%%%%      SyncStack stack;
+%%%%      public Consumer(SyncStack s) {
+%%%%        stack = s;
+%%%%      }
+%%%%      public void run() {
+%%%%        for(int i=0; i<20; i++) {
+%%%%          char c = stack.pop();
+%%%%          try {
+%%%%            Thread.sleep((int)(Math.random() * 800));
+%%%%          } catch(InterruptedException e) {
+%%%%            e.printStackTrace();
+%%%%          }
+%%%%        }
+%%%%      }
+%%%%    }
+%%%%  \end{javaCode}
+%%%%\end{frame}
 
 \begin{frame}
   \frametitle{本节习题}
+
+  \tta{简答题}
+
   \begin{enumerate}
-  \item 简述线程的基本概念，程序、进程、线程的关系是什么？
-  \item 线程的生命周期包括哪些基本状态？这些状态的关系如何？状态间的切换控制如何进行？
+  \item 简述线程的基本概念。程序、进程、线程的关系是什么？
+  \item 线程的生命周期包括哪些基本状态？这些状态的关系如何？状态间的切
+    换控制如何进行？（{\kai\Blue 可以通过思维导图、文字描述等方式梳理线
+      程状态与控制转换方法之间的关系}）
   \end{enumerate}
+
+  \tta{小编程}
+  
+  \begin{enumerate}
+  \item 编程实践生产者—消费者模式，并在理解的基础上对代码给出比较完整的注释。
+  \end{enumerate}
+  
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
