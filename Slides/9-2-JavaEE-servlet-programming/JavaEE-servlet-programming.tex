@@ -2,14 +2,14 @@
 \input{../SLIDE-MAIN/slide-main}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % \titlepage
-\title[KevinW@OUC]{\hei {\huge Java EE企业应用系统设计}\\  
+\title[KevinW@OUC]{\hei {\huge Java应用与开发}\\  
  Servlet编程}
 \author[王晓东]{王晓东\\
   \href{mailto:wangxiaodong@ouc.edu.cn}{\footnotesize wangxiaodong@ouc.edu.cn}}
-\institute[中国海洋大学]{\small 中国海洋大学}
+\institute[中国海洋大学]{\small 计算机科学与技术系}
 \date{\today}
 \titlegraphic{\vspace{-6em}\includegraphics[height=6cm]{static/ouc.pdf}\vspace{-6em}}
-%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 %% Delete this, if you do not want the table of contents to pop up at
 %% the beginning of each subsection:
@@ -18,89 +18,88 @@
     \frametitle{\textbf{\hei 接下来…}}
     \tableofcontents[currentsection]
   }
-}  %
+}
 
-\AtBeginSubsection[]                            % 在每个子段落之前
-{
+\AtBeginSubsection[]{                            % 在每个子段落之前
   \frame<handout:0>                             % handout:0 表示只在手稿中出现
   {
     \frametitle{\textit{\hei 接下来…}}\small
     \tableofcontents[current,currentsubsection] % 显示在目录中加亮的当前章节
   }
 }
- \frame{\titlepage}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{\titlepage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \begin{frame}
-\frametitle{参考书目}
-\begin{enumerate}
-\item 吕海东，张坤 编著，Java EE企业级应用开发实例教程，清华大学出版社，2010年8月
-\end{enumerate}  
+  \frametitle{学习目标}
+
+  \begin{enumerate}
+  \item 理解Web的概念及工作模式，掌握Java Web应用的构成。
+  \item 掌握Servlet的概念、体系结构及生命周期管理基本原理。
+  \item 掌握Servlet的编程及配置方法，了解Servlet的在Tomcat服务器上的部署方式（war）。
+  \end{enumerate}  
 \end{frame}
-
-% \begin{frame}
-% \frametitle{本章学习目标}
-% \begin{enumerate}
-% \item 
-% \end{enumerate}  
-% \end{frame}
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{大纲}
 \frame{\frametitle{大纲} \tableofcontents}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{Servlet} 
+\begin{frame}[fragile]
+  \frametitle{Servlet是主流Web框架的基础} 
 
-JSP和JSF都是建立在Servlet基础之上的，其他Web框架如Struts、WebWork和Spring MVC都是基于Servlet。
-
+  JSP和JSF都是建立在Servlet基础之上的，其他Web框架
+  如Struts、WebWork和Spring MVC都是基于Servlet。
 \end{frame}
 
 \section{Web基础}
 
-\begin{frame}
-\frametitle{Web基本概念} 
+\begin{frame}[fragile]
+  \frametitle{什么是Web}
 
-\begin{itemize}
-\item Web本质上就是Internet上所有文档的集合，如HTML网页、CSS、JS、图片、动态网页、声音、视频等。
-\item Web文档保存在Web站点上，Web站点驻留在Web服务器上。常见Web服务器有Apache、IIS、WebLogic、GlassFish、JBoss和Tomcat等，每个服务器都有一个唯一的IP地址。
-\item Web文档都有一个唯一的地址，通过URL格式来进行定位：
-\begin{center}
-\Blue\kai 协议://IP地址:端口/站点名/目录/文件名 \\
-\Red http://210.30.108.30:8080/jycrm/admin/login.jsp\\
-ftp://210.30.108.30/software/jdk.zip\\
-\end{center}
-\end{itemize}
+  \begin{itemize}
+  \item Web本质上就是Internet上所有文档（资源）的集合，如HTML网
+    页、CSS、JS、图片、动态网页、声音、视频等。
+  \item Web文档保存在Web站点上，Web站点驻留在Web服务器上。
+  \item 常见Web服务器
+    有Apache、IIS、WebLogic、GlassFish、JBoss和Tomcat等。
+  \end{itemize}
+  Web文档都有唯一的地址，通过URL来进行定位：
+
+  {\Blue\kai 协议://IP地址:端口/站点名/目录/文件名}
+
+  \begin{javaCode}
+    http://210.30.108.30:8080/jycrm/admin/login.jsp
+    ftp://210.30.108.30/software/jdk.zip
+  \end{javaCode}
 \end{frame}
 
 \begin{frame}
-\frametitle{Web工作模式} 
+  \frametitle{Web工作模式} 
 
-Web使用请求/响应模式进行工作，Web服务器不会主动将Web文档发送到客户端。
+  Web使用请求/响应模式进行工作，Web服务器不会主动将Web文档发送到客户端。
 
-\begin{enumerate}\kai
-\item 由客户（一般是浏览器）使用URL对Web文档进行请求；
-\item Web服务器接收并处理请求；
-\item 处理结束后将响应内容发送到客户。
-\end{enumerate}
+  \begin{enumerate}\kai
+  \item 由客户（一般是浏览器）使用URL对Web文档进行请求；
+  \item Web服务器接收并处理请求；
+  \item 处理结束后将响应内容发送到客户。
+  \end{enumerate}
 
-\begin{itemize}
-\item Web请求方式主要有{\Red GET、POST}、PUT、DELETE和HEAD。
-\item Web响应一般情况下是HTML文档，也可以是其他类型个事。Web使用MIME (Multipurpose Internet mail Extensions)标准来确定具体的响应类型。HTTP响应总体上分为两类：文本类型（纯文本字符、HTML、XML）和二进制原始类型（图片、声音、视频）。
-\end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Java Web} 
-\begin{itemize}
-\item 基于Java语言。
-\item 符合JavaEE标准。
-\item 运行Web容器内。
-\item 使用Web组件技术：Servlet、JSP、JSF。
-\end{itemize}
+  \frametitle{Web工作模式} 
+  
+  \begin{itemize}
+  \item Web请求方式主要有{\Red GET、POST}、PUT、DELETE和HEAD。
+  \item Web响应一般情况下是HTML文档，也可以是其他类型资源。
+  \item Web使用MIME (Multipurpose Internet mail Extensions)标准来确定具
+    体的响应类型。HTTP响应总体上分为两类：文本类型（纯文本字
+    符、HTML、XML）和二进制原始类型（图片、声音、视频）。
+  \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Java Web的组成} 
+\frametitle{Java Web应用的构成} 
 \begin{itemize}
 \item HTML文档
 \item CSS
@@ -112,27 +111,22 @@ Web使用请求/响应模式进行工作，Web服务器不会主动将Web文档�
 \item Java Lib
 \item Web配置文件：/WEB-INF/web.xml
 \end{itemize}
+
+\notice{演示} 在Eclipse中创建一个Java Dynamic Project。
 \end{frame}
 
-\begin{frame}
-\frametitle{Java Web的结构} 
-\begin{figure}
-\centering
-\includegraphics[width=0.85\textwidth]{fig03_01.png}
-\end{figure}
-\end{frame}
 
 \section{Servlet概述}
 
 \begin{frame}
 \frametitle{Servlet概述}
-\xyy{什么是Servlet} 
+\ttc{什么是Servlet} 
 \begin{itemize}
 \item Servlet是一种Java Class，它运行在Java EE的Web容器内，由Web容器负责它的对象的创建和销毁，不能直接由其它类对象来调用。
 \item 当Web容器接收到对它的HTTP请求时，自动创建Servlet对象，并自动调用它的doPost或doGet方法。
 \end{itemize}
 
-\xyy{Servlet的主要功能}
+\ttc{Servlet的主要功能}
 \begin{itemize}
 \item 接收用户HTTP请求。
 \item 取得HTTP请求提交的数据。
@@ -144,14 +138,14 @@ Web使用请求/响应模式进行工作，Web服务器不会主动将Web文档�
 
 \begin{frame}
 \frametitle{Servlet概述}
-\xyy{与Servlet相近的技术} 
+\ttc{与Servlet相近的技术} 
 \begin{itemize}
 \item CGI (Common Gateway Interface)。
 \item MS的HTTP DLL技术。
 \item Perl语言编写的处理代码。
 \end{itemize}
 
-\xyy{Servlet的特点}
+\ttc{Servlet的特点}
 \begin{itemize}
 \item 使用Java语言编写。
 \item 可以运行在符合J2EE规范的所有应用服务器上，实现跨平台运行。
@@ -207,7 +201,7 @@ throws ServletException, IOException {
 }
 \end{javaCode}
 
-当HTTP请求为GET时，自动运行，每次请求都运行一次。
+当HTTP请求为GET时自动运行，每次请求都运行一次。
 \end{frame}
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
@@ -282,7 +276,7 @@ public  void destroy() {
 \frametitle{Servlet处理流程} 
 \begin{figure}
 \centering
-\includegraphics[width=0.8\textwidth]{fig03_03.png}
+\includegraphics[width=\textwidth]{fig-servlet-mechanism.pdf}
 \end{figure}
 \end{frame}
 
@@ -317,7 +311,7 @@ public  void destroy() {
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
 \frametitle{Servlet配置}
-\xyy{Servlet初始参数}
+\ttc{Servlet初始参数}
 
 在Servlet的声明中可以配置Servlet初始参数，如数据库的Driver、URL、账号和密码等信息。在Servlet中可以读取这些信息，避免在Servlet代码中定义这些信息，修改时无需重新编译Servlet。
 
@@ -339,7 +333,7 @@ String driver = config.getInitParameter("driver");
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
 \frametitle{Servlet配置}
-\xyy{Servlet启动时机}
+\ttc{Servlet启动时机}
 
 在配置Servlet时，可以指示Servlet跟随Web容器一起自动启动。这时，Servlet就可以在没有请求的情形下，进行实例化和初始化，完成特定任务。自启动Servlet的配置语法：
 
@@ -359,7 +353,7 @@ String driver = config.getInitParameter("driver");
 \item 在{\Red /WEB-INF/web.xml}中进行Servlet的URL映射。
 \end{itemize}
 
-\xyy{映射语法}
+\ttc{映射语法}
 
 \begin{xmlCode}
 <servlet-mapping>
@@ -374,7 +368,7 @@ String driver = config.getInitParameter("driver");
 \frametitle{Servlet配置}
 \wxd{Servlet映射}
 
-\xyy{映射地址方式 \ding{182} 绝对地址方式映射}
+\ttc{映射地址方式 \ding{182} 绝对地址方式映射}
 \begin{xmlCode}
 <servlet-mapping>
   <servlet-name>LoginAction</servlet-name>
@@ -387,7 +381,7 @@ String driver = config.getInitParameter("driver");
 \frametitle{Servlet配置}
 \wxd{Servlet映射}
 
-\xyy{映射地址方式 \ding{183} 匹配目录模式映射方式}
+\ttc{映射地址方式 \ding{183} 匹配目录模式映射方式}
 \begin{xmlCode}
 <servlet-mapping>
   <servlet-name>MainAction</servlet-name>
@@ -402,7 +396,7 @@ String driver = config.getInitParameter("driver");
 \frametitle{Servlet配置}
 \wxd{Servlet映射}
 
-\xyy{映射地址方式 \ding{184} 匹配扩展名模式映射方式}
+\ttc{映射地址方式 \ding{184} 匹配扩展名模式映射方式}
 \begin{xmlCode}
 <servlet-mapping>
   <servlet-name>MainAction</servlet-name>
@@ -444,29 +438,29 @@ public class LoginAction extends HttpServlet {
 {\Blue /WEB-INF/classes/city/oa/servlet/LoginAction.class}
 \end{frame}
 
-\section{Servlet Sample} 
+\section{Servlet示例} 
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{Servlet Sample} 
-\xyy{Eclipse}
+\frametitle{Servlet示例} 
+\ttc{Eclipse}
 
 New Project \ding{223} Web \ding{223} Dynamic Web Project \ding{223} Next >
 
 ---------------------------------------------------------------------------\\
-Project name: {\Blue MyFirstServlet}\\
-Target runtime\\ {\Blue Apache Tomcat v7.0}\\
+Project name: {\Blue sample.servlet}\\
+Target runtime\\ {\Blue Apache Tomcat v8.0}\\
 Dynamic web module version\\ 3.0\\
-Configuration\\ {\Blue Default Configuration for Apache Tomcat v7.0}\\
+Configuration\\ {\Blue Default Configuration for Apache Tomcat v8.0}\\
 ---------------------------------------------------------------------------\\
 \ding{223} Next >
 \end{frame}
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{Servlet Sample} 
+\frametitle{Servlet示例} 
 
 ---------------------------------------------------------------------------\\
 Source folder on build path: \\ {\Blue src}\\
-Default output folder: \\ {\Blue WebContent/WEB-INF/classes}\\
+%%Default output folder: \\ {\Blue WebContent/WEB-INF/classes}\\
 ---------------------------------------------------------------------------\\
 
 \ding{223} Next >
@@ -478,33 +472,35 @@ Default output folder: \\ {\Blue WebContent/WEB-INF/classes}\\
 \end{frame}
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{Servlet Sample} 
+\frametitle{Servlet示例} 
 
-\xyy{WebContent/WEB-INF/web.xml}
+\ttc{WebContent/WEB-INF/web.xml}
 
 Add following statements between <web-app> and </web-app>.
+
 \begin{xmlCode}
-<servlet>
-	<servlet-name>HelloServlet</servlet-name>
-	<servlet-class>cn.edu.ouc.javaee.chp03.HelloServlet</servlet-class>
-	<load-on-startup>0</load-on-startup>
-</servlet>
-<servlet-mapping>
-	<servlet-name>HelloServlet</servlet-name>
-	<url-pattern>/hello</url-pattern>
-</servlet-mapping>  
+  <servlet>
+    <servlet-name>HelloServlet</servlet-name>
+    <servlet-class>ouc.javaweb.HelloServlet</servlet-class>
+    <load-on-startup>0</load-on-startup>
+  </servlet>
+    
+  <servlet-mapping>
+    <servlet-name>HelloServlet</servlet-name>
+    <url-pattern>/hello</url-pattern>
+  </servlet-mapping>  
 \end{xmlCode}
 \end{frame}
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{Servlet Sample} 
+\frametitle{Servlet示例} 
 
-\xyy{Java Resources/src}
+\ttc{Java Resources/src}
 
 Create java class file named ``HelloServlet.java''.
 
 \begin{javaCode}
-package cn.edu.ouc.javaee.chp03;
+package ouc.javaweb;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -517,7 +513,7 @@ public class HelloServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response)
   throws ServletException, IOException {
     response.setContentType("text/html");
-    response.setCharacterEncoding("GBK");
+    response.setCharacterEncoding("UTF-8");
     PrintWriter out = response.getWriter();
     out.println("<html>");
     out.println("<head><title>A Servlet Sample</title></head>");
@@ -533,20 +529,34 @@ public class HelloServlet extends HttpServlet {
 \end{frame}
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{Servlet Sample} 
+\frametitle{Servlet示例} 
 
-MyFirstServlet \ding{223} 鼠标右键 \ding{223} Run as \ding{223} Run on Server
+sample.servlet \ding{223} 鼠标右键 \ding{223} Run as \ding{223} Run on Server
 
- \ding{223} Choose an existing server \ding{223} Tomcat v7.0 Server at localhost \ding{223} Finish
+ \ding{223} Choose an existing server \ding{223} Tomcat v8.0 Server at localhost \ding{223} Finish
 
-在浏览器中请求页面{\Blue http://localhost:8080/MyFirstServlet/hello}。
+在浏览器中请求页面{\Blue http://localhost:8080/sample.servlet/hello}。
 
 \end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% \begin{figure}
-%% \centering
-%% \includegraphics[width=0.6\textwidth]{fig01.png}
-%% \end{figure}
+
+
+\begin{frame}
+  \frametitle{本节习题}
+
+  \tta{问答题}
+  
+  \begin{enumerate}
+  \item Servlet和一般Java类的区别是什么？
+  \item 简述Servlet的生命周期。
+  \item 简述Servlet与URL地址的映射方式（包括web.xml配置和基于注解）。
+  \end{enumerate}
+
+  \tta{小编程}
+  
+  \begin{enumerate}
+  \item 编写一个能够计数访问次数的Servlet，每次请求次数增加1，并显示当前总访问次数。
+  \end{enumerate}
+\end{frame}
 % TKS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 \centering
