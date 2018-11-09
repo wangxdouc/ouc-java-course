@@ -48,12 +48,13 @@
 \pgfdeclareimage[width=1cm]{ouc}{figures/static/ouc.pdf}
 \logo{\pgfuseimage{ouc}{\vspace{-20pt}}}
 
-% setting for font
+% Setting for font
 %%\setCJKmainfont{Adobe Kaiti Std}
-\setCJKmainfont{SimSun} 
+%%\setCJKmainfont{SimSun} 
 %% \setCJKmainfont{FangSong_GB2312} 
 %% \setmainfont{Apple Garamond}  %%苹果字体没有SmallCaps
-\setCJKmainfont{SimSun} 
+\setCJKmainfont{SimSun}
+%%\setCJKmainfont{Adobe Song Std}
 %FUNNY%\setCJKmainfont{DFPShaoNvW5-GB}  %%华康少女文字W5(P)
 %FUNNY%\setCJKmainfont{FZJingLeiS-R-GB}  %%方正静蕾体
 %FUNNY%\setmainfont{Purisa}
@@ -65,7 +66,8 @@
      %\setromanfont[BoldFont={黑体}]{宋体}
      %\setromanfont[BoldFont={SimHei}]{SimSun}
      %\setromanfont[BoldFont={"[simhei.ttf]"}]{"[simsun.ttc]"}
-% setting for graphics
+
+     % setting for graphics
 \graphicspath{{figures/}}  %%图片路径
 \renewcommand\figurename{图}
 
@@ -88,7 +90,7 @@
 \XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt  %%多一点调整的空间
 %%%%%
 
-% font setting by xeCJK
+% Font setting by xeCJK
 \setCJKfamilyfont{NSimSun}{NSimSun}
 \newcommand{\song}{\CJKfamily{NSimSun}}
 %%%\setCJKfamilyfont{AdobeSongStd}{Adobe Song Std}
@@ -97,11 +99,13 @@
 \newcommand{\fang}{\CJKfamily{FangSong}}
 %%%\setCJKfamilyfont{AdobeFangsongStd}{Adobe Fangsong Std}
 %%%\newcommand{\AdobeFang}{\CJKfamily{AdobeFangsongStd}}
-\setCJKfamilyfont{SimHei}{SimHei}
+%%%\setCJKfamilyfont{SimHei}{SimHei}
+\setCJKfamilyfont{SimHei}{Adobe Heiti Std}
 \newcommand{\hei}{\CJKfamily{SimHei}}
 %%%\setCJKfamilyfont{AdobeHeitiStd}{Adobe Heiti Std}
 %%%\newcommand{\AdobeHei}{\CJKfamily{AdobeHeitiStd}}
-\setCJKfamilyfont{KaiTi}{KaiTi}
+%%%\setCJKfamilyfont{KaiTi}{KaiTi}
+\setCJKfamilyfont{KaiTi}{Adobe Kaiti Std}
 \newcommand{\kai}{\CJKfamily{KaiTi}}
 %%%\setCJKfamilyfont{AdobeKaitiStd}{Adobe Kaiti Std}
 \newcommand{\AdobeKai}{\CJKfamily{AdobeKaitiStd}}
