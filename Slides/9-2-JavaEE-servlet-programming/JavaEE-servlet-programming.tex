@@ -258,18 +258,18 @@ public  void destroy() {
 \section{Servlet生命周期}
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{Servlet的运行过程} 
-\begin{enumerate}\kai
-\item 用户在浏览器请求ServletURL地址。
-\item Web容器接收到请求，检查是Servlet请求，将处理交给Servlet引擎。
-\item Servlet引擎根据URL地址检查是否有Servlet映射，如果没有则返回错误信息给浏览器。
-\item 有servlet映射时，先检查是否有实例在运行。
-\item 如果没有实例运行，则创建Servlet类的对象，调用其构造方法，然后调用init()方法。
-\item 如果有实例在运行，则根据请求的方法是GET或POST，自动调doGet()或doPost()方法。将请求对象和响应对象传给doGet()或doPost()方法。
-\item 在doGet()或doPost()方法内通过HttpServletRequest的请求对象分析出用户发送的请求信息。
-\item 按用户的要求进行业务处理。
-\item 通过HttpServletResponse响应对象向浏览器发送响应信息。
-\end{enumerate}
+  \frametitle{Servlet的运行过程} 
+  \begin{enumerate}[<+-|alert@+>]\kai
+  \item 用户在浏览器请求ServletURL地址。
+  \item Web容器接收到请求，检查是Servlet请求，将处理交给Servlet引擎。
+  \item Servlet引擎根据URL地址检查是否有Servlet映射，如果没有则返回错误信息给浏览器。
+  \item 有servlet映射时，先检查是否有实例在运行。
+  \item 如果没有实例运行，则创建Servlet类的对象，调用其构造方法，然后调用init()方法。
+  \item 如果有实例在运行，则根据请求的方法是GET或POST，自动调doGet()或doPost()方法。将请求对象和响应对象传给doGet()或doPost()方法。
+  \item 在doGet()或doPost()方法内通过HttpServletRequest的请求对象分析出用户发送的请求信息。
+  \item 按用户的要求进行业务处理。
+  \item 通过HttpServletResponse响应对象向浏览器发送响应信息。
+  \end{enumerate}
 \end{frame}
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
@@ -301,7 +301,7 @@ public  void destroy() {
 \begin{xmlCode}
 <servlet>
   <servlet-name>loginaction</servlet-name>
-  <servlet-class>com.city.oa.action.LoginAction</servlet-class>
+  <servlet-class>ouc.java.servlet.LoginAction</servlet-class>
 </servlet>  
 \end{xmlCode}
 
@@ -313,7 +313,9 @@ public  void destroy() {
 \frametitle{Servlet配置}
 \ttc{Servlet初始参数}
 
-在Servlet的声明中可以配置Servlet初始参数，如数据库的Driver、URL、账号和密码等信息。在Servlet中可以读取这些信息，避免在Servlet代码中定义这些信息，修改时无需重新编译Servlet。
+在Servlet的声明中可以配置Servlet初始参数，如数据库的Driver、URL、账号和
+密码等信息。在Servlet中可以读取这些信息，避免在Servlet代码中定义这些信
+息，修改时无需重新编译Servlet。
 
 \begin{xmlCode}
 <servlet>
@@ -335,7 +337,9 @@ String driver = config.getInitParameter("driver");
 \frametitle{Servlet配置}
 \ttc{Servlet启动时机}
 
-在配置Servlet时，可以指示Servlet跟随Web容器一起自动启动。这时，Servlet就可以在没有请求的情形下，进行实例化和初始化，完成特定任务。自启动Servlet的配置语法：
+在配置Servlet时，可以指示Servlet跟随Web容器一起自动启动。这
+时，Servlet就可以在没有请求的情形下，进行实例化和初始化，完成特定任务。
+自启动Servlet的配置语法：
 
 \begin{xmlCode}
 <load-on-startup>2</load-on-startup>
@@ -428,14 +432,14 @@ String driver = config.getInitParameter("driver");
 
 例如Servlet类LoginAction：
 \begin{javaCode}
-package city.oa.servlet;
+package ouc.java.servlet;
 public class LoginAction extends HttpServlet {
   //     
 }
 \end{javaCode}
 
 存放目录为：
-{\Blue /WEB-INF/classes/city/oa/servlet/LoginAction.class}
+{\Blue /WEB-INF/classes/ouc/java/servlet/LoginAction.class}
 \end{frame}
 
 \section{Servlet示例} 
