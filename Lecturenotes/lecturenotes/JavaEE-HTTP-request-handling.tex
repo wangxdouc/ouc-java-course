@@ -1,0 +1,314 @@
+\chapter*{HTTP 请求处理编程}
+\label{chp:JavaEE-HTTP-request-handling}
+
+\section*{基本信息}
+\sline
+\begin{description}
+\item[课程名称：] Java应用与开发
+\item[授课教师：] 王晓东
+\item[授课时间：] 第十周
+\item[参考教材：] 本课程参考教材及资料如下：
+  \begin{itemize}
+  \item 吕海东，张坤 编著，Java EE企业级应用开发实例教程，清华大学出版社，2010年8月
+  \end{itemize}
+\end{description}
+
+\section*{教学目标}
+
+\sline
+
+\begin{enumerate}
+\item 掌握HTTP协议的特点以及HTTP请求中包含哪些信息。
+\item 理解Java HTTP请求对象的类型及其生命周期，掌握请求对象的功能。
+\item 学习并实践掌握部分请求对象方法的用法。
+\end{enumerate}  
+
+\section*{授课方式}
+
+\sline
+\begin{description}
+\item[理论课：] 多媒体教学、程序演示
+\item[实验课：] 上机编程
+\end{description}
+
+\newpage
+\section*{教学内容}
+\sline
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{HTTP请求内容}
+
+
+\subsection{Web工作模式}
+
+Web通常使用{\bf\Red 请求—响应}模式。
+
+\begin{itemize}\kai
+\item 客户端（浏览器）向服务器发出HTTP请求，在HTTP请求中包含传递到服务器的数据；
+\item Web服务器接收到请求，对请求进行处理。
+\item Web服务器使用HTTP向客户端发送响应。
+\item 客户端接收到响应后，进行显示或页面跳转。
+\end{itemize}
+
+\subsection{HTTP请求中包含的信息} 
+
+HTTP请求中包含的信息包括两部分：{\kai\Red 请求头和请求体}。
+
+\subsubsection{请求头}
+
+\begin{xmlCode}
+  GET /articles/news/today.jsp HTTP/1.1 
+  Accept: */*
+  Accept-Language: en-us 
+  Connection: Keep-Alive 
+  Host: localhost
+  Referer: http://localhost/links.asp
+  User-Agent: Mozilla/4.0 (compatible; MSIE 5.5; Windows NT 5.0)
+  Accept-Encoding: gzip, deflate
+  ...
+\end{xmlCode}
+
+\tta{HTTP请求头标记和说明}
+  
+\begin{description}\kai
+\item[User-Agent] 浏览器的机器环境
+\item[Accept] 浏览器支持哪些MIME数据类型
+\item[Accept-Charset] 浏览器支持的字符编码
+\item[Accept-Encoding] 浏览器支持哪种数据压缩格式
+\item[Accept-Language] 浏览器指定的语言环境
+\item[Host] 浏览器访问的主机名
+\item[Referer] 浏览器是从哪个页面来的
+\item[Cookie] 浏览器保存的cookie对象
+\end{description}
+
+{\kai\Red Java EE Web组件Servlet和JSP中可以使用请求对象的方法读取这些请
+  求内容，进而进行相应的处理。}
+
+
+\subsubsection{请求体} 
+
+每次HTTP请求时，在请求头之后会有一个{\bf\Red 空行}，接下来是请求中包含的提交数据，即{\bf\Blue 请求体}。
+
+\ttc{\ding{182} GET请求}
+
+无请求体，请求数据直接在请求的URL地址中，作为URL的一部分发送给Web服务器。
+  
+\begin{xmlCode}
+  http://localhost:8080/webapp/login.do?id=9001&pass=9001
+\end{xmlCode}
+
+
+\begin{itemize}
+\item 请求体为空，提交数据直接在URL上，作为请求头部分传输到Web服务器，
+  通过URL的QueryString部分能得到提交的参数数据。
+\item 此种方式对提交数据的大小有限制，不同浏览器会有所不同，
+  如IE为2083字节。GET请求时数据会出现在URL中，保密性差，实际编程中要
+  尽量避免。
+\end{itemize}
+
+\ttc{\ding{183} POST请求}
+
+\begin{itemize}
+\item 请求体数据单独打包为数据块，通过Socket直接传递到Web服务器端，数
+  据不会在地址栏出现。
+\item 可以提交大的数据，包括二进制文件，实现文件上传功能。
+\item 原则上POST请求对提交的数据没有大小限制。
+\end{itemize}
+
+\section{Java EE请求对象}
+
+\subsection{请求对象类型与生命周期} 
+
+\tta{请求对象接口类型}
+
+\begin{itemize}
+\item Java EE规范中的通用请求对象要实现接口javax.servlet.ServeltRequest
+\item HTTP请求对象要实现接口\\{\bf\Red javax.servlet.http.HttpServletRequest}
+\end{itemize}
+
+\tta{请求对象生命周期}
+
+在Java Web组件开发中，不需要Servlet或JSP自己创建请求对象，它们
+由{\bf\Blue Web容器自动创建}，并传递给Servlet和JSP的服务方
+法doGet和doPost，在服务处理方法中直接使用请求对象即可。
+
+\subsection{请求对象类型与生命周期} 
+
+\tta{请求对象创建}
+
+每次Web服务器接收到HTTP请求时，会自动创建实现HttpServletRequest接口的
+对象。在创建该对象之后，Web服务器将请求头和请求体信息写入请求对
+象，Servlet和JSP可以通过请求对象的方法取得这些请求信息，继而可以取得
+用户提交的数据。
+
+\tta{请求对象销毁}
+
+当Web服务器处理HTTP请求，向客户端发送HTTP响应结束后，会自动销毁请求对
+象，保存在请求对象中的数据随即丢失。当下次请求时新的请求对象又会被创
+建。
+
+\subsection{请求对象功能与方法} 
+
+\tta{请求对象方法一般分类}
+
+\begin{itemize}
+\item 取得请求头信息；
+\item 取得请求体中包含的提交参数数据，包含表单元素或地址栏URL的参数；
+\item 取得客户端的有关信息，如请求协议、IP地址和端口等；
+\item 取得服务器端的相关信息，如服务器的IP等；
+\item 取得请求对象的属性信息，用于在一个请求的转发对象之间传递数据。
+\end{itemize}
+
+\subsection{取得请求头} 
+
+\begin{itemize}
+\item String getHeader(String name)
+  \begin{javaCode}
+    String browser = request.getHeader("User-Agent");
+  \end{javaCode}
+
+\item int getIntHeader(String name)
+  \begin{javaCode}
+    int size = request.getIntHeader("Content-Length");
+  \end{javaCode}
+
+\item long getDateHeader(String name)
+  \begin{javaCode}
+    long datetime = request.getDateHeader("If-Modified-Since");
+  \end{javaCode}
+
+\item Enumeration getHeaderNames()
+  
+  \begin{javaCode}
+    for (Enumeration e = request.getHeaderNames(); e.hasMoreElements(); ) {
+      String headerName = (String) e.nextElement();
+      System.out.println("Name = " + headerName);
+    }
+  \end{javaCode}
+\end{itemize}
+
+\subsection{取得请求中包含的提交参数数据} 
+
+\begin{itemize}
+\item 在Web开发中，用户通过表单或URL参数将客户端数据提交到服务器端，
+  这些数据被Web服务器自动封装到请求对象中。
+\item Web组件Servlet和JSP可以通过请求对象获得用户提交的数据。
+\end{itemize}
+  
+\subsubsection{String getParameter(String name)}
+
+取得表单或URL参数中指定名称的数据值。
+
+\ttc{表单}
+
+\begin{xmlCode}
+  Product Name: <input type="text" name="productName" />
+\end{xmlCode}
+
+\ttc{URL参数}
+
+\begin{xmlCode}
+  productSearch.do?productName=Acer    
+\end{xmlCode}
+
+以下代码可以取得以上的参数名为productName的数据：
+
+\begin{javaCode}
+  String productName = request.getParameter("productName");
+\end{javaCode}
+
+
+\subsubsection{String[] getParameterValues(String name)}
+
+取得指定名称的参数数据数组，如复选框和复选列表。
+
+\ttc{表单复选数据}
+
+\begin{xmlCode}
+  爱好：
+  <input type="checkbox" name="behave" value="旅游">旅游
+  <input type="checkbox" name="behave" value="读书">读书
+  <input type="checkbox" name="behave" value="体育">体育
+\end{xmlCode}
+
+如下代码取得选定的爱好：
+
+\begin{javaCode}
+  String[] behaves = request.getParameterValues("behave");
+  for (int i = 0; i < behaves.length; i++) {
+    out.println(behaves[i]);
+  }
+\end{javaCode}
+
+\subsubsection{Enumeration getParameterNames()}
+
+取得所有请求的参数名称。
+
+\begin{javaCode}
+  for (Enumeration enums = request.getParameterNames(); enums.hasMoreElements();) {
+    String paramName = (String) enums.nextElement();
+    System.out.println(paramName);
+  }
+\end{javaCode}
+
+\subsubsection{Map getParameterMap()}
+
+取得所有请求的参数名和值，包装在一个Map对象中，可以使用这个对象同时取得
+所有的参数名和参数值。
+
+\begin{javaCode}
+  Map params = request.getParameterMap();
+  Set names = params.keySet();
+  for (Object o: names) {
+    String paramName = (String) o;
+    out.print(paramName + " = " + params.get(paramName) + "<br/>");
+  }
+\end{javaCode}
+
+\subsubsection{ServletInputStream getInputStream() throws IOException}
+
+取得客户端的输入流。
+
+\begin{itemize}
+\item 当用户提交的数据中包含文件上传时，提交的数据可以以二进制编码方
+  式提交到服务器。
+\item 当表单既有文本字段还有文件上传时，就需要对此二进制流进行解析，
+  从而分离出文本和上传文件。
+\item 可以使用第三方框架/Jar包实现上传文件的处理，如{\kai\Blue Apache的Common
+    upload组件}。
+\end{itemize}
+
+\notice{注意}
+
+{\kai 当使用getParameter()方法后，就无法使用getInputStream()方法，反之亦然。}
+
+\begin{xmlCode}
+  <form action="" method="" enctype="multipart/form-data">
+    姓名：<input type="text" name="name"/><br/>
+    照片：<input type="file" name="photo"/><br/>
+    <input type="submit" value="提交"/>
+  </form>
+\end{xmlCode}
+
+\subsection{取得其他客户端信息} 
+
+\ttc{String getRemoteHost()} 取得请求客户的主机名。
+
+\ttc{String getRemoteAddr()} 取得请求客户端的IP地址。
+
+\ttc{int getRemotePort()} 取得请求客户的端口号。
+
+\ttc{String getProtocol()} 取得请求的协议。
+
+\ttc{String getContentType()} 取得请求体的MIME内容类型。
+
+\ttc{int getContentLength()} 取得请求体为二进制流时请求体的长度。
+
+\ttc{String getProtocol()} 取得请求的协议，一般为HTTP。
+
+\subsection{取得服务器端信息} 
+
+\ttc{String getServerName()} 取得服务器的HOST，一般为IP地址。
+
+\ttc{int getServerPort()} 取得服务器接收端口。
+

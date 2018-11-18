@@ -1,15 +1,44 @@
 \chapter*{线程编程}
 \label{chp:Java-thread-programming}
 
-\section*{本章要点}
+\section*{基本信息}
+\sline
+\begin{description}
+\item[课程名称：] Java应用与开发
+\item[授课教师：] 王晓东
+\item[授课时间：] 第七周
+\item[参考教材：] 本课程参考教材及资料如下：
+  \begin{itemize}
+  \item 陈国君主编，Java程序设计基础（第5版），清华大学出版社，2015.5
+  \item Bruce Eckel, Thinking in Java (3rd)
+  \end{itemize}
+\end{description}
+
+\section*{教学目标}
 
 \sline
+
 \begin{enumerate}
-\item 线程的基础概念；
-\item 线程的控制；
-\item 线程的同步。
-\end{enumerate}  
+\item 线程基础：理解任务调度、进程和线程，掌握其联系和区别；掌
+  握Java的线程模型，以及如何创建线程；理解后台线程。
+\item 线程控制：理解线程的生命周期，明白各阶段的含义；掌握线程控制方
+  法，理解各线程控制方法对线程状态切换的作用。
+\item 线程的同步：理解临界资源问题，进一步明白线程安全的意义；了解关
+  键字synchronized的用法；了解死锁的概念；通过生产者—消费者问题分析理
+  解线程同步。
+\end{enumerate}
+
+\section*{授课方式}
+
 \sline
+\begin{description}
+\item[理论课：] 多媒体教学、程序演示
+\item[实验课：] 上机编程
+\end{description}
+
+\newpage
+\section*{教学内容}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{线程基础}
 
@@ -38,8 +67,6 @@ Block，简称PCB)，包含进程的描述信息和控制信息，是进程存�
 行，其中每个任务被称为线程（Thread）。更专业的表述为：{\hei 线程是程序
   内部的顺序控制流。}
 
-\sline
-
 在早期的操作系统中并没有线程的概念，进程是能拥有资源和独立运行的最小单
 位，也是程序执行的最小单位。任务调度采用的是时间片轮转的抢占式调度方式，
 而进程是任务调度的最小单位，每个进程有各自独立的一块内存，使得各个进程
@@ -57,8 +84,6 @@ Block，简称PCB)，包含进程的描述信息和控制信息，是进程存�
 运行的基本单位。线程自己只拥有一点在运行中必不可少的资源（如程序计数器，
 一组寄存器和栈），但是它可与同属一个进程的其他的线程共享进程所拥有的全
 部资源。
-
-\sline
 
 \subsection{线程和进程的区别}
 
@@ -387,9 +412,10 @@ class MyThreadViewer {
 \item[终止状态] 线程run()方法执行完毕。
 \end{description}
 
-\begin{figure}[h]
+
+\begin{figure}[htb]
 \centering
-\includegraphics[width=0.95\textwidth]{images/fig-thread-lifecycle.pdf}
+\includegraphics[width=0.95\textwidth]{images/Java-thread-programming/fig-thread-lifecycle.pdf}
 \caption{Java线程生命周期状态}
 \label{fig:thread-lifecycle}
 \end{figure}
@@ -612,12 +638,12 @@ suspend()和resume()方法已经不提倡使用，原因是suspend()方法挂起
 
 两个线程A和B在同时操纵Stack类的同一个实例(栈)，A向栈里push一个数据，B要从堆栈中pop一个数据。
 
-\samplecode{Stack.java}
+\tta{代码}
 
 \begin{javaCode}
 public class Stack {
   int idx = 0;
-  char[] data = new char[6];
+  char[ ] data = new char[6];
   
   public void push(char c) {
     data[idx] = c;
@@ -630,7 +656,7 @@ public class Stack {
 }
 \end{javaCode}
 
-\descript{上述问题分析}
+\tta{问题分析}
 
 \begin{enumerate}
 \item 操作之前，假设data = |a|b| | | | |，idx = 2；
@@ -640,50 +666,99 @@ public class Stack {
 \item 最后的结果相当于c没有入栈，产生这种问题的原因在于对共享数据访问的操作的不完整性。
 \end{enumerate}
 
-\subsection{Java synchronized}
-  
-synchronized是Java中的关键字，当某个对象用synchronized修饰时，表明该对
-象在任一时刻只能由一个线程访问。synchronized是一种同步锁，其修饰的对象
-有以下几种：
 
-\begin{enumerate}
-\item 修饰一个代码块，被修饰的代码块称为同步语句块，其作用的范围是大括
-  号{}括起来的代码，作用的对象是调用这个代码块的对象；
-\item 修饰一个方法，被修饰的方法称为同步方法，其作用的范围是整个方法，
-  作用的对象是调用这个方法的对象；
-\item 修改一个静态的方法，其作用的范围是整个静态方法，作用的对象是这个
-  类的所有对象；
-\item 修改一个类，其作用的范围是synchronized后面括号括起来的部分，作用
-  主的对象是这个类的所有对象。
-\end{enumerate}
+\subsection{什么是临界资源}
+
+在并发程序设计中，对多线程共享的资源或数据称为{\bf\Red 临界资源}（或同
+步资源），而把每个线程中访问临界资源的那一段代码称为{\bf\Blue 临界代
+  码}（或临界区）。
+
+\begin{itemize}
+\item 在一个时刻只能被一个线程访问的资源就是临界资源。
+\item 访问临界资源的那段代码就是临界区，{\kai\Red 临界区必须互斥地使用}。
+\end{itemize}
+
+\subsection{互斥锁}
+
+\begin{itemize}
+\item Java引入对象{\Red\hei 互斥锁}机制来实现线程的互斥操作，保证共享
+  数据操作的完整性。
+\item Java中每个对象都有一个互斥锁与之相连，用来保证在任一时刻，只能
+  有一个线程访问该对象。
+\item 多线程对临界资源的并发访问是通过竞争互斥锁实现的。
+\end{itemize}
 
 \subsection{synchronized的用法}
 
-synchronized用于方法声明中，标明整个方法为同步方法。
+为了保证互斥，Java语言使用{\bf\Red synchronized}关键字标识同步的{\hei\Blue 资源}，包括：
+
+\begin{itemize}
+\item 对象
+  \begin{javaCode}
+    synchronized(对象) {
+      临界代码段
+    }
+  \end{javaCode}
+\item 方法
+  \begin{javaCode}
+    public synchronized 返回值类型 方法名 {
+      方法体
+    }
+  \end{javaCode}
+
+  等效方式：
+  
+  \begin{javaCode}
+    public 返回值类型 方法名 {
+      synchronized(this) {
+        方法体
+      }
+    }
+  \end{javaCode}
+\item 语句块（一段代码），用法同方法的等效方式
+\end{itemize}
+
+\subsection{synchronized的用法示例}
+
+\tta{用于方法声明中，标明整个方法为同步方法}
 
 \begin{javaCode}
-public synchronized void push(char c) {
-  data[idx] = c;
-  idx++;
-}
-\end{javaCode}
-
-synchronized用于修饰语句快，标明整个语句块为同步块。
-
-\begin{javaCode}
-public char pop() {
-  synchronized(this) {
-    idx--;
-    return data[idx];
+  public synchronized void push(char c) {
+    data[idx] = c;
+    idx++;
   }
-}
 \end{javaCode}
 
-\notice{线程死锁}
+\tta{用于修饰语句块，标明整个语句块为同步块}
 
-并发运行的多个线程间彼此等待、都无法运行的状态称为线程死锁。为避免死锁，
-在线程进入阻塞状态时应尽量释放其锁定的资源，以为其他的线程提供运行的机
-会。
+\begin{javaCode}
+  // Other code
+  public char pop() {
+    synchronized(this) {
+      idx--;
+      return data[idx];
+    }
+    // Other code
+  }
+\end{javaCode}
+
+\subsection{synchronized的功能}
+
+\begin{itemize}\kai
+\item 首先判断对象或者方法的{\bf\Red 互斥锁}是或否存在，若存在就获得互斥锁，然后执行紧随其后的临界代码段或方法体；
+\item 如果对象或方法的互斥锁不在（已经被其他线程拿走），就进入线程{\bf\Blue 等待状态}，直到获得互斥锁。
+\end{itemize}
+
+\codeset{sample.thread.syn.WithdrawMoneyFromBankSample.java}
+
+
+\subsection{线程死锁}
+
+并发运行的多个线程间彼此等待、都无法运行的状态称为{\hei\Blue 线程死锁}。
+
+{\kai\Red 为避免死锁，在线程进入阻塞状态时应尽量释放其锁定的资源，以为其他的线程提供运行的机会。}
+
+\tta{相关方法}
 
 \begin{itemize}
 \item public final void wait()
@@ -691,80 +766,67 @@ public char pop() {
 \item public final void notifyAll()
 \end{itemize}
 
+\subsection{线程间通信}
+
+通过线程间的{\Red\hei 对话}来解决线程间的同步问题。
+
+\tta{线程间通信的有效手段}
+
+\ttc{wait()} {\small\kai 如果一个正在执行同步代码（synchronized）的线
+  程A执行了wait()调用（在对象x上），该线程暂停执行而进入对象x的等待队
+  列，并释放已获得的对象x的互斥锁。线程A要一直等到其他线程在对象x上调
+  用notify()或notifyAll()方法，才能重新获得对象x的互斥锁后继续执行
+  （从wait()语句后继续执行）。}
+
+\ttc{notify()} {\small\kai 唤醒正在等待该对象互斥锁的第一个线程。}
+
+\ttc{notifyAll()} {\small\kai 唤醒正在等待该对象互斥锁的所有线程，具有最高优先级的线程首先被唤醒并执行。}
+  
+
+\subsection{Object.wait()和notify()}
+
+\begin{itemize}
+\item wait()和notify()只能在同步代码块中调用。
+\item wait()在放弃CPU资源的同时交出了对资源的控制权。
+\end{itemize}
+
+
+\subsection{Thread.sleep()与Object.wait()、notify()的区别}
+  
+\begin{itemize}
+\item 所属对象不同。sleep()是Thread类的方法，
+  而wait()，notify()，notifyAll()是Object类中定义的方法，都会影响线程
+  的执行行为。
+\item 锁行为不同。Thread.sleep()不会导致锁行为的改变，如果当前
+  线程是拥有锁的，那么Thread.sleep()不会让线程释放锁。可以简单认为和
+  锁相关的方法都定义在Object类中，因此调用Thread.sleep()不会影响锁
+  的相关行为。
+\item 线程恢复方式不同。Thread.sleep和Object.wait都会暂停当前的
+  线程，即表示它暂时不再需要CPU的执行时间。区别是调用wait后，需要别的
+  线程执行notify/notifyAll才能够重新获得CPU执行时间。
+\end{itemize}
+
 \subsection{生产者—消费者问题}
 
-\begin{javaCode}
-public class SyncStack {
-  private int index = 0;
-  private char[] data = new char[6];
-
-  public synchronized void push(char c) {
-    while(index == data.length) {
-      try {
-        this.wait();
-      } catch(InterruptedException e) {
-      }
-    }
-    this.notify();
-    data[index] = c;
-    index++;
-    System.out.println("生产: " + c);
-  }
+生产者消费者模型（如图\ref{fig:producer-and-consumer}）就是在一个系统中
+存在{\hei\Red 生产者}和{\hei\Red 消费者}两种角色，他们之间通
+过{\hei\Blue 内存缓冲区}进行通信，生产者生产消费者需要的资料，消费者把
+资料做成产品。
   
-  public synchronized char pop() {
-    while(index == 0) {
-      try {
-        this.wait();
-      } catch(InterruptedException e) {
-      }
-    }
-    this.notify();
-    index--;
-    System.out.println("消费: " + data[index]);
-    return data[index];
-  }
-}
-\end{javaCode}
+\tta{生产者消费者问题是线程模型中的经典问题}
 
-\subsubsection{生产者}
-  
-\begin{javaCode}
-  public class Producer implements Runnable {
-    SyncStack stack;
-    public Producer(SyncStack s) {
-      stack = s;
-    }
-    public void run() {
-      for(int i=0; i<20; i++) {
-        char c = (char)(Math.random() * 26 + 'A');
-        stack.push(c);
-        try {
-          Thread.sleep((int)(Math.random() * 300));
-        } catch(InterruptedException e) {
-          e.printStackTrace();
-        }
-      }
-    }
-  }    
-\end{javaCode}
+\begin{itemize}
+\item 生产者和消费者在同一时间段内共用同一存储空间，生产者向空间里生
+  产数据，而消费者取走数据。
+\item 阻塞队列就相当于一个缓冲区，平衡了生产者和消费者的处理能力。这
+  个阻塞队列就是用来给生产者和消费者解耦的。
+\end{itemize}
 
-\subsubsection{消费者}
-  
-\begin{javaCode}
-  public class Consumer implements Runnable {
-    SyncStack stack;
-    public Consumer(SyncStack s) {
-      stack = s;
-    }
-    public void run() {
-      for(int i=0; i<20; i++) {
-        char c = stack.pop();
-        try {
-          Thread.sleep((int)(Math.random() * 800));
-        } catch(InterruptedException e) {
-          e.printStackTrace();
-        }
-      }
-    }
-  }
-\end{javaCode}
+\begin{figure}[htb]
+\centering
+\framebox{\includegraphics[width=0.8\textwidth]{images/Java-thread-programming/producer-and-consumer.png}}
+\caption{生产者消费者问题}
+\label{fig:producer-and-consumer}
+\end{figure}
+
+\codeset{sample.thread.syn.ProducerAndConsumer.java}

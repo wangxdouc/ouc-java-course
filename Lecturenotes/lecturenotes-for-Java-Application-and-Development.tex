@@ -153,24 +153,26 @@
 \XeTeXlinebreaklocale "zh"
 \XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
 
-% Font settings by xeCJK
+% Font setting by xeCJK
 \setCJKfamilyfont{NSimSun}{NSimSun}
 \newcommand{\song}{\CJKfamily{NSimSun}}
 %%%\setCJKfamilyfont{AdobeSongStd}{Adobe Song Std}
 %%%\newcommand{\AdobeSong}{\CJKfamily{AdobeSongStd}}
-%%%\setCJKfamilyfont{FangSong}{FangSong_GB2312}
-%%%\newcommand{\fang}{\CJKfamily{FangSong}}
+\setCJKfamilyfont{FangSong}{FangSong_GB2312}
+\newcommand{\fang}{\CJKfamily{FangSong}}
 %%%\setCJKfamilyfont{AdobeFangsongStd}{Adobe Fangsong Std}
 %%%\newcommand{\AdobeFang}{\CJKfamily{AdobeFangsongStd}}
-\setCJKfamilyfont{SimHei}{SimHei}
+%%%\setCJKfamilyfont{SimHei}{SimHei}
+\setCJKfamilyfont{SimHei}{Adobe Heiti Std}
 \newcommand{\hei}{\CJKfamily{SimHei}}
 %%%\setCJKfamilyfont{AdobeHeitiStd}{Adobe Heiti Std}
 %%%\newcommand{\AdobeHei}{\CJKfamily{AdobeHeitiStd}}
-\setCJKfamilyfont{KaiTi}{KaiTi}
+%%%\setCJKfamilyfont{KaiTi}{KaiTi}
+\setCJKfamilyfont{KaiTi}{Adobe Kaiti Std}
 \newcommand{\kai}{\CJKfamily{KaiTi}}
 %%%\setCJKfamilyfont{AdobeKaitiStd}{Adobe Kaiti Std}
 \newcommand{\AdobeKai}{\CJKfamily{AdobeKaitiStd}}
-%\setCJKfamilyfont{LiSu}{LiSu}
+\setCJKfamilyfont{LiSu}{LiSu}
 \newcommand{\li}{\CJKfamily{LiSu}}
 \setCJKfamilyfont{YouYuan}{YouYuan}
 \newcommand{\you}{\CJKfamily{YouYuan}}
@@ -221,15 +223,19 @@
 % 其他
 \newcommand{\sline}[1][magenta]{{\color{#1}\vspace{-5mm}\noindent\rule{\textwidth}{.4mm}}}
 
-\newcommand\tta[1]{\vskip 4bp \tikz \node[rectangle,minimum size=6mm,
-  fill=blue!60!white]{\White \ding{118} \msyh #1};}
+\newcommand\tta[1]{\vspace{3mm}\noindent\hskip5pt\tikz\node[rectangle,minimum
+size=6mm, fill=blue!60!white]{\White \ding{118} \msyh #1};}
 
 \newcommand\ttb[1]{\vskip 4bp \tikz \node[rectangle,rounded
   corners,minimum size=6mm, fill=purple!60!white,]{\White \ding{42}
     \msyh #1};}
 
-\newcommand\ttc[1]{\vskip 2bp \tikz \node[rectangle,minimum size=3mm,
-  fill=black!80!white,]{\White \msyh\scriptsize #1};}
+
+\newcommand\ttc[1]{\vspace{3mm}\noindent\hskip5pt\tikz\node[rectangle,minimum
+  size=6mm,fill=black!60!white]{\White \msyh\small #1};}
+
+%\newcommand\ttc[1]{\vskip 2bp \tikz \node[rectangle,minimum size=3mm,
+%  fill=black!80!white,]{\White \msyh\scriptsize #1};}
 
 % 示例代码
 \newcommand{\samplecode}[2][blue]{{\vspace{3mm}\noindent\hskip5pt\color{#1}
@@ -325,11 +331,15 @@
   \lstset{
     basicstyle=\footnotesize \sffamily \msyh ,% 字体为微软雅黑
     columns=flexible,%
-    framexleftmargin=.5mm,frame=shadowbox,%
-    rulesepcolor=\color{yellow},%
+    framexleftmargin=.5mm,%
+    %frame=shadowbox,%
+    %rulesepcolor=\color{yellow},%
+    rulecolor=\color{blue},%
     backgroundcolor=\color{white},%
     xleftmargin=3\fboxsep,%
     xrightmargin=3\fboxsep,%
+    aboveskip=1em,  %外框上边距
+    belowskip=-2em, %外框下边距
     numbers=left,numberstyle=\tiny,%
     numberblanklines=false,numbersep=7pt,%
     language=html,%
@@ -462,42 +472,50 @@ keywordstyle=\Cyan \bfseries
 %%%
 %\mainmatter
 
-%\include{lecturenotes/Java-course-arch}
-%% Week 01 %%
+\include{lecturenotes/Java-course-arch}
+% Week 01 %%
 
-%\include{lecturenotes/Introduction-to-Java}
-%\include{lecturenotes/Java-language-basic-and-flow-control}
-%\include{lecturenotes/exp-ide-and-basic}
+\include{lecturenotes/Introduction-to-Java}
+\include{lecturenotes/Java-language-basic-and-flow-control}
+\include{lecturenotes/exp-ide-and-basic}
 
-%% Week 02 %%
-%\include{lecturenotes/Java-array-and-string}
-%\include{lecturenotes/Advanced-object-oriented-programming-1}
+% Week 02 %%
+\include{lecturenotes/Java-array-and-string}
+\include{lecturenotes/Advanced-object-oriented-programming-1}
 
-%% Week 03 %%
-%\include{lecturenotes/Advanced-object-oriented-programming-2}
-%\include{lecturenotes/Java-memory-allocation}
+% Week 03 %%
+\include{lecturenotes/Advanced-object-oriented-programming-2}
+\include{lecturenotes/Java-memory-allocation}
 
-%% Week 04 %%
-%\include{lecturenotes/Advanced-class-features}
-%\include{lecturenotes/Java-generic-type}
+% Week 04 %%
+\include{lecturenotes/Advanced-class-features}
+\include{lecturenotes/Java-generic-type}
 
-%% Week 05 %%
-%\include{lecturenotes/Terminal-application-programming}
-%\include{lecturenotes/Set-list-map}
+% Week 05 %%
+\include{lecturenotes/Terminal-application-programming}
+\include{lecturenotes/Set-list-map}
 
-%% Week 06 %%
-%\include{lecturenotes/Java-GUI-programming}
+% Week 06 %%
+\include{lecturenotes/Java-GUI-programming}
 
-%% Week 07 %%
-%\include{lecturenotes/Java-exception-handling}
+% Week 07 %%
+\include{lecturenotes/Java-exception-handling}
 \include{lecturenotes/Advanced-IO-programming}
 
+% Week 08 %%
+\include{lecturenotes/Java-thread-programming}
 
-% \include{lecturenotes/Java-thread-programming}
+% Week 09 %%
+\include{lecturenotes/JavaEE-architecture}
+\include{lecturenotes/JavaEE-servlet-programming}
 
-%%%
-% \backmatter
 
+% Week 10 %%
+\include{lecturenotes/JavaEE-HTTP-request-handling}
+\include{lecturenotes/JavaEE-HTTP-response-handling}
+
+
+%\backmatter
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

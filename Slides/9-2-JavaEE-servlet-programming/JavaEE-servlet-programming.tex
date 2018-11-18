@@ -427,7 +427,7 @@ String driver = config.getInitParameter("driver");
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
 \frametitle{Servlet部署}
 
-编译好的Servlet class文件应该放到指定的Web应用目录下，才能被Web容器找到，这个目录为：\\
+编译好的Servlet class文件应该放到指定的Web应用目录下，才能被Web容器找到，这个路径为：\\
 {\Red /WEB-INF/classes/package/FileName.class}
 
 例如Servlet类LoginAction：
@@ -438,8 +438,8 @@ public class LoginAction extends HttpServlet {
 }
 \end{javaCode}
 
-存放目录为：
-{\Blue /WEB-INF/classes/ouc/java/servlet/LoginAction.class}
+存放路径为：{\Blue
+  /WEB-INF/classes/ouc/java/servlet/LoginAction.class}
 \end{frame}
 
 \section{Servlet示例} 

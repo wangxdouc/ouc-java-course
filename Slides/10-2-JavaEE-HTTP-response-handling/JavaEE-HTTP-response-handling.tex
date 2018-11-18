@@ -32,18 +32,14 @@ HTTP响应处理编程}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-\frametitle{参考书目}
-\begin{enumerate}
-\item 吕海东，张坤 编著，Java EE企业级应用开发实例教程，清华大学出版社，2010年8月
-\end{enumerate}  
-\end{frame}
+  \frametitle{学习目标}
 
-% \begin{frame}
-% \frametitle{本章学习目标}
-% \begin{enumerate}
-% \item 
-% \end{enumerate}  
-% \end{frame}
+  \begin{enumerate}
+  \item 掌握HTTP响应的内容，包括响应状态行、响应头、响应体。
+  \item 理解Java HTTP响应对象的类型及其生命周期，掌握响应对象的功能。
+  \item 学习并实践掌握部分响应对象方法的用法。
+  \end{enumerate}  
+\end{frame}
 
 \section*{大纲}
 \frame{\frametitle{大纲} \tableofcontents}
@@ -53,27 +49,30 @@ HTTP响应处理编程}
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
 \frametitle{HTTP响应的内容}
 
-在Web服务器接收请求处理后，向客户端发送HTTP响应（Response）。响应的内容包括：
+在Web服务器接收请求处理后，向客户端发送HTTP响应（Response）。
+
+\tta{响应的内容}
+
 \begin{itemize}
 \item 响应状态（Status Code）
 \item 响应头（Response Header）
 \item 响应体（Response Body）
 \end{itemize}
-
-Java Web中响应由响应对象Response完成。
 \end{frame}
 
 \begin{frame}[fragile,fragile] % [fragile]参数使得能够插入代码
-\frametitle{HTTP响应状态行} 
+\frametitle{\ding{182} HTTP响应状态行} 
 
 表明响应的状态信息，如成功、失败、错误。
 
-状态行组成：版本 / 状态代码 / 状态消息。
+状态行组成：{\kai\Red 版本 / 状态代码 / 状态消息}。
 
-状态行例子：
+\tta{状态行例子}
+
 \begin{verbatim}
 HTTP/1.1 200 ok
 \end{verbatim}
+
 \begin{enumerate}
 \item 版本：使用的HTTP协议版本，如HTTP/1.1；
 \item 状态代码：3位数字；
@@ -89,30 +88,37 @@ HTTP/1.1 200 ok
 \end{frame}
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{响应头} 
+\frametitle{\ding{183} 响应头} 
 
-Web服务器在向客户端发送HTTP响应时也可以包含响应头，赖指示客户端如何处理响应体，主要用来告诉浏览器响应的类型、字符编码和字节大小等信息，以使得浏览器知道如何处理响应内容。
+Web服务器在向客户端发送HTTP响应时也可以包含响应头，来指示客户端浏览器如何处理
+响应体，主要包括响应的类型、字符编码和字节大小等信息。
 
-常见响应头内容：
-\begin{enumerate}
+\tta{常见响应头内容}
+
+\begin{enumerate}\kai\small
 \item 指示HTTP响应可以接收到的文档类型集：Accept
 \item 告知客户可以接收的字符集：Accept-Charset
-\item 所有响应的字符编码集：Accept-Encoding
+\item 响应的字符编码集：Accept-Encoding
 \item 响应体的MIME类型：Content-Type
 \item 响应体的语言类型：Context-Language
 \item 响应体的长度和字节数：Content-Length
-\item 通知客户端到期时间：Expires 
+\item 通知客户端到期时间：Expires
 \item 缓存情况：Cache-Control
 \item 重定向到另一个URL地址：Redirect
 \end{enumerate}
+
 \end{frame}
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{响应体} 
+\frametitle{\ding{184} 响应体} 
 
-响应体类型由响应头确定，可以使任何类型。浏览器在处理响应体之前，会收到响应头，根据响应头的信息，确定如何处理响应体，如响应头的Content-Type为PDF，则浏览器会启动PDF Reader来处理此响应体以显示PDF文档。
+响应体类型由响应头确定，可以是任何类型。浏览器在处理响应体之前，会收到
+响应头，根据响应头的信息，确定如何处理响应体。{\kai\Red 如响应头
+  的Content-Type为PDF，则浏览器会启动PDF Reader来处理此响应体以显
+  示PDF文档。}
 
-常用类型包括：
+\tta{常用响应类型}
+
 \begin{enumerate}
 \item 纯文本：text/plain
 \item HTML：text/html
@@ -120,10 +126,18 @@ Web服务器在向客户端发送HTTP响应时也可以包含响应头，赖指�
 \item PDF：application/pdf
 \end{enumerate}
 
-注意：
-\begin{itemize}\kai
-\item 文本类型响应要求响应头中包含MIME类型和字符编码集，使用{\hei 字符输出流}向客户端发送响应体数据；
-\item 二进制数据类型响应需要在响应头中包含MIME类型，不要设置字符编码集，使用{\hei 字节输出流}向客户端发送响应体数据。
+\end{frame}
+
+\begin{frame}[fragile] % [fragile]参数使得能够插入代码
+\frametitle{\ding{184} 响应体} 
+
+\notice{注意}
+
+\begin{itemize}
+\item 文本类型响应要求响应头中包含MIME类型和字符编码集，使用{\hei\Red
+    字符输出流}向客户端发送响应体数据；
+\item 二进制数据类型响应需要在响应头中包含MIME类型，不要设置字符编码集，
+  使用{\hei\Blue 字节输出流}向客户端发送响应体数据。
 \end{itemize}
 \end{frame}
 
@@ -132,11 +146,11 @@ Web服务器在向客户端发送HTTP响应时也可以包含响应头，赖指�
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
 \frametitle{响应对象类型} 
 
-\wxd{响应对象类型}
+\tta{响应对象类型}
 
 javax.servlet.http.HttpServeletResponse
 
-\wxd{响应对象职责}
+\tta{响应对象职责}
 
 \begin{itemize}
 \item 设置状态行；
@@ -165,11 +179,11 @@ javax.servlet.http.HttpServeletResponse
 
 一般情况下，Web开发人员不需要通过编程来改变响应状态码，Web服务器会根据请求处理的情况自动设置状态码，并发送到客户端浏览器。例如，当客户请求不存在的URL地址时，Web服务器会自动设置状态码为404，状态消息为not found。
 
-\wxd{public void setStatus(int code)}
+\tta{public void setStatus(int code)}
 
 直接发送指定的响应状态码，没有设置状态消息，只有默认的状态消息，如果无对应状态消息则显示为空。
 
-\wxd{public void setStatus(int code, String message)}
+\tta{public void setStatus(int code, String message)}
 
 设置指定的状态码，同时设定自定义的状态消息，可以修改默认的状态消息。该方法在Servlet 2.5后被舍弃，一般不要使用。
 
@@ -178,7 +192,7 @@ javax.servlet.http.HttpServeletResponse
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
 \frametitle{设置响应状态码} 
 
-\wxd{public void sendError(int sc) throws IOException}
+\tta{public void sendError(int sc) throws IOException}
 
 向客户端发送指定的错误信息码，可以是任意定义的整数。
 
@@ -187,7 +201,7 @@ response.setCharacterEncoding("GBK");
 response.sendError(580); 
 \end{javaCode}
 
-\wxd{public void sendError(int sc, String msg) throws IOException}
+\tta{public void sendError(int sc, String msg) throws IOException}
 
 向客户端发送指定的错误信息码和自定义状态消息。
 
@@ -202,14 +216,14 @@ response.sendError(580, "自定义错误");
 
 {\hei 当客户端接收到响应状态为200时，浏览器会继续接收响应头信息，来确定响应体的类型和大小。}
 
-\wxd{public void setHeader(String name, String value)}
+\tta{public void setHeader(String name, String value)}
 
 将指定名称和值的响应头发送到客户端。
 \begin{javaCode}
 response.setHeader("Content-Type", "text/html");  
 \end{javaCode}
 
-\wxd{public void setIntHeader(String name, int value)}
+\tta{public void setIntHeader(String name, int value)}
 
 设置整数类型的响应头的名和值。 
 \begin{javaCode}
@@ -217,7 +231,7 @@ response.setHeader("Content-Length", 20);
 \end{javaCode}
 {\kai 实际项目中无需设定该响应头，Web服务器会自动计算并发送给浏览器。}
 
-\wxd{public void setDateHeader(String name,long date)}
+\tta{public void setDateHeader(String name,long date)}
 
 设定日期类型的响应头，参数date为GMT格式的日期。
 \end{frame}
@@ -225,15 +239,15 @@ response.setHeader("Content-Length", 20);
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
 \frametitle{设置响应头的便捷方法} 
 
-\wxd{public void setContentType(String type)}
+\tta{public void setContentType(String type)}
 
 直接设置响应内容类型MIME响应头。
 
-\wxd{public void setContentLength(int len)}
+\tta{public void setContentLength(int len)}
 
 设置响应体长度，以字节为单位。
 
-\wxd{void setCharacterEncoding(String charset)}
+\tta{void setCharacterEncoding(String charset)}
 
 设置响应字符集，包括响应状态，响应头和响应体。 
 \end{frame}
@@ -241,7 +255,7 @@ response.setHeader("Content-Length", 20);
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
 \frametitle{设置响应头的便捷方法} 
 
-\wxd{public void setBufferSize(int size)}
+\tta{public void setBufferSize(int size)}
 
 设定响应体的缓存字节数。
 
@@ -250,15 +264,20 @@ response.setHeader("Content-Length", 20);
 response.setBufferSize(4096);  
 \end{javaCode}
 
-{\kai Servlet在发送响应时，一般按照发送状态码、响应头和响应体的顺序进行，大的响应体缓存，可以允许Servlet有更多的时间发送状态码和响应头，这种情况发生在响应头和响应体同时写的情况。}
+{\kai Servlet在发送响应时，一般按照发送状态码、响应头和响应体的顺序进行，
+  大的响应体缓存，可以允许Servlet有更多的时间发送状态码和响应头，这种情
+  况发生在响应头和响应体同时写的情况。}
 
-提示：编程的时候最好先把响应头全部设定后，再发送响应体。
+\notice{提示}
+
+编程的时候最好先把响应头全部设定后，再发送响应体。
+
 \end{frame}
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
 \frametitle{响应对象方法——向客户端传送Cookie} 
 
-\wxd{public void addCookie(Cookie cookie);}
+\tta{public void addCookie(Cookie cookie);}
 
 此方法功能将Cookie对象放置在响应头中，随响应内容到浏览器客户端，并保存到客户端的PC的本地目录中。
 
@@ -272,7 +291,7 @@ response.addCookie(cookie01);
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
 \frametitle{响应对象方法——请求重定向} 
 
-\wxd{public void sendRedirect(String url)}
+\tta{public void sendRedirect(String url)}
 
 将对客户的响应重定向到新的URL上，让客户端浏览器对此URL进行请求。
 
@@ -289,13 +308,15 @@ response.addCookie(cookie01);
 
 响应体即浏览器实际显示的具体内容，可以时HTML网页，也可以是其他文件格式，由响应头的Content-Type决定。
 
-响应体的类型主要分为两大类，即文本类型和二进制类型。{\Red 文本类型使用字符输出流PrintWriter的对象来实现；二进制类型由OutputStream的对象来实现。}
+响应体的类型主要分为两大类，即文本类型和二进制类型。{\Red 文本类型使用
+  字符输出流PrintWriter的对象来实现；二进制类型由OutputStream的对象来实
+  现。}
 
-\wxd{public PrintWriter getWriter()}
+\tta{public PrintWriter getWriter()}
 
 取得字符输出流。
 
-\wxd{public ServletOutputStream getOutputStream()}
+\tta{public ServletOutputStream getOutputStream()}
 
 取得二进制输出流。
 
@@ -382,15 +403,18 @@ out.close();
 \end{enumerate}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{} 
+\begin{frame}
+  \frametitle{本节习题}
 
+  \tta{小编程}
+  \begin{enumerate}
+  \item 实践课堂示例代码，分别完成文本类型二进制类型的和响应的编程测试。
+    \begin{itemize}
+    \item 文本类型：浏览器显示一个网页；
+    \item 二进制类型：浏览器显示显示一张图片或播放一首音乐。      
+    \end{itemize}
+  \end{enumerate}
 \end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% \begin{figure}
-%% \centering
-%% \includegraphics[width=0.6\textwidth]{fig01.png}
-%% \end{figure}
 % TKS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 \centering
