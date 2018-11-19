@@ -1,12 +1,13 @@
-%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% 中文 XeTeX book/report 模板 
 %% book模式下，请将\frontmatter \mainmatter \backmater去掉注释
 %% report模式下，请将\frontmatter \mainmatter \backmater进行注释
-%% Maintained by Xiaodong Wang
-%% Data 2010/08/05
 %%
+%% Xiaodong Wang
+%% CS, Ocean University of China
+%% Date 2018/11/18
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[12pt,leqno]{report}
-
 \def\pgfsysdriver{pgfsys-dvipdfm.def}
 \usepackage[slantfont,boldfont]{xeCJK}
 \usepackage{fontspec,indentfirst}
@@ -23,19 +24,15 @@
          total={15.8cm,23.2cm},
          top=2cm,
          left=2.5cm,]{geometry}
-
 %% 设定行距
 \linespread{1.5} %% 1.5倍
-
 %% 自定义宏包解决段落首行缩进2个中文字符问题
 \usepackage{cjkindent} 
-
 %% 设定itemize等列表环境的间距
 \usepackage{enumitem}
 \setenumerate[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
 \setitemize[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
 \setdescription{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
-
 % 目录超链接
 \usepackage[pdfauthor={Xiaodong Wang},%
             pdftitle={Java应用与开发课程实验手册},%
@@ -47,7 +44,6 @@
             plainpages=false,%
             % pdftex,
             bookmarks]{hyperref}
-
 \hypersetup{colorlinks,%
             citecolor=green,%
             filecolor=magenta,%
@@ -114,7 +110,6 @@
 % 支持中文字号
 \newcommand{\CJKfontsize}[4]{%
   \fontsize{#1}{#2 plus#3 minus #4}\selectfont}
-
 \newcommand\zihao[1]{%
   \ifthenelse{\equal{#1}{0}}{%
     \CJKfontsize{42bp}{50.4pt}{.5pt}{.3pt}}{}%
@@ -156,21 +151,21 @@
 % Font setting by xeCJK
 \setCJKfamilyfont{NSimSun}{NSimSun}
 \newcommand{\song}{\CJKfamily{NSimSun}}
-%%%\setCJKfamilyfont{AdobeSongStd}{Adobe Song Std}
-%%%\newcommand{\AdobeSong}{\CJKfamily{AdobeSongStd}}
+%%% \setCJKfamilyfont{AdobeSongStd}{Adobe Song Std}
+%%% \newcommand{\AdobeSong}{\CJKfamily{AdobeSongStd}}
 \setCJKfamilyfont{FangSong}{FangSong_GB2312}
 \newcommand{\fang}{\CJKfamily{FangSong}}
-%%%\setCJKfamilyfont{AdobeFangsongStd}{Adobe Fangsong Std}
-%%%\newcommand{\AdobeFang}{\CJKfamily{AdobeFangsongStd}}
-%%%\setCJKfamilyfont{SimHei}{SimHei}
+%%% \setCJKfamilyfont{AdobeFangsongStd}{Adobe Fangsong Std}
+%%% \newcommand{\AdobeFang}{\CJKfamily{AdobeFangsongStd}}
+%%% \setCJKfamilyfont{SimHei}{SimHei}
 \setCJKfamilyfont{SimHei}{Adobe Heiti Std}
 \newcommand{\hei}{\CJKfamily{SimHei}}
-%%%\setCJKfamilyfont{AdobeHeitiStd}{Adobe Heiti Std}
-%%%\newcommand{\AdobeHei}{\CJKfamily{AdobeHeitiStd}}
-%%%\setCJKfamilyfont{KaiTi}{KaiTi}
+%%% \setCJKfamilyfont{AdobeHeitiStd}{Adobe Heiti Std}
+%%% \newcommand{\AdobeHei}{\CJKfamily{AdobeHeitiStd}}
+%%% \setCJKfamilyfont{KaiTi}{KaiTi}
 \setCJKfamilyfont{KaiTi}{Adobe Kaiti Std}
 \newcommand{\kai}{\CJKfamily{KaiTi}}
-%%%\setCJKfamilyfont{AdobeKaitiStd}{Adobe Kaiti Std}
+%%% \setCJKfamilyfont{AdobeKaitiStd}{Adobe Kaiti Std}
 \newcommand{\AdobeKai}{\CJKfamily{AdobeKaitiStd}}
 \setCJKfamilyfont{LiSu}{LiSu}
 \newcommand{\li}{\CJKfamily{LiSu}}
@@ -206,45 +201,28 @@
 \def\White{\color{white}}
 
 %% 自定义命令
-% 注意
 \newcommand{\notice}[2][red]{\vspace{3mm}\noindent\hskip5pt\shadowbox{\color{#1}
-    #2 \vspace{3mm}}}
-% 说明
+    #2 \vspace{3mm}}} % 注意
 \newcommand{\descript}[2][blue]{\vspace{3mm}\noindent\hskip5pt\shadowbox{\color{#1}
-    #2 \vspace{3mm}}}
-
-% TIP
+    #2 \vspace{3mm}}} % 说明
 \newcommand{\kgtip}[2][blue]{\vspace{3mm}\noindent\hskip5pt\framebox{\color{#1}\msyh
-    #2 \vspace{3mm}}}
-% 其他
+    #2 \vspace{3mm}}} % TIP
 \newcommand{\mysb}[2][magenta]{\ding{42}\hskip5pt\shadowbox{\color{#1}
     #2\vspace{3mm}}}
-
-% 其他
-\newcommand{\sline}[1][magenta]{{\color{#1}\vspace{-5mm}\noindent\rule{\textwidth}{.4mm}}}
-
+\newcommand{\sline}[1][magenta]{{\color{#1}\vspace{-5mm}\noindent\rule{\textwidth}{.4mm}}} % 分割线
 \newcommand\tta[1]{\vspace{3mm}\noindent\hskip5pt\tikz\node[rectangle,minimum
-size=6mm, fill=blue!60!white]{\White \ding{118} \msyh #1};}
-
+  size=6mm, fill=blue!60!white]{\White \ding{118} \msyh #1};}
 \newcommand\ttb[1]{\vskip 4bp \tikz \node[rectangle,rounded
   corners,minimum size=6mm, fill=purple!60!white,]{\White \ding{42}
     \msyh #1};}
-
-
 \newcommand\ttc[1]{\vspace{3mm}\noindent\hskip5pt\tikz\node[rectangle,minimum
   size=6mm,fill=black!60!white]{\White \msyh\small #1};}
-
-%\newcommand\ttc[1]{\vskip 2bp \tikz \node[rectangle,minimum size=3mm,
-%  fill=black!80!white,]{\White \msyh\scriptsize #1};}
-
 % 示例代码
 \newcommand{\samplecode}[2][blue]{{\vspace{3mm}\noindent\hskip5pt\color{#1}
-    Code: #2 \vspace{3mm}}}
-
+    示例代码： {\kai #2} \vspace{3mm}}}
 \newcommand{\samp}[2][blue]{{\vspace{3mm}\noindent\hskip5pt\color{#1}
-    Code: #2 \vspace{3mm}}}
-
-\newcommand\codeset[1]{\vskip 2bp \tikz
+    示例代码： {\kai #2} \vspace{3mm}}}
+\newcommand\codeset[1]{\vspace{2mm}\noindent\hskip5pt\tikz
   \node[rectangle,minimum size=3mm,
   fill=white!100!white,]{\Mage\msyh\small 课程配套代码 \ding{231}
     \Black #1};\vskip -8bp}
@@ -268,7 +246,6 @@ size=6mm, fill=blue!60!white]{\White \ding{118} \msyh #1};}
     numberblanklines=false, numbersep=7pt,%
     language=sh%
     }\lstset{#1}}{}
-
 
 % shCode环境
 \lstnewenvironment{shCode}[1][]{% for shell command code
@@ -349,7 +326,6 @@ size=6mm, fill=blue!60!white]{\White \ding{118} \msyh #1};}
     keywordstyle= \bfseries
     }\lstset{#1}}{}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \begin{document}
 % 增加 \ucite 命令使显示的引用为上标形式
 \newcommand{\ucite}[1]{$^{\mbox{\scriptsize \cite{#1}}}$}
@@ -358,7 +334,6 @@ size=6mm, fill=blue!60!white]{\White \ding{118} \msyh #1};}
 \renewcommand\figurename{图}
 \renewcommand\tablename{表}
 \newtheorem{definition}{定义}
-
 
 \renewcommand{\chaptername}{\ding{64}~\thechapter~\ding{64}}
 %\titleformat{\chapter}[hang]{\LARGE\hei\bfseries}{\chaptername}{1em}{}
@@ -371,16 +346,16 @@ size=6mm, fill=blue!60!white]{\White \ding{118} \msyh #1};}
 
 % 定义参数列表环境
 % Define new namelist environment to list the used parameters
- \newcommand{\namelistlabel}[1]{\mbox{#1}\hfil}
- \newenvironment{namelist}[1]{%
- \begin{list}{}
-      {
-        \let\makelabel\namelistlabel
-        \settowidth{\labelwidth}{XXXX}
-        \setlength{\leftmargin}{1.4\labelwidth}
-        }
-      }{%
- \end{list}}
+\newcommand{\namelistlabel}[1]{\mbox{#1}\hfil}
+\newenvironment{namelist}[1]{%
+  \begin{list}{}
+    {
+      \let\makelabel\namelistlabel
+      \settowidth{\labelwidth}{XXXX}
+      \setlength{\leftmargin}{1.4\labelwidth}
+    }
+  }{%
+  \end{list}}
 
 % 定义Rule环境
 \newenvironment{Rule} %
@@ -472,44 +447,43 @@ keywordstyle=\Cyan \bfseries
 %%%
 %\mainmatter
 
-\include{lecturenotes/Java-course-arch}
-% Week 01 %%
-
-\include{lecturenotes/Introduction-to-Java}
-\include{lecturenotes/Java-language-basic-and-flow-control}
-\include{lecturenotes/exp-ide-and-basic}
-
-% Week 02 %%
-\include{lecturenotes/Java-array-and-string}
-\include{lecturenotes/Advanced-object-oriented-programming-1}
-
-% Week 03 %%
-\include{lecturenotes/Advanced-object-oriented-programming-2}
-\include{lecturenotes/Java-memory-allocation}
-
-% Week 04 %%
-\include{lecturenotes/Advanced-class-features}
-\include{lecturenotes/Java-generic-type}
-
-% Week 05 %%
-\include{lecturenotes/Terminal-application-programming}
-\include{lecturenotes/Set-list-map}
-
-% Week 06 %%
-\include{lecturenotes/Java-GUI-programming}
-
-% Week 07 %%
-\include{lecturenotes/Java-exception-handling}
-\include{lecturenotes/Advanced-IO-programming}
-
-% Week 08 %%
-\include{lecturenotes/Java-thread-programming}
-
-% Week 09 %%
-\include{lecturenotes/JavaEE-architecture}
-\include{lecturenotes/JavaEE-servlet-programming}
-
-
+%\include{lecturenotes/Java-course-arch}
+%% Week 01 %%
+%
+%\include{lecturenotes/Introduction-to-Java}
+%\include{lecturenotes/Java-language-basic-and-flow-control}
+%\include{lecturenotes/exp-ide-and-basic}
+%
+%% Week 02 %%
+%\include{lecturenotes/Java-array-and-string}
+%\include{lecturenotes/Advanced-object-oriented-programming-1}
+%
+%% Week 03 %%
+%\include{lecturenotes/Advanced-object-oriented-programming-2}
+%\include{lecturenotes/Java-memory-allocation}
+%
+%% Week 04 %%
+%\include{lecturenotes/Advanced-class-features}
+%\include{lecturenotes/Java-generic-type}
+%
+%% Week 05 %%
+%\include{lecturenotes/Terminal-application-programming}
+%\include{lecturenotes/Set-list-map}
+%
+%% Week 06 %%
+%\include{lecturenotes/Java-GUI-programming}
+%
+%% Week 07 %%
+%\include{lecturenotes/Java-exception-handling}
+%\include{lecturenotes/Advanced-IO-programming}
+%
+%% Week 08 %%
+%\include{lecturenotes/Java-thread-programming}
+%
+%% Week 09 %%
+%\include{lecturenotes/JavaEE-architecture}
+%\include{lecturenotes/JavaEE-servlet-programming}
+%
 % Week 10 %%
 \include{lecturenotes/JavaEE-HTTP-request-handling}
 \include{lecturenotes/JavaEE-HTTP-response-handling}
