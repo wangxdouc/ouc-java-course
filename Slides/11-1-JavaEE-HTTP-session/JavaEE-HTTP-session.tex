@@ -2,7 +2,7 @@
 \input{../SLIDE-MAIN/slide-main}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % \titlepage
-\title[KevinW@OUC]{\hei {\huge Java EE企业应用系统设计}\\  
+\title[KevinW@OUC]{\hei {\huge Java应用与开发}\\  
 HTTP会话跟踪技术}
 \author[王晓东]{王晓东\\
   \href{mailto:wangxiaodong@ouc.edu.cn}{\footnotesize wangxiaodong@ouc.edu.cn}}
@@ -28,137 +28,165 @@ HTTP会话跟踪技术}
     \tableofcontents[current,currentsubsection] % 显示在目录中加亮的当前章节
   }
 }
- \frame{\titlepage}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{\titlepage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \begin{frame}
-\frametitle{参考书目}
-\begin{enumerate}
-\item 吕海东，张坤 编著，Java EE企业级应用开发实例教程，清华大学出版社，2010年8月
-\end{enumerate}  
-\end{frame}
+  \frametitle{学习目标}
 
-% \begin{frame}
-% \frametitle{本章学习目标}
-% \begin{enumerate}
-% \item 
-% \end{enumerate}  
-% \end{frame}
-
+  \begin{enumerate}
+  \item 
+  \item 
+  \item 
+  \end{enumerate}  
+\end{frame} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \section*{大纲}
 \frame{\frametitle{大纲} \tableofcontents}
 
 \section{会话基本概念}
 
 \begin{frame}
-\frametitle{什么是会话} 
-\begin{itemize}
-\item 在Web应用中把客户端浏览器开始请求Web服务器，访问不同Web文档进行请求/响应，到结束访问的一系列过程称为会话，即一次会话（Session）。
-\item 当用户访问第一个Java Web组件时，Java EE Web服务器自动为用户创建一个会话对象。
-\end{itemize}
+  \frametitle{什么是会话} 
 
-{\kai 例如，当当网进行图书浏览、购买、完成结算的全过程可能是一次会话；登录126邮箱，完成浏览收件箱、编写邮件、发送邮件可以是一次会话。}
+  \begin{itemize}
+  \item 在Web应用中把客户端浏览器开始请求Web服务器，访问不同Web文档进行
+    请求/响应，到结束访问的一系列过程称为会话，即一次会话（Session）。
+  \item 当用户访问第一个Java Web组件时，Java EE Web服务器自动为用户创建
+    一个会话对象。
+  \end{itemize}
+
+  {\Blue\kai 例如，当当网进行图书浏览、购买、完成结算的全过程可能是一次
+    会话；登录126邮箱，完成浏览收件箱、编写邮件、发送邮件、登出邮箱可以
+    是一次会话。}
 \end{frame}
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{会话跟踪} 
+  \frametitle{会话跟踪} 
 
-\begin{block}{会话跟踪}
-Web应用需要在用户访问的一个会话内，让Web服务器保存客户的信息（如客户的账号或客户的购物
-筐），称为会话跟踪。即Web服务器能使用某种技术保存客户的信息，在一个会话内，当客户在次访问
-时，服务器能够定位是先前的同一个客户。
-\end{block}
+  \tta{HTTP的固有设计“缺陷”}
 
-{\kai\Blue 由于Web应用采用HTTP协议，而HTTP协议是无状态、不持续的协议，所以需要独立于HTTP协议的会话跟踪技术，用于记录会话的状态信息。}
+  {\kai 由于Web应用采用HTTP协议，而HTTP协议是无状态、不持续的协议，所以需
+    要独立于HTTP协议的会话跟踪技术，用于记录会话的状态信息。}
+
+  \tta{什么是会话跟踪}
+
+  \begin{itemize}
+  \item 在一个会话内，当用户在次访问时，服务器需要能够定位是先前访问的同一个用户。
+  \item Web应用需要在用户访问的一个会话内，让Web服务器保存客户的信息（如客户的
+    账号或客户的购物车），称为{\bf\Red 会话跟踪}，即Web服务器必须使用某种技
+    术保存客户的信息。
+  \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{Java EE Web会话跟踪方法} 
+  \frametitle{Java EE Web会话跟踪方法} 
 
-\begin{enumerate}\kai
-\item {\hei\Red 重写URL} 将客户端的信息附加在请求URL地址的参数中，Web服务器取得参数信息，完成客户端信息的保存。
-\item {\hei\Red 隐藏表单字段} 将要保存的客户信息，如用户登录账号使用隐藏表单字段发送到服务器端，完成Web服务器保持客户状态信息。
-\item {\bf\Red Cookie} 使用Java EE API提供的Cookie对象，可以将客户信息保存在Cookie中，完成会话跟踪功能。
-\item {\hei\Red HttpSession对象} Java EE API专门提供了HttpSession会话对象保存客户的信息来实现会话跟踪。 
-\end{enumerate}
+  \begin{enumerate}\kai
+  \item {\hei\Red 重写URL} 将客户端的信息附加在请求URL地址的参数
+    中，Web服务器取得参数信息，完成客户端信息的保存。
+  \item {\hei\Red 隐藏表单字段} 将要保存的客户信息，如用户登录账号使用
+    隐藏表单字段发送到服务器端，完成Web服务器保持客户状态信息。
+  \item {\bf\Red Cookie} 使用Java EE API提供的Cookie对象，可以将客户信
+    息保存在Cookie中，完成会话跟踪功能。
+  \item {\hei\Red HttpSession对象} Java EE API专门提供了HttpSession会话
+    对象保存客户的信息来实现会话跟踪。
+  \end{enumerate}
+
+  一般3和4组合使用。
 \end{frame}
 
-\section{URL重写}
+\section{会话跟踪技术}
+
+\subsection{URL重写}
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{URL重写的实现} 
-\begin{itemize}
-\item 在进行HTTP请求时，可以在URL地址后直接附加请求参数，把客户端的数据传输到Web服务器端。
-\item Web服务器通过HttpServletRequest请求对象取得这些URL地址后面附加的请求参数。
-\item 这种URL地址后附加参数的方式称为{\hei URL重写}。
-\end{itemize}
+  \frametitle{URL重写的实现}
 
-\xyy{URL重新示例}
+  \ttb{\ding{182} 浏览器端构造URL请求}
+  
+  \begin{itemize}
+  \item 在进行HTTP请求时，可以在URL地址后直接附加请求参数，把客户端的数据传输到Web服务器端。
+  \item Web服务器通过HttpServletRequest请求对象取得这些URL地址后面附加的请求参数。
+  \item 这种URL地址后附加参数的方式称为{\hei URL重写}。
+  \end{itemize}
 
-\begin{xmlCode}
-<a href="../product/main.do?userid=9001&category=11">产品管理</a>
-\end{xmlCode}
+  \ttc{URL重写示例}
 
-此例中，将客户ID附加在地址栏上，以?name=value形式附加在URL后，多个参数使用\&符号进行间隔。
-\end{frame}
+  \begin{xmlCode}
+    <a href="../product/main.do?userid=9001&category=11">产品管理</a>
+  \end{xmlCode}
 
-\begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{URL重写的实现} 
-
-Web服务器端使用请求对象取得URL后附加的客户端参数数据。
-\begin{javaCode}
-String userid = request.getParameter("userid"); // 取得用户 ID 参数数据
-\end{javaCode}
-
-为保证Web应用在能在以后持续的请求/响应中实现会话跟踪，必须保证每次请求都要在URI地址中加
-入userid=9001参数，如下为Servlet重定向请求的附件参数：
-\begin{javaCode}
-response.sendRedirect("../product/view.do?productid=1201&userid=" + userid);
-\end{javaCode}
-进而实现会话跟踪。
+  {\kai\Blue 此例中，将客户ID附加在地址栏上，以?name=value形式附加在URL后，多个参数使用\&符号进行间隔。}
 \end{frame}
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{URL重写的缺点} 
+  \frametitle{URL重写的实现} 
 
-\begin{itemize}
-\item URL地址过长；
-\item 不同浏览器对URL传递参数的限制；
-\item 安全性缺陷；
-\item 编程繁杂。
-\end{itemize}
-\end{frame}
+  \ttb{\ding{183} 服务器端解析URL获取用户会话标识}
+  
+  Web服务器端使用请求对象取得URL后附加的客户端参数数据。
+  
+  \begin{javaCode}
+    String userid = request.getParameter("userid"); // 取得用户 ID 参数数据
+  \end{javaCode}
 
-\section{隐藏域表单元素}
-
-\begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{隐藏域表单的实现} 
-
-将会话数据被放在隐藏表单元素中，随表单的提交而发送到Web服务器，实现会话跟踪技术。 
-
-\xyy{实现技术代码}
-
-\begin{xmlCode}
-<form action="../product/main.do" method="post">
-  <input type="hidden" name="userid" value="9001" />
-  <input type="submit" value="提交" />
-</form>  
-\end{xmlCode}
 \end{frame}
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{隐藏域表单的缺点} 
-\begin{itemize}
-\item 安全性差\\
-虽然使用隐藏域表单和POST表单提交模式，防止了会话数据在浏览器地址栏显示，但用户可以在浏览器中使用页面查看源代码方式看到保存的会话信息，如用户登录账号和密码。
-\item 编程复杂\\
-如果需要保存的会话数据很多，就需要非常多的隐藏文本域元素，导致提交数据过大，影响Web应用的请求/响应性能，另外如果每个页面都有大堆的文本域对象，导致编程任务繁杂。
-\item 无法在超链接模式下工作\\
-如果使用隐藏表单实现会话跟踪，则要求整个Web应用的各个文档之间跳转必须使用表单提交模式，无法使用超链接方式，违反Web应用的用户习惯。
-\end{itemize}
+  \frametitle{URL重写的实现}
+
+  \ttb{\ding{184} 浏览器和服务器两端持续带会话标识通信}
+  
+  为保证Web应用在能在以后持续的请求/响应中实现会话跟踪，必须保证每次请求都要在URI地址中加
+  入userid=9001参数，进而实现会话跟踪。
+
+  如下为Servlet重定向请求的附加参数：
+  
+  \begin{javaCode}
+    response.sendRedirect("../product/view.do?productid=1201&userid=" + userid);
+  \end{javaCode}
 \end{frame}
 
-\section{Cookie}
+\begin{frame}[fragile] % [fragile]参数使得能够插入代码
+  \frametitle{URL重写的缺点}
+
+  \begin{itemize}
+  \item URL传递参数的限制
+  \item 安全性缺陷
+  \item 编程繁杂
+  \end{itemize}
+\end{frame}
+
+%%%%\section{隐藏域表单元素}
+%%%%
+%%%%\begin{frame}[fragile] % [fragile]参数使得能够插入代码
+%%%%\frametitle{隐藏域表单的实现} 
+%%%%
+%%%%将会话数据被放在隐藏表单元素中，随表单的提交而发送到Web服务器，实现会话跟踪技术。 
+%%%%
+%%%%\xyy{实现技术代码}
+%%%%
+%%%%\begin{xmlCode}
+%%%%<form action="../product/main.do" method="post">
+%%%%  <input type="hidden" name="userid" value="9001" />
+%%%%  <input type="submit" value="提交" />
+%%%%</form>  
+%%%%\end{xmlCode}
+%%%%\end{frame}
+%%%%
+%%%%\begin{frame}[fragile] % [fragile]参数使得能够插入代码
+%%%%\frametitle{隐藏域表单的缺点} 
+%%%%\begin{itemize}
+%%%%\item 安全性差\\
+%%%%虽然使用隐藏域表单和POST表单提交模式，防止了会话数据在浏览器地址栏显示，但用户可以在浏览器中使用页面查看源代码方式看到保存的会话信息，如用户登录账号和密码。
+%%%%\item 编程复杂\\
+%%%%如果需要保存的会话数据很多，就需要非常多的隐藏文本域元素，导致提交数据过大，影响Web应用的请求/响应性能，另外如果每个页面都有大堆的文本域对象，导致编程任务繁杂。
+%%%%\item 无法在超链接模式下工作\\
+%%%%如果使用隐藏表单实现会话跟踪，则要求整个Web应用的各个文档之间跳转必须使用表单提交模式，无法使用超链接方式，违反Web应用的用户习惯。
+%%%%\end{itemize}
+%%%%\end{frame}
+
+\subsection{Cookie}
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
 \frametitle{什么是Cookie} 
