@@ -1,4 +1,4 @@
-\chapter*{ Servlet编程}
+\chapter{ Servlet编程}
 \label{chp:JavaEE-servlet-programming}
 
 \section*{基本信息}
@@ -211,7 +211,7 @@ init方法在Web容器创建Servlet对象后立即执行，且只执行一次。
   }
 \end{javaCode}
 
-\kai 在init方法中使用Web容器传递的config对象取得Servlet的各种配置初始参数，进而使用这些参数完成读取数据库或其他外部资源。
+{\kai 在init方法中使用Web容器传递的config对象取得Servlet的各种配置初始参数，进而使用这些参数完成读取数据库或其他外部资源。}
 
 \subsection{重写destroy方法} 
 
@@ -227,7 +227,7 @@ init方法在Web容器创建Servlet对象后立即执行，且只执行一次。
   }
 \end{javaCode}
 
-\kai 代码中application为Web应用的上下文环境对象。
+{\kai 代码中application为Web应用的上下文环境对象。}
 
 \section{Servlet生命周期}
 
