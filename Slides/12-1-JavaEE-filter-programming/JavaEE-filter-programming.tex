@@ -2,7 +2,7 @@
 \input{../SLIDE-MAIN/slide-main}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % \titlepage
-\title[KevinW@OUC]{\hei {\huge Java EE企业应用系统设计}\\  
+\title[KevinW@OUC]{\hei {\huge Java应用与开发}\\  
 Java EE过滤器编程}
 \author[王晓东]{王晓东\\
   \href{mailto:wangxiaodong@ouc.edu.cn}{\footnotesize wangxiaodong@ouc.edu.cn}}
@@ -32,19 +32,11 @@ Java EE过滤器编程}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-\frametitle{参考书目}
+\frametitle{学习目标}
 \begin{enumerate}
-\item 吕海东，张坤 编著，Java EE企业级应用开发实例教程，清华大学出版社，2010年8月
-\end{enumerate}  
-\end{frame}
-
-\begin{frame}
-\frametitle{本章学习目标}
-\begin{enumerate}
-\item 什么是过滤器？
-\item 掌握过滤器的主要功能。
-\item 掌握过滤器编程。
-\item 掌握过滤器配置。
+\item 理解Java EE过滤器的概念。
+\item 掌握Java EE过滤器的主要功能。
+\item 掌握Java EE过滤器编程和配置方法。
 \end{enumerate}  
 \end{frame}
 
@@ -54,7 +46,7 @@ Java EE过滤器编程}
 \section{过滤器概述}
 
 \begin{frame}
-\frametitle{监听器概述} 
+\frametitle{过滤器概述} 
 
 \wxd{Web开发所遇到的常见问题}
 
@@ -315,10 +307,10 @@ public class CharEncodingFilter implements Filter {
 \frametitle{过滤器生命周期} 
 
 \begin{enumerate}\kai
-\item {\hei\Blue 创建阶段} 根据<filter-class>标记定义的过滤器类，将累定义加载到服务器内存，并调用此类的默认构造方法，创建过滤器对象。
+\item {\hei\Blue 创建阶段} 根据<filter-class>标记定义的过滤器类，将类定义加载到服务器内存，并调用此类的默认构造方法，创建过滤器对象。
 \item {\hei\Blue 初始化阶段} 创建FilterConfig对象，调用过滤器的init()方法，传入FilterConfig象，完成初始化工作。
 \item {\hei\Blue 过滤服务阶段} 每次请求符合过滤器配置的URL时，过滤方法都将执行一次。
-\item {\hei\Blue 销毁阶段} 当Web应用卸载或Web容器停止之前，destroy方法被Web容器调用，完成卸载操作，Web容器销毁过滤器对象。
+\item {\hei\Blue 销毁阶段} 当Web应用卸载或Web容器停止之前，destroy()方法被Web容器调用，完成卸载操作，Web容器销毁过滤器对象。
 \end{enumerate}
 \end{frame}
 
@@ -332,7 +324,7 @@ public class CharEncodingFilter implements Filter {
 调用ServletRequest或HttpServletRequest的各种set请求头方法对请求头进行修改。
 
 \begin{javaCode}
-request.setCharacterEncoding{"code"};  
+request.setCharacterEncoding("code");  
 \end{javaCode}
 
 {\kai 对文字乱码问题，可以在过滤器中进行集中处理，避免在每个Servlet或JSP中进行请求字符编码的转换。}
@@ -398,18 +390,25 @@ if ( 某条件成立 ) {
 \end{javaCode}
 \end{frame}
 
-\section{过滤器应用实例：用户登录验证和权限验证}
+\section{本节习题}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{} 
+\begin{frame}
+  \frametitle{本节习题}
 
+  \tta{简答题}
+  
+  \begin{enumerate}
+  \item 什么是过滤器？过滤器通常用于那些场景？
+  \item Java EE过滤器的工作原理是怎样的？
+  \end{enumerate}
+
+  \tta{小编程}
+
+  \begin{enumerate}
+  \item 编写过滤器，结合Session等技术，实现用户登录验证。
+  \end{enumerate}
 \end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% \begin{figure}
-%% \centering
-%% \includegraphics[width=0.6\textwidth]{fig01.png}
-%% \end{figure}
+
 % TKS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 \centering

@@ -158,8 +158,25 @@
     numbers=left,numberstyle=\tiny,%
     numberblanklines=false,numbersep=7pt,%
     language=Java, %
-    }\lstset{#1}}{}
+  }\lstset{#1}}{}
 
+
+\lstnewenvironment{jspCode}[1][]{% for JSP
+  \lstset{
+    basicstyle=\tiny\ttfamily,%
+    columns=flexible,%
+    framexleftmargin=.7mm, %
+    % frame=shadowbox,%
+    % rulesepcolor=\color{cyan},%
+    frame=single,%
+    backgroundcolor=\color{white},%
+    xleftmargin=4\fboxsep,%
+    xrightmargin=4\fboxsep,%
+    numbers=left,numberstyle=\tiny,%
+    numberblanklines=false,numbersep=7pt,%
+    language=xml, %
+  }\lstset{#1}}{}
+  
 \lstnewenvironment{shCode}[1][]{% for Java
   \lstset{
     basicstyle=\scriptsize\ttfamily,%

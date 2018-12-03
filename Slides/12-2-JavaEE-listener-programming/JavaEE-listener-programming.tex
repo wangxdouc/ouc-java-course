@@ -2,7 +2,7 @@
 \input{../SLIDE-MAIN/slide-main}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % \titlepage
-\title[KevinW@OUC]{\hei {\huge Java EE企业应用系统设计}\\  
+\title[KevinW@OUC]{\hei {\huge Java应用与开发}\\  
 Java EE监听器编程}
 \author[王晓东]{王晓东\\
   \href{mailto:wangxiaodong@ouc.edu.cn}{\footnotesize wangxiaodong@ouc.edu.cn}}
@@ -28,25 +28,16 @@ Java EE监听器编程}
     \tableofcontents[current,currentsubsection] % 显示在目录中加亮的当前章节
   }
 }
- \frame{\titlepage}
+\frame{\titlepage}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-\frametitle{参考书目}
-\begin{enumerate}
-\item 吕海东，张坤 编著，Java EE企业级应用开发实例教程，清华大学出版社，2010年8月
-\end{enumerate}  
+  \frametitle{学习目标}
+  \begin{enumerate}
+  \item 理解监听器的概念。
+  \item 掌握Java EE的监听器的主要功能和包含的类型。
+  \item 掌握监听器的编程和配置，学会编写监听器代码。
+  \end{enumerate}  
 \end{frame}
-
- \begin{frame}
- \frametitle{本章学习目标}
- \begin{enumerate}
- \item 什么是监听器？
- \item 监听器的主要功能和类型
- \item 监听器的编程和配置
- \item 监听器的测试和应用实例
- \end{enumerate}  
- \end{frame}
 
 \section*{大纲}
 \frame{\frametitle{大纲} \tableofcontents}
@@ -54,67 +45,72 @@ Java EE监听器编程}
 \section{监听器概述}
 
 \begin{frame}
-\frametitle{概述} 
+  \frametitle{什么是监听器} 
 
-监听器，顾名思义就是能监测其他对象活动的对象，当监测的对象发生变化时，会自动运行监听器方法，完成特定的功能和任务。 
+  \begin{block}{}
+    监听器，顾名思义就是能监测其他对象活动的对象，当被监测的对象发生变化
+    时，会自动触发运行监听器方法，完成特定的功能和任务。Java EE规范
+    在Servlet 2.3中引入了监听器（Listener）规范。
+  \end{block}
 
-Java EE规范在Servlet 2.3中引入了监听器（Listener）规范。
+  Java EE监听器能够检测Web应用的关键对象包括：
 
-监听器能够检测Web应用中如下的关键对象：
-
-\begin{itemize}
-\item ServletContext上下文
-\item HttpSession会话
-\item ServletRequest请求对象
-\end{itemize}
-
+  \begin{itemize}
+  \item ServletContext上下文
+  \item HttpSession会话
+  \item ServletRequest请求对象
+  \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{监听器的基本功能} 
-\begin{enumerate}\kai
-\item {\hei 网站访问人数或次数计数器}\\
-访问人数计数是所有综合门户网站的生命，是网站广告标价的基础。国内知名门户网站如搜狐，新浪等广告价格高，就在于其每日巨大的访问量所致。	
-\item {\hei 网站登录用户人数和在线用户监测}\\
-可以使用监听器完成Web应用已经登录人数和在线用户列表的登记处理。这是许多网上论坛，网上购物网站，Mail在线系统，即时通讯系统等必须具有的功能。
-\item {\hei 日志记录}\\
-对Web应用关键的事件进行记录，如Web服务器的启动和停止，用户的登录和注销等事件的登记，便于日后进行系统中追踪和维护。
-\item {\hei 会话超时后的清理工作}\\
-\end{enumerate}
+  \frametitle{监听器的应用场景} 
+  \begin{itemize}
+  \item {\hei 网站访问人数或次数计数器}\\
+    访问人数计数是所有综合门户网站的生命，是网站广告标价的基础。国内知
+    名门户网站如网易、新浪等广告价格高，就在于其每日巨大的访问量所致。
+  \item {\hei 网站登录用户人数和在线用户监测}\\
+    可以使用监听器完成Web应用已经登录人数和在线用户列表的登记处理。这是
+    许多网上论坛，网上购物网站，Mail在线系统，即时通讯系统等必须具有的
+    功能。
+  \item {\hei 日志记录}\\
+    对Web应用关键的事件进行记录，如Web服务器的启动和停止，用户的登录和
+    注销等事件的登记，便于日后进行系统中追踪和维护。
+  \item {\hei 会话超时后的清理工作}
+  \end{itemize}
 \end{frame}
 
 \section{Java EE监听器类型}
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{Java EE监听器类型} 
+  \frametitle{Java EE监听器类型} 
 
-\begin{enumerate}
-\item ServletContext对象监听器
-\item ServletContext对象属性监听器
-\item HttpSession对象监听器
-\item HttpSession对象属性监听器
-\item HttpServletRequest对象监听器
-\item HttpServletRequest属性监听器
-\end{enumerate}
+  \begin{enumerate}
+  \item ServletContext对象监听器
+  \item ServletContext对象属性监听器
+  \item HttpSession对象监听器
+  \item HttpSession对象属性监听器
+  \item HttpServletRequest对象监听器
+  \item HttpServletRequest属性监听器
+  \end{enumerate}
 \end{frame}
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{Java EE监听器类型} 
+  \frametitle{Java EE监听器类型} 
 
-\begin{center}\small
-\setlength{\extrarowheight}{1.5mm}
-\rowcolors[]{1}{red!20}{red!10}
-\begin{tabular}{l|c|l}
-监听器接口 & 引入版本 & 监听器事件\\
-ServletContextListener & 2.3 & ServletContextEvent\\
-ServletContextAttributeListener & 2.3 & ServletContextAttributeEvent\\
-HttpSessionListener & 2.3 & HttpSessionEvent\\
-HttpSessionActivationListener & 2.3 & HttpSessionEvent\\
-HttpSessionBindingListener & 2.3 & HttpSessionBindingEvent\\
-ServletRequestListener & 2.4 & ServletRequestEvent\\
-ServletRequestAttributeListener & 2.4 & ServletRequestAttributeEvent\\
-\end{tabular}
-\end{center}
+  \begin{center}\scriptsize
+    \setlength{\extrarowheight}{1.5mm}
+    \rowcolors[]{1}{red!20}{red!10}
+    \begin{tabular}{l|c|l}
+      监听器接口 & 引入版本 & 监听器事件\\
+      ServletContextListener & 2.3 & ServletContextEvent\\
+      ServletContextAttributeListener & 2.3 & ServletContextAttributeEvent\\
+      HttpSessionListener & 2.3 & HttpSessionEvent\\
+      HttpSessionActivationListener & 2.3 & HttpSessionEvent\\
+      HttpSessionBindingListener & 2.3 & HttpSessionBindingEvent\\
+      ServletRequestListener & 2.4 & ServletRequestEvent\\
+      ServletRequestAttributeListener & 2.4 & ServletRequestAttributeEvent\\
+    \end{tabular}
+  \end{center}
 \end{frame}
 
 \section{ServletContext对象监听器}
@@ -122,18 +118,22 @@ ServletRequestAttributeListener & 2.4 & ServletRequestAttributeEvent\\
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
 \frametitle{ServletContext对象监听器}
 
-ServletContext对象监听器能监听该对象的创建和销毁二个关键的状态，并分别提供了不同的方法来实现对该对象创建和销毁的监听和处理。
-\begin{enumerate}
-\item JavaEE规范定义了ServletContext监听器接口，来规范监听器的编写，javax.serlvet.ServletContextListener。
-\item 提供了ServletContext监听器事件类，javax.servlet.ServletContextEvent。
+ServletContext对象监听器能监听Web应用上下文对象的创建和销毁这二个关键的状
+态，并分别提供了不同的方法来实现对该对象创建和销毁的监听和处理。
+
+\begin{itemize}\kai
+\item JavaEE规范定义了ServletContext监听器接
+  口javax.serlvet.ServletContextListener来规范监听器的编写。
+\item 提供了ServletContext监听器事件
+  类javax.servlet.ServletContextEvent。
 \item 定义了取得监听对象本身的方法。
-\end{enumerate}
+\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
 \frametitle{ServletContext对象监听器编程} 
 
-\begin{enumerate}
+\begin{enumerate}\kai
 \item 定义监听器类并实现javax.servlet.ServletContextListener接口。
 \item 实现接口中定义的如下两个方法：
   \begin{itemize}
@@ -148,32 +148,36 @@ ServletContext对象监听器能监听该对象的创建和销毁二个关键的
 \frametitle{ServletContext对象监听器示例} 
 
 \begin{javaCode}
-public class ApplicationStatusListener implements ServletContextListener {
-  ...
-  public void contextInitialized(ServletContextEvent event) {
-    ServletContext application = event.getServletContext();
-    application.setAttribute("userOnlineNumber", userOnlineNumber);
-    WebVisitNumber = UserOnline.getVisitNumber();
-    application.setAttribute("WebVisitNumber", WebVisitNumber);
-  }
-  public void contextDestroyed(ServletContextEvent event) {
-    ServletContext application = event.getServletContext();
-    WebVisitNumber = (Integer) application.getAttribute("WebVisitNumber");
-    UserOnline.saveVisitNumber(userOnlineNumber);
-  }
-}  
+  public class ApplicationStatusListener implements ServletContextListener {
+    ...
+    public void contextInitialized(ServletContextEvent event) {
+      ServletContext application = event.getServletContext();
+      application.setAttribute("userOnlineNumber", userOnlineNumber);
+      WebVisitNumber = UserOnline.getVisitNumber();
+      application.setAttribute("WebVisitNumber", WebVisitNumber);
+    }
+    public void contextDestroyed(ServletContextEvent event) {
+      ServletContext application = event.getServletContext();
+      WebVisitNumber = (Integer) application.getAttribute("WebVisitNumber");
+      UserOnline.saveVisitNumber(userOnlineNumber);
+    }
+  }  
 \end{javaCode}
 
 \begin{itemize}\kai
-\item 监听器监测到ServletContext对象创建，自动执行contextInitialized方法，取得以前保存的网站访问次数，将历史访问次数存入ServletContext对象中。将来监测到用户访问网站时，自动进行计数器累加。
-\item 监听器检测到ServletContext对象要销毁，Web容器自动执行contextDestroyed方法，完成从ServletContext对象中取得累计访问次数并写入数据库中。
+\item 监听器监测到ServletContext对象创建，自动执行contextInitialized方
+  法，取得以前保存的网站访问次数，将历史访问次数存入ServletContext对象
+  中。将来监测到用户访问网站时，自动进行计数器累加。
+\item 监听器检测到ServletContext对象要销毁，Web容器自动执
+  行contextDestroyed方法，完成从ServletContext对象中取得累计访问次数并
+  写入数据库中。
 \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
 \frametitle{ServletContext 对象监听器配置} 
 
-在/WEB-INF/web.xml中进行配置。
+在/WEB-INF/web.xml中配置监听器。
 
 \begin{xmlCode}
 <!-- ServletContext对象创建和销毁监听器 -->
@@ -182,7 +186,7 @@ public class ApplicationStatusListener implements ServletContextListener {
 </listener>  
 \end{xmlCode}
 
-不需要映射地址，也无需初始化参数，只需要监听器的包和类名即可。
+{\bf\Red 不需要映射地址，也无需初始化参数，只需要监听器的包和类名即可。}
 \end{frame}
 
 \section{ServletContext对象属性监听器}
@@ -209,7 +213,7 @@ Servlet作为Web应用级共享容器，可以使用如下操作ServletContext�
 口javax.servlet.ServletContextAttributeListener 和事件类
 javax.servlet.ServletContextAttributeEvent，接口方法包括：
 
-\begin{itemize}
+\begin{itemize}\small
 \item public void attributeAdded(ServletContextAttributeEvent event);
 \item public void attributeRemoved(ServletContextAttributeEvent
   event);
@@ -235,43 +239,52 @@ ServletContext对象的实例；
 \begin{frame}[fragile] % [fragile]参数使得能够插入代码
 \frametitle{ServletContext对象属性监听器示例}
 
-\xyy{代码}
+\xyy{监听器编写}
 
 \begin{javaCode}
-public class ApplicationAttributeListener implements
-ServletContextAttributeListener {
-  private String name = null;
-  private String value = null;
-  
-  public void attributeAdded(ServletContextAttributeEvent event) {
-    name = event.getName();
-    value = (String) evnet.getValue();
-    System.out.println("New Attribute added: " + "name" + "=" + "value");
+  public class ApplicationAttributeListener implements
+  ServletContextAttributeListener {
+    private String name = null;
+    private String value = null;
+    
+    public void attributeAdded(ServletContextAttributeEvent event) {
+      name = event.getName();
+      value = (String) evnet.getValue();
+      System.out.println("New Attribute added: " + "name" + "=" + "value");
+    }
+
+    // Other Methods.
+
   }
-
-  // Other Methods.
-
-}
 \end{javaCode}
-\xyy{配置}
+
+\xyy{监听器配置}
 \begin{xmlCode}
-<!-- ServletContext对象创建和销毁监听器 -->
-<listener>
-  <listener-class>org.javaee.ApplicationAttributeListener</listener-class>
-</listener> 
+  <!-- ServletContext对象创建和销毁监听器 -->
+  <listener>
+    <listener-class>org.javaee.ApplicationAttributeListener</listener-class>
+  </listener> 
 \end{xmlCode}
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile] % [fragile]参数使得能够插入代码
-\frametitle{} 
+\section{本节习题}
 
+\begin{frame}
+  \frametitle{本节习题}
+
+  \tta{简答题}
+  
+  \begin{enumerate}
+  \item 什么是监听器？监听器通常用于那些场景？
+  \item Java EE提供哪些类型的监听器？
+  \end{enumerate}
+
+  \tta{小编程}
+
+  \begin{enumerate}
+  \item 编写代码，自行学习除了ServletContext对象监听器之外的其他监听器类型。
+  \end{enumerate}
 \end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% \begin{figure}
-%% \centering
-%% \includegraphics[width=0.6\textwidth]{fig01.png}
-%% \end{figure}
 % TKS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 \centering
