@@ -1,4 +1,4 @@
-package ouc.javaweb;
+package ouc.javaweb.servlet;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
