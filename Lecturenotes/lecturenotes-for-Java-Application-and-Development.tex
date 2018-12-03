@@ -281,6 +281,26 @@
     numberblanklines=false,numbersep=7pt,%
     language=c,%
     keywordstyle= \bfseries
+  }\lstset{#1}}{}
+
+% jspCode环境
+\lstnewenvironment{jspCode}[1][]{%
+  \lstset{
+    basicstyle=\footnotesize \ttfamily,%
+    columns=flexible,%
+    framexleftmargin=.7mm,%
+    %frame=shadowbox,%
+    %rulesepcolor=\color{gray},%
+    backgroundcolor=\color{white},%
+    xleftmargin=7\fboxsep,%
+    xrightmargin=2\fboxsep,%
+    aboveskip=1em,  %外框上边距
+    belowskip=-2em, %外框下边距
+    numbers=left,numberstyle=\tiny,%
+    numberblanklines=false,numbersep=7pt,%
+    language=java,%
+    escapeinside={\/\/*}{*)}, % if you want to add a comment within your code
+    keywordstyle= \bfseries
     }\lstset{#1}}{}
 
 % javaCode环境
@@ -493,9 +513,11 @@ keywordstyle=\Cyan \bfseries
 %\include{lecturenotes/JavaEE-ServletContext-and-Web-configuration}
 
 %% Week 12 %%
-\include{lecturenotes/JavaEE-filter-programming}
-\include{lecturenotes/JavaEE-listener-programming}
+%\include{lecturenotes/JavaEE-filter-programming}
+%\include{lecturenotes/JavaEE-listener-programming}
 
+%% Week 13 %%
+\include{lecturenotes/JavaEE-JSP}
 %\backmatter
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}
