@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -22,7 +23,15 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 		// Code goes here.
+		HttpSession session = request.getSession();
+		String username = (String) session.getAttribute("username");
+		if (username != null) {
+			response.sendRedirect("index/index.html");
+		} else {
+			response.sendRedirect("user/login.html");
+		}
 	}
 
 	/**
@@ -33,8 +42,14 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// Code goes here.
-		
-		response.sendRedirect("index.html");
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		if ("admin".equals(username) && "admin".equals(password)) {
+			request.getSession().setAttribute("username", username);
+			response.sendRedirect("index/index.html");
+		} else {
+			response.sendRedirect("user/login.html");
+		}
 	}
 
 }
