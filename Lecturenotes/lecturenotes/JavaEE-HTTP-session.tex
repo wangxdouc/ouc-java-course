@@ -498,3 +498,24 @@ Java EE API提供{\bf\Blue javax.servlet.http.Cookie}类来表达一个Cookie对
   }
 \end{javaCode}
 
+\section{课后习题}
+  
+\tta{小编程}
+
+实践课堂会话对象的应用实例，编写完整的用户登录、登录后才能浏览的主页，并在主页中包含登出按钮。
+
+\begin{enumerate}
+\item 登录页面为login.html，登录处理Servlet为LoginServlet.java，使用
+  表单完成用户登录数据的提交并通过LoginServlet查询判断用户名和密码是
+  否合法（可以硬编码，无需查询数据库），如用户名和密码合法则{\bf\Red
+    重定向}到index.html。
+  \begin{javaCode}
+    if ("admin".equals(username) && "admin".equals(password)) {
+      response.sendRedirect("index.html");
+    } else {
+      response.sendRedirect("login.html");
+    }
+  \end{javaCode}
+\item index.html中需要包含Logout按钮，用户点击Logout按钮则销毁当前会
+  话并{\bf\Red 重定向}到login.html。
+\end{enumerate}

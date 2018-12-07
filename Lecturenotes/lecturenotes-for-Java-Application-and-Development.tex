@@ -413,47 +413,44 @@ keywordstyle=\Cyan \bfseries
 % 更改enumerate的列表项符号
 %% \renewcommand{\labelenumi}{[\arabic{enumi}]}
 
-%%%%%% %%%%% 标题 作者 日期 %%%%%
-%%%%%% 
-%%%%%% \title{\Huge{Java应用与开发课程实验手册 \thanks{配套中国海洋大学信息科学与工程学院计算机科学与技术系《Java应
-%%%%%%       用与开发》课程使用。}}}
-%%%%%% \author{王晓东\\
-%%%%%%   中国海洋大学\\
-%%%%%%   信息科学与工程学院计算机科学与技术系}
-%%%%%% 
-%%%%%% \date{\today} \maketitle
-%%%%%% 
-%%%%%% \pagenumbering{alph}
-%%%%%% \maketitle
-%%%%%% 
-%%%%%% %%%
-%%%%%% % \frontmatter
-%%%%%% \clearpage\pagenumbering{roman}
-%%%%%% \include{logs}
-%%%%%% 
-%%%%%% %%%%% 生成目录 %%%%%
-%%%%%% \tableofcontents 
-%%%%%% \newpage
-%%%%%% \listoffigures % 图目录
-%%%%%% \listoftables % 标目录
-%%%%%% %%%%%%%%%%%%%%%%%%
-%%%%%% \chapter*{序\quad 言}
-%%%%%% 
-%%%%%% \pagestyle{plain}
-%%%%%% 
-%%%%%% 本文档为中国海洋大学信息科学与工程学院计算机科学与技术系《J2EE应用与开
-%%%%%% 发》实验课程参考资料。
-%%%%%% 
-%%%%%% 本文档参考了多方书籍、资料和源代码而编写，在此对原始资料的作者和编者表
-%%%%%% 示感谢。但为保证实验授课质量，并没有随本文档公开原始参考资料的出处，望
-%%%%%% 相关作者和编者谅解！
-%%%%%% 
-%%%%%% 基于~GNU~通用公共许可证（General Public License）的条款，任何人有权复制、
-%%%%%% 发布和~/~或修改本文。虽然由于参考资料的版权限制，本开放发布策略并不算非
-%%%%%% 常合理。
-%%%%%% 
-%%%%%% \pagestyle{headings}
-%%%%%% \clearpage\pagenumbering{arabic}
+%%%%% 标题 作者 日期 %%%%%
+
+\title{\Huge{\hei 《Java应用与开发》课程讲义}}
+
+\author{中国海洋大学信息科学与工程学院\\
+  王晓东}
+  
+
+\date{2018年9月} \maketitle
+
+\pagenumbering{alph}
+\maketitle
+
+%%%
+%\frontmatter
+\clearpage\pagenumbering{roman}
+\include{logs}
+
+%%%%% 生成目录 %%%%%
+\tableofcontents 
+\newpage
+\listoffigures % 图目录
+\listoftables % 标目录
+%%%%%%%%%%%%%%%%%%
+\chapter*{序\quad 言}
+
+\pagestyle{plain}
+
+本讲义配套中国海洋大学信息科学与工程学院计算机科学与技术系《Java应用与开
+发》课程使用。
+
+本讲义参考了多方书籍、资料和源代码而编写，在此对原始资料的作者和编者表
+示感谢。但为保证课堂教学进度和实验授课质量，并没有随本文档公开原始参考
+资料的出处，望相关作者和编者谅解！
+
+
+\pagestyle{headings}
+\clearpage\pagenumbering{arabic}
 
 %%%%% 页眉 页脚 %%%%%
 \pagestyle{fancy}
@@ -467,57 +464,58 @@ keywordstyle=\Cyan \bfseries
 %%%
 %\mainmatter
 
-%\include{lecturenotes/Java-course-arch}
-%% Week 01 %%
-%
-%\include{lecturenotes/Introduction-to-Java}
-%\include{lecturenotes/Java-language-basic-and-flow-control}
-%\include{lecturenotes/exp-ide-and-basic}
-%
-%% Week 02 %%
-%\include{lecturenotes/Java-array-and-string}
-%\include{lecturenotes/Advanced-object-oriented-programming-1}
-%
-%% Week 03 %%
-%\include{lecturenotes/Advanced-object-oriented-programming-2}
-%\include{lecturenotes/Java-memory-allocation}
-%
-%% Week 04 %%
-%\include{lecturenotes/Advanced-class-features}
-%\include{lecturenotes/Java-generic-type}
-%
-%% Week 05 %%
-%\include{lecturenotes/Terminal-application-programming}
-%\include{lecturenotes/Set-list-map}
-%
-%% Week 06 %%
-%\include{lecturenotes/Java-GUI-programming}
-%
-%% Week 07 %%
-%\include{lecturenotes/Java-exception-handling}
-%\include{lecturenotes/Advanced-IO-programming}
-%
-%% Week 08 %%
-%\include{lecturenotes/Java-thread-programming}
-%
-%% Week 09 %%
-%\include{lecturenotes/JavaEE-architecture}
-%\include{lecturenotes/JavaEE-servlet-programming}
-%
-%% Week 10 %%
-%\include{lecturenotes/JavaEE-HTTP-request-handling}
-%\include{lecturenotes/JavaEE-HTTP-response-handling}
-%
+\include{lecturenotes/Java-course-arch}
+% Week 01 %%
+
+\include{lecturenotes/Introduction-to-Java}
+\include{lecturenotes/Java-language-basic-and-flow-control}
+\include{lecturenotes/exp-ide-and-basic}
+
+% Week 02 %%
+\include{lecturenotes/Java-array-and-string}
+\include{lecturenotes/Advanced-object-oriented-programming-1}
+
+% Week 03 %%
+\include{lecturenotes/Advanced-object-oriented-programming-2}
+\include{lecturenotes/Java-memory-allocation}
+
+% Week 04 %%
+\include{lecturenotes/Advanced-class-features}
+\include{lecturenotes/Java-generic-type}
+
+% Week 05 %%
+\include{lecturenotes/Terminal-application-programming}
+\include{lecturenotes/Set-list-map}
+
+% Week 06 %%
+\include{lecturenotes/Java-GUI-programming}
+
+% Week 07 %%
+\include{lecturenotes/Java-exception-handling}
+\include{lecturenotes/Advanced-IO-programming}
+
+% Week 08 %%
+\include{lecturenotes/Java-thread-programming}
+
+% Week 09 %%
+\include{lecturenotes/JavaEE-architecture}
+\include{lecturenotes/JavaEE-servlet-programming}
+
+% Week 10 %%
+\include{lecturenotes/JavaEE-HTTP-request-handling}
+\include{lecturenotes/JavaEE-HTTP-response-handling}
+
 %%% Week 11 %%
-%\include{lecturenotes/JavaEE-HTTP-session}
-%\include{lecturenotes/JavaEE-ServletContext-and-Web-configuration}
-
+\include{lecturenotes/JavaEE-HTTP-session}
+\include{lecturenotes/JavaEE-ServletContext-and-Web-configuration}
+%
 %% Week 12 %%
-%\include{lecturenotes/JavaEE-filter-programming}
-%\include{lecturenotes/JavaEE-listener-programming}
+\include{lecturenotes/JavaEE-filter-programming}
+\include{lecturenotes/JavaEE-listener-programming}
 
-%% Week 13 %%
+% Week 13 %%
 \include{lecturenotes/JavaEE-JSP}
+
 %\backmatter
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}
