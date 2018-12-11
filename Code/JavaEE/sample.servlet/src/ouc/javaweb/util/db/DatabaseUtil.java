@@ -16,7 +16,7 @@ public class DatabaseUtil {
 	public static String USERNAME;
 	public static String PASSWORD;
 	public static String DRIVER;
-	private static ResourceBundle rb = ResourceBundle.getBundle("ouc.cs.course.java.musicserver.util.db.db-config");
+	private static ResourceBundle rb = ResourceBundle.getBundle("ouc.javaweb.util.db.db-config");
 
 	private DatabaseUtil() {
 	}

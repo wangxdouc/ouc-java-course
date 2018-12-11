@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author xiaodong
  *
  */
-@WebFilter(filterName = "LoginVerificationFilter", urlPatterns = { "/index/*" })
+@WebFilter(filterName = "LoginVerificationFilter", urlPatterns = { "/index/*", "/admin/*" })
 public class LoginVerificationFilter implements Filter {
 
 	public LoginVerificationFilter() {

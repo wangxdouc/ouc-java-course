@@ -1,5 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang=zh>
+<html lang=zh-CN>
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="Expires" content="0">
@@ -10,6 +12,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" type="text/css"
 	href="../bootstrap/4.1.3/css/bootstrap.min.css" />
+<script src="../bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
 <style>
 #content-sec3 {
@@ -50,10 +53,10 @@
 </head>
 <body>
 	<nav class="navbar navbar-dark bg-dark">
-		<a class="navbar-brand" href="index.html">Java Web Teaching</a>
+		<a class="navbar-brand" href="index.html">Java Web Teaching</a> 
 		<ul class="navbar-nav px-3 bg-danger rounded">
 			<li class="nav-item text-nowrap"><a class="nav-link"
-				href="../logout"> 退出</a></li>
+				href="../logout"> <%=session.getAttribute("username")%> 退出</a></li>
 		</ul>
 	</nav>
 
@@ -69,7 +72,7 @@
 						style="position: absolute; top: 20px; left: 20px;">
 						<h2 class="title title-sub-line">欢迎来到 Java Web
 							的世界！如果你不努力的去了解，你怎么知道喜不喜欢呢？</h2>
-						<a href="data-form.html" class="btn btn-outline-danger">元芳你怎么看？</a>
+						<a href="data-form.html" class="btn btn-outline-danger"><%=session.getAttribute("username")%>，你怎么看？</a>
 					</div>
 				</div>
 				<figcaption class="figure-caption text-right">心中的风景</figcaption>
