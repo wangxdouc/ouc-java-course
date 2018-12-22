@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<framework>
+	<controller name="login"
+		class="ouc.user.controller.LoginAction">
+		<result name="input">/login.jsp</result>
+		<result name="error">/error.jsp</result>
+		<result name="success">/index.jsp</result>
+	</controller>
+	
+	<controller name="index"
+		class="ouc.user.controller.IndexAction">
+		<result name="success">/index.jsp</result>
+	</controller>
+</framework>

@@ -69,4 +69,7 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {23.1}{\ignorespaces JSP的执行过程\relax }}{279}{figure.caption.66}
 \contentsline {figure}{\numberline {23.2}{\ignorespaces inlcude动作和指令的差异\relax }}{283}{figure.caption.67}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {24.1}{\ignorespaces MVC设计模式\relax }}{297}{figure.caption.68}
+\contentsline {figure}{\numberline {24.2}{\ignorespaces Strut2框架工作流程\relax }}{306}{figure.caption.69}
 \contentsfinish 
