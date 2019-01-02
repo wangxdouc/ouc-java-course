@@ -44,6 +44,9 @@ public class FileUploadServlet extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 
+		request.setCharacterEncoding("utf-8");
+		System.out.println(request.getParameter("title"));
+		
 		// 指定文件上传存储路径
 		// String savePath =
 		// request.getServletContext().getRealPath("/WEB-INF/uploadFile");
@@ -71,6 +74,10 @@ public class FileUploadServlet extends HttpServlet {
 			part.write(savePath + File.separator + fileName);
 		} else { // 一次性上传多个文件
 			for (Part part : parts) { // 循环处理上传的文件
+ 				if(part.getContentType() == null) { // 排除表单文本域
+ 					continue;
+ 				}
+				
 				// 获取请求头，请求头的格式：form-data; name="file"; filename="abc.jpg"
 				String header = part.getHeader("content-disposition");
 				// 获取文件名

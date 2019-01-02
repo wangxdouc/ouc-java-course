@@ -26,6 +26,10 @@ body {
 						<form action="${pageContext.request.contextPath}/upload"
 							method="post" enctype="multipart/form-data">
 							<div class="form-group">
+								<label for="exampleInputEmail1">文件描述</label> <input
+									type="text" name="title" class="form-control-file">
+							</div>
+							<div class="form-group">
 								<input type="file" name="file" class="form-control-file">
 							</div>
 
