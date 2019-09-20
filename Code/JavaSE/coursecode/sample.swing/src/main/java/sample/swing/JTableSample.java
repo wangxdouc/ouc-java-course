@@ -17,8 +17,7 @@ public class JTableSample {
 		JFrame myFrame = new JFrame("Table␣Example");
 
 		Object data[][] = { { 1, "张三", "男", "18", "010.82607080" }, { 2, "李四", "女", "24", "010.82607080" },
-				{ 3, "王五", "男", "30", "010.82607080" }, // ... ...
-		};
+				{ 3, "王五", "男", "30", "010.82607080" } };
 
 		String columnNames[] = { "编号", "姓名", "性别", "年龄", "电话" };
 		JTable table = new JTable(data, columnNames);
@@ -31,6 +30,7 @@ public class JTableSample {
 				System.exit(0);
 			}
 		});
+
 		myFrame.setVisible(true);
 	}
 }

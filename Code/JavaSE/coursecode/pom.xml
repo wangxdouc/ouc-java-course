@@ -22,5 +22,7 @@
 		<module>sample.awt</module>
 		<module>sample.exception</module>
 		<module>sample.io</module>
+		<module>sample.classloader</module>
+		<module>sample.basic</module>
 	</modules>
 </project>
