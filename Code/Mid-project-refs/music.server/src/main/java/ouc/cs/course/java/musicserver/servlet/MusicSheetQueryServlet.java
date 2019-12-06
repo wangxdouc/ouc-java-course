@@ -45,8 +45,24 @@ public class MusicSheetQueryServlet extends HttpServlet {
 				}
 				break;
 
-			case "top10":
-				System.out.println("top10");
+			case "top1":
+				System.out.println("top1");
+				try {
+					mslist = musicSheetService.getLatest(1);
+				} catch (SQLException e) {
+					token = false;
+					e.printStackTrace();
+				}
+				break;
+
+			case "top20":
+				System.out.println("top20");
+				try {
+					mslist = musicSheetService.getLatest(20);
+				} catch (SQLException e) {
+					token = false;
+					e.printStackTrace();
+				}
 				break;
 
 			case "random10":

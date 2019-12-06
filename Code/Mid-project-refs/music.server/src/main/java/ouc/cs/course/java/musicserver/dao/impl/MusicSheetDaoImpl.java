@@ -29,6 +29,7 @@ public class MusicSheetDaoImpl implements MusicSheetDao {
 			ps.setString(4, ms.getCreator());
 			ps.setString(5, ms.getDateCreated());
 			ps.setString(6, ms.getPicture());
+			
 			ps.executeUpdate();
 
 			ResultSet rs = ps.getGeneratedKeys();
@@ -199,6 +200,45 @@ public class MusicSheetDaoImpl implements MusicSheetDao {
 			DatabaseUtil.close(rs, ps, conn);
 		}
 		return musicSheetList;
+	}
+	
+	/**
+	 * 查询num条记录
+	 * @param num
+	 * @return
+	 * @throws SQLException
+	 */
+	@Override
+	public List<MusicSheet> findLatest(int num) throws SQLException {
 
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		MusicSheet ms = null;
+		List<MusicSheet> musicSheetList = new ArrayList<MusicSheet>();
+		String sql = "select id, uuid, name, creatorId, creator, dateCreated, picture from musicsheet order by id desc limit " + num;
+		
+		try {
+			conn = DatabaseUtil.getConnection();
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				ms = new MusicSheet();
+				ms.setId(rs.getInt(1));
+				ms.setUuid(rs.getString(2));
+				ms.setName(rs.getString(3));
+				ms.setCreatorId(rs.getString(4));
+				ms.setCreator(rs.getString(5));
+				ms.setDateCreated(rs.getString(6));
+				ms.setPicture(rs.getString(7));
+				musicSheetList.add(ms);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new SQLException("query latest data failed.");
+		} finally {
+			DatabaseUtil.close(rs, ps, conn);
+		}
+		return musicSheetList;
 	}
 }

@@ -96,6 +96,32 @@ public class MusicSheetService {
 
 		return mslist;
 	}
+	
+	/**
+	 * 获取尊新的num条记录
+	 * @param num
+	 * @return
+	 * @throws SQLException
+	 */
+	public List<MusicSheet> getLatest(int num) throws SQLException {
+		List<MusicSheet> mslist = musicSheetDao.findLatest(num);
+
+		Music mu = null;
+		for (MusicSheet ms : mslist) {
+			Map<String, String> musicItems = new HashMap<String, String>();
+
+			for (int musicId : mstmDao.findByMusicSheetId(ms.getId())) {
+				mu = musicDao.findById(musicId);
+				musicItems.put(mu.getMd5value(), mu.getName());
+			}
+
+			ms.setMusicItems(musicItems);
+		}
+
+		return mslist;
+	}
+	
+	
 
 	public String getMusicSheetPictureUrl(String uuid) throws SQLException {
 		MusicSheet musicSheet = musicSheetDao.findByUuid(uuid);

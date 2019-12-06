@@ -38,14 +38,33 @@
 						</tr>
 						<tr>
 							<td><a
-								href="http://service.uspacex.com/music.server/downloadMusic?md5=df142e440c2162c5d5c51077e387dc80">http://service.uspacex.com/music.server/downloadMusic?md5={md5value
+								href="http://service.uspacex.com/music.server/queryMusicSheets?type=top20">http://service.uspacex.com/music.server/queryMusicSheets?type=top20</a></td>
+							<td>查询返回Top20所有音乐单</td>
+							<td>JSON</td>
+						</tr>
+						<tr>
+							<td><a
+								href="http://service.uspacex.com/music.server/queryMusicSheets?type=top1">http://service.uspacex.com/music.server/queryMusicSheets?type=top1</a></td>
+							<td>查询返回最新的1个音乐单（测试使用）</td>
+							<td>JSON</td>
+						</tr>
+						<tr>
+							<td><a
+								href="http://service.uspacex.com/music.server/downloadMusic?md5=77008b41f4c692808ac7b414722269e0">http://service.uspacex.com/music.server/downloadMusic?md5={md5value
 									of music}</a></td>
 							<td>下载md5值所代表的音乐文件</td>
 							<td>File stream</td>
 						</tr>
 						<tr>
 							<td><a
-								href="http://service.uspacex.com/music.server/downloadPicture?uuid=235edc3a68144beb8e8980e59941c470">http://service.uspacex.com/music.server/downloadPicture?uuid={uuid
+								href="http://service.uspacex.com/music.server/music?md5=77008b41f4c692808ac7b414722269e0">http://service.uspacex.com/music.server/music?md5={md5value
+									of music}</a></td>
+							<td>在线流媒体播放md5值所代表的音乐文件</td>
+							<td>Audio Stream</td>
+						</tr>
+						<tr>
+							<td><a
+								href="http://service.uspacex.com/music.server/downloadPicture?uuid=2a2fa72e16c640d6a1e23a5cce67e98d">http://service.uspacex.com/music.server/downloadPicture?uuid={uuid
 									of music sheet}</a></td>
 							<td>下载uuid值所代表的音乐单封面图像</td>
 							<td>File stream</td>
@@ -152,7 +171,7 @@
 			$scope.queryMusicSheetList = function() {
 				$http({
 					method : 'GET',
-					url : 'queryMusicSheets?type=all',
+					url : 'queryMusicSheets?type=top20',
 				}).then(function(resp, status) {
 					console.log(resp.data);
 					$scope.musicSheetList = resp.data.musicSheetList;

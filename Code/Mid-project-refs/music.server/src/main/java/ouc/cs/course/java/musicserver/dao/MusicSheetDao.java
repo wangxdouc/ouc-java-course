@@ -20,4 +20,6 @@ public interface MusicSheetDao {
 	public List<MusicSheet> findAll() throws SQLException;
 
 	void deleteByUuid(String uuid) throws SQLException;
+
+	List<MusicSheet> findLatest(int num) throws SQLException;
 }

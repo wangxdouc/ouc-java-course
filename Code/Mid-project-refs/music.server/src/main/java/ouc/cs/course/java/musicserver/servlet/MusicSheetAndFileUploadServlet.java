@@ -44,7 +44,7 @@ public class MusicSheetAndFileUploadServlet extends HttpServlet {
 		factory.setRepository(new File(path));
 		factory.setSizeThreshold(1024 * 1024);
 		ServletFileUpload upload = new ServletFileUpload(factory);
-		// 试图解决Linux服务器写入MySQL数据库中文文件名乱码，未成功
+		// 试图解决Linux服务器写入MySQL数据库中文文件名乱码，未成功？
 		upload.setHeaderEncoding("UTF-8");
 
 		Map<String, String> musicSheetMetadata = new HashMap<String, String>();
@@ -133,7 +133,7 @@ public class MusicSheetAndFileUploadServlet extends HttpServlet {
 
 		if (token) {
 			jsonObject.put("musicSheet", JSONObject.fromObject(ms));
-			
+
 			jsonObject.put("message", "Upload musicsheet successfully.");
 		} else {
 			jsonObject.put("message", "Upload musicsheet failed.");

@@ -4,12 +4,14 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	id="WebApp_ID" version="3.1">
 
-	<display-name>Archetype Created Web Application</display-name>
-
+	<display-name>Music Server</display-name>
 
 	<context-param>
 		<description>Music File Path on Server</description>
 		<param-name>musicFilePath</param-name>
+		<!-- 注意根据服务器的文件存储路径修改以下值 -->
+		<!-- <param-value>/home/user/musicUpload/</param-value> --> 
 		<param-value>/Users/xiaodong/musicUpload/</param-value>
+
 	</context-param>
 </web-app>
