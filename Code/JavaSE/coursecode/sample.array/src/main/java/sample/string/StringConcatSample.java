@@ -9,7 +9,7 @@ package sample.string;
 public class StringConcatSample {
 	public static void main(String[] args) {
 		String s = "Java";
-		String a = "Java";
+
 		String ss = "Hello, " + s + ". I love you.";
 		System.out.println(ss);
 	}
