@@ -423,11 +423,21 @@
 \begin{frame}[fragile]
   \frametitle{格式化输出}
 
-  \tta{System.out.format}
+  \ttb{System.out.format}
 
-  
-  
-  
+  提供类似C语言printf()的方法format()（也可以使用printf()方法）
+
+  \ttb{java.util.Formatter}
+
+  可以将Formatter看作一个翻译器，它将你的格式化字符串与数据翻译成需要的结果。
+
+  当创建一个Formatter对象时，需要向其构造器传递信息，告诉它最终的结果向哪里输出。
+
+  \ttb{String.format()}
+
+  format()方法是一个static方法，接受与Formatter.format()一样的参数。
+
+  \codeset{sample.string.SimpleFormat.java/FormatterSample.java}
   
 \end{frame}
 
