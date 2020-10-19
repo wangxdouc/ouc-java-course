@@ -168,7 +168,7 @@
   \item \fbox{int[][] x;}\\
     {\kai\Blue 表示定义了一个数组引用变量x，第一个元素为x[0],最后一个为x[n-1]，其长度不确定}
   \item \fbox{x = new int[3][];}\\
-    {\kai\Blue 表示数组x有三个元素，每个元素都是int[]类型的一维数组，分别为int x[0][]、int[] x[1]、int[] x[2]}\\
+    {\kai\Blue 表示数组x有三个元素，每个元素都是int[]类型的一维数组，分别为int x[0][]、int x[1][]、int x[2][]}\\
     \fbox{x[0] = new int[3];  x[1] = new int[2];}\\
     {\kai\Blue 给x[0]、x[1]、x[2]赋值（长度可以不一样）}
   \end{itemize}
@@ -208,13 +208,92 @@
 \section{字符串}
 
 \begin{frame}[fragile]
-  \frametitle{字符串变量的创建}
+  \frametitle{字符串}
+  
+  {\hei 字符串操作是计算机程序设计中最常见的行为。}
 
-  字符串是用一对双引号括起来的字符序列。Java语言中，字符串常量或变量均用类实现。
+  \begin{itemize}
+  \item 字符串是用一对双引号括起来的字符序列。Java语言中，字符串常量或变量均用类实现。
+  \item String对象是不可变的。String类每一个看起来会修改String值的方法，
+    实际上都创建了一个新的对象，以包含修改后的字符串内容。
+  \end{itemize}
+
+  \begin{javaCode}
+    String s = new String("hello java");
+    s.toUpperCase();
+    System.out.println(s);
+  \end{javaCode}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+  \frametitle{理解Java字符串}
+
+  \samp{String.java Part 1}
+  \begin{javaCode}
+    public final class String
+    implements java.io.Serializable, Comparable<String>, CharSequence { //1
+    /** The value is used for character storage. */
+    private final char value[]; //2
+
+    /** The offset is the first index of the storage that is used. */
+    private final int offset;
+
+    /** The count is the number of characters in the String. */
+    private final int count;
+
+    /** Cache the hash code for the string */
+    private int hash; // Default to 0
+
+    /** use serialVersionUID from JDK 1.0.2 for interoperability */
+    private static final long serialVersionUID = -6849794470754667710L;
+    ........
+}
+  \end{javaCode}
+
+  \begin{enumerate}\kai\small
+  \item String类是final类，即意味着String类不能被继承，并且它的成员方法都默认为final方法。
+  \item 从String类的成员属性可以看出String类其实是通过char数组来保存字符串的。
+  \end{enumerate}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{理解Java字符串}
+
+  \samp{String.java Part 2}
+  \begin{javaCode}
+    public String substring(int beginIndex, int endIndex) {
+      if (beginIndex < 0) {
+        throw new StringIndexOutOfBoundsException(beginIndex);
+      }
+      if (endIndex > count) {
+        throw new StringIndexOutOfBoundsException(endIndex);
+      }
+      if (beginIndex > endIndex) {
+        throw new StringIndexOutOfBoundsException(endIndex - beginIndex);
+      }
+      return ((beginIndex == 0) && (endIndex == count)) ? this :
+      new String(offset + beginIndex, endIndex - beginIndex, value);
+    }
+  \end{javaCode}
+
+  \begin{enumerate}\kai\small
+  \item 无论是substring还是concat操作等都不是在原有的字符串上进行的，而是重新生成了一个新的字符串对象，最原始的字符串并没有被改变。
+  \item {\hei\Red String对象一旦被创建就是固定不变的，对String对象的任何操作都不影响到原对象，而是会生成新的对象。}
+  \end{enumerate}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{字符串变量的创建}
 
   \wxd{字符串变量的创建}
 
   \samp{格式1}
+  
   \begin{javaCode}
     String s;                  //声明字符串型引用变量s，此时s的值为null
     s = new String("Hello");   //在堆内存中分配空间，并将s指向该字符串首地址 
@@ -300,62 +379,68 @@
 \end{frame}
 
 \begin{frame}[fragile]
-  \frametitle{理解Java字符串}
+  \frametitle{+ 与StringBuilder}
 
-  \samp{String.java Part 1}
+  String不变性带来了一定的效率问题。用于String的“+”和“+=”是Java中仅有的
+  两个重载过的运算符。“+”可以用来连接字符串。
+
   \begin{javaCode}
-    public final class String
-    implements java.io.Serializable, Comparable<String>, CharSequence { //1
-    /** The value is used for character storage. */
-    private final char value[]; //2
-
-    /** The offset is the first index of the storage that is used. */
-    private final int offset;
-
-    /** The count is the number of characters in the String. */
-    private final int count;
-
-    /** Cache the hash code for the string */
-    private int hash; // Default to 0
-
-    /** use serialVersionUID from JDK 1.0.2 for interoperability */
-    private static final long serialVersionUID = -6849794470754667710L;
-    ........
-}
+    String s = "Java";
+    String ss = "Hello" + s + ". I love you.";
+    System.out.println(ss);
   \end{javaCode}
 
-  \begin{enumerate}\kai\small
-  \item String类是final类，即意味着String类不能被继承，并且它的成员方法都默认为final方法。
-  \item 从String类的成员属性可以看出String类其实是通过char数组来保存字符串的。
-  \end{enumerate}
-\end{frame}
+  这段代码可能是怎么工作的？\pause
 
+  String可能有一个append()方法，它会生成一个新的String对象，该新对象包含了“Hello”与s连接后的字符串；然后再与“I love you”连接，再次生成新的String对象。\pause
+
+  {\Red\kai 这种工作方式会产生一大堆需要垃圾回收的中间对象！}
+\end{frame}
 
 \begin{frame}[fragile]
-  \frametitle{理解Java字符串}
+  \frametitle{实际情况是如何？}
 
-  \samp{String.java Part 2}
-  \begin{javaCode}
-    public String substring(int beginIndex, int endIndex) {
-      if (beginIndex < 0) {
-        throw new StringIndexOutOfBoundsException(beginIndex);
-      }
-      if (endIndex > count) {
-        throw new StringIndexOutOfBoundsException(endIndex);
-      }
-      if (beginIndex > endIndex) {
-        throw new StringIndexOutOfBoundsException(endIndex - beginIndex);
-      }
-      return ((beginIndex == 0) && (endIndex == count)) ? this :
-      new String(offset + beginIndex, endIndex - beginIndex, value);
-    }
-  \end{javaCode}
+  \codeset{sample.string.StringConcatSample.java}
 
-  \begin{enumerate}\kai\small
-  \item 无论是substring还是concat操作等都不是在原有的字符串上进行的，而是重新生成了一个新的字符串对象，最原始的字符串并没有被改变。
-  \item {\hei\Red String对象一旦被创建就是固定不变的，对String对象的任何操作都不影响到原对象，而是会生成新的对象。}
-  \end{enumerate}
+  反编译Java类文件：
+  
+  \begin{shCode}
+    javap -c StringConcatSample
+  \end{shCode}
+
+  {\kai -c 表示生成JVM字节码。}
+
+  \pause
+
+  \begin{itemize}
+  \item 我们并没有主动使用StringBuilder类，但编译器自作主张的使用了它，因为它{\hei\Red 更高效}。
+  \item StringBuilder用于创建最终的String，为每个字符串调
+    用StringBuilder的append()方法。
+\end{itemize}
+  
 \end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{格式化输出}
+
+  \ttb{System.out.format}
+
+  提供类似C语言printf()的方法format()（也可以使用printf()方法）
+
+  \ttb{java.util.Formatter}
+
+  可以将Formatter看作一个翻译器，它将你的格式化字符串与数据翻译成需要的结果。
+
+  当创建一个Formatter对象时，需要向其构造器传递信息，告诉它最终的结果向哪里输出。
+
+  \ttb{String.format()}
+
+  format()方法是一个static方法，接受与Formatter.format()一样的参数。
+
+  \codeset{sample.string.SimpleFormat.java/FormatterSample.java}
+  
+\end{frame}
+
 
 \begin{frame}
   \frametitle{本节习题}
